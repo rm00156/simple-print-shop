@@ -5,6 +5,8 @@ import { services } from "@/content/services";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
+
   const staticRoutes = [
     "",
     "/products",
@@ -12,16 +14,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/contact",
     "/quote",
+    "/privacy",
+    "/terms",
+    "/cookies",
+    "/shipping",
   ].map((path) => ({
     url: `${siteUrl}${path}`,
+    lastModified,
   }));
 
   const categoryRoutes = categories.map((c) => ({
     url: `${siteUrl}/products/${c.slug}`,
+    lastModified,
   }));
 
   const serviceRoutes = services.map((s) => ({
     url: `${siteUrl}/services/${s.slug}`,
+    lastModified,
   }));
 
   return [...staticRoutes, ...categoryRoutes, ...serviceRoutes];
