@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Bluwave",
   },
   description: site.description,
+  alternates: { canonical: "/" },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -40,6 +41,20 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "Bluwave — print shop in Lower Sydenham, south east London",
     description: site.description,
+    images: [
+      {
+        url: "/hero1.webp",
+        width: 1536,
+        height: 1024,
+        alt: site.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bluwave — print shop in Lower Sydenham, south east London",
+    description: site.description,
+    images: ["/hero1.webp"],
   },
   robots: {
     index: true,
@@ -67,7 +82,7 @@ const address =
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "PrintShop",
+  "@type": "LocalBusiness",
   name: site.name,
   telephone: site.phoneHref.replace(/^tel:/, ""),
   url: siteUrl,
