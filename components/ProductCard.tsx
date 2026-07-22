@@ -12,7 +12,7 @@ export function ProductCard({
   const Icon = item.icon ?? FallbackIcon;
 
   return (
-    <div className="group flex flex-col rounded-2xl border border-line bg-surface-2 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-line-strong hover:shadow-md">
+    <div className="group flex flex-col rounded-2xl bg-surface-2 p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover">
       <div className="relative mb-3 aspect-[16/10] overflow-hidden rounded-xl bg-surface-1">
         {item.image ? (
           <Image
@@ -33,13 +33,13 @@ export function ProductCard({
           </div>
         )}
         {item.badge && (
-          <span className="absolute right-2 top-2 rounded-full bg-gold/15 px-2.5 py-0.5 text-[11px] font-semibold text-gold backdrop-blur-sm">
+          <span className="absolute left-2 top-2 rounded-full bg-gold px-2.5 py-0.5 text-[11px] font-bold text-primary-900">
             {item.badge}
           </span>
         )}
       </div>
 
-      <p className="font-bold text-ink">{item.name}</p>
+      <p className="font-display font-bold text-ink">{item.name}</p>
       <p className="mt-1 text-sm leading-relaxed text-ink-2">
         {item.description}
       </p>

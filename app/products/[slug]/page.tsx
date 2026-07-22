@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { ExternalLink, Phone } from "lucide-react";
+import { ArrowRight, ExternalLink, Phone } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/Button";
 import { ProductCard } from "@/components/ProductCard";
@@ -47,44 +46,51 @@ export default async function ServicePage({ params }: Props) {
   const funeralHandoff =
     category.slug === "funeral-stationery" ? funeralSiteUrl : null;
 
+  const WatermarkIcon = category.icon;
+
   return (
     <>
-      <section className="c-blue px-4 py-6 sm:px-6 sm:py-8 lg:py-10">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-[42px] md:leading-[1.1]">
-              {category.name}
-            </h1>
-            <p className="ts mt-3 max-w-md text-base leading-[1.7]">
-              {category.intro}
-            </p>
-            <a
+      <section className="relative overflow-hidden px-4 pt-10 pb-10 sm:px-6 sm:pt-14 sm:pb-14">
+        <WatermarkIcon
+          size={300}
+          strokeWidth={1}
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/2 -right-10 hidden -translate-y-1/2 text-primary/5 md:block"
+        />
+        <div className="relative max-w-2xl">
+          <span className="inline-flex rounded-full bg-primary/5 px-3 py-1 text-xs font-semibold text-ink-2">
+            Print Excellence
+          </span>
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-[42px] md:leading-[1.1]">
+            {category.name}
+          </h1>
+          <p className="mt-4 max-w-xl text-base leading-[1.7] text-ink-2">
+            {category.intro}
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Button href="#quote-form" className="w-full sm:w-auto">
+              Get started
+              <ArrowRight size={16} aria-hidden="true" />
+            </Button>
+            <Button
               href={site.phoneHref}
-              className="mt-6 inline-flex items-center gap-2 text-base font-semibold text-white transition-colors hover:text-primary-300"
+              variant="outline"
+              className="w-full sm:w-auto"
             >
-              <Phone size={18} aria-hidden="true" />
+              <Phone size={16} aria-hidden="true" />
               {site.phone}
-            </a>
+            </Button>
           </div>
-
-          {category.image && (
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl shadow-primary-900/40 lg:aspect-auto lg:h-[300px]">
-              <Image
-                src={category.image}
-                alt={category.name}
-                fill
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                preload
-                className="object-cover"
-              />
-            </div>
-          )}
         </div>
       </section>
 
-      <div className="grid grid-cols-1 gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-3 lg:gap-8">
+      <div className="grid grid-cols-1 gap-6 px-4 pb-10 sm:px-6 sm:pb-12 lg:grid-cols-3 lg:gap-8">
         <div className="lg:col-span-2">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <h2 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
+            Our range
+          </h2>
+          <p className="mt-1 text-sm text-ink-2">{category.tagline}</p>
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {category.items.map((item) => (
               <ProductCard
                 key={item.name}
@@ -100,8 +106,8 @@ export default async function ServicePage({ params }: Props) {
           className="lg:sticky lg:top-6 lg:col-span-1 lg:self-start"
         >
           {funeralHandoff ? (
-            <div className="rounded-2xl border border-line bg-surface-2 p-5 shadow-sm sm:p-6">
-              <p className="text-xl font-bold text-ink">
+            <div className="rounded-2xl bg-surface-2 p-5 shadow-card sm:p-6">
+              <p className="font-display text-xl font-bold text-ink">
                 A dedicated funeral service
               </p>
               <p className="mt-1 text-sm text-ink-2">
@@ -129,8 +135,10 @@ export default async function ServicePage({ params }: Props) {
               </a>
             </div>
           ) : (
-            <div className="rounded-2xl border border-line bg-surface-2 p-5 shadow-sm sm:p-6">
-              <p className="text-xl font-bold text-ink">Request a quote</p>
+            <div className="rounded-2xl bg-surface-2 p-5 shadow-card sm:p-6">
+              <p className="font-display text-xl font-bold text-ink">
+                Request a quote
+              </p>
               <p className="mt-1 text-sm text-ink-2">
                 Tell us what you need and we&apos;ll call you back the same day.
               </p>
@@ -142,25 +150,30 @@ export default async function ServicePage({ params }: Props) {
         </div>
       </div>
 
-      <section className="c-blue px-4 py-12 text-center sm:px-6 sm:py-16">
-        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-          Precision is our standard.
-        </h2>
-        <p className="ts mx-auto mt-4 max-w-xl text-base leading-[1.7]">
-          Every piece we print is hand-inspected for colour accuracy and finish
-          quality before leaving our studio.
-        </p>
-        <div className="mt-8 flex flex-wrap items-start justify-center gap-x-10 gap-y-6 sm:gap-x-16">
-          {bannerStats.map((stat) => (
-            <div key={stat.label}>
-              <p className="text-3xl font-bold text-white sm:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-1 text-sm font-semibold text-white/65">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+      <section className="c-blue px-4 py-12 sm:px-6 sm:py-14">
+        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="max-w-md">
+            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              Precision is our standard.
+            </h2>
+            <p className="ts mt-3 text-sm leading-[1.7]">
+              Every piece we print is hand-inspected for colour accuracy and
+              finish quality before leaving our studio. We combine heritage
+              techniques with modern technology.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-start gap-x-10 gap-y-6 sm:gap-x-14">
+            {bannerStats.map((stat) => (
+              <div key={stat.label}>
+                <p className="font-display text-3xl font-bold text-accent sm:text-4xl">
+                  {stat.value}
+                </p>
+                <p className="ts mt-1 text-xs font-semibold tracking-wide uppercase">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>

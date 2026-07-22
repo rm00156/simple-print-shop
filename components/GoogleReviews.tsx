@@ -70,7 +70,7 @@ export function GoogleReviews({ liveData, fallbackRating, fallbackCount, fallbac
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+      <div className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5">
         <span className="text-2xl font-bold text-primary sm:text-3xl">{rating}</span>
         <div className="flex flex-col gap-1">
           <StarRow rating={rating} size={16} />
@@ -85,14 +85,14 @@ export function GoogleReviews({ liveData, fallbackRating, fallbackCount, fallbac
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {reviews.map((r) => (
           <div
             key={r.id}
-            className="flex flex-col rounded-2xl border border-line bg-surface-1 p-3 transition-all hover:-translate-y-0.5 hover:border-line-strong hover:bg-surface-2 hover:shadow-md"
+            className="flex flex-col rounded-2xl bg-surface-2 p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
           >
             <StarRow rating={r.rating} size={12} />
-            <p className="mt-2 mb-3 line-clamp-4 flex-1 text-xs leading-[1.5] italic">
+            <p className="mt-3 mb-4 line-clamp-5 flex-1 text-sm leading-[1.6] text-ink-2 italic">
               &ldquo;{r.quote}&rdquo;
             </p>
             <div className="flex items-center gap-2">

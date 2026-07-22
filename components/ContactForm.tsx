@@ -18,7 +18,7 @@ if (!TURNSTILE_SITE_KEY && process.env.NODE_ENV !== "production") {
 }
 
 const inputClasses =
-  "h-12 w-full rounded-xl border border-line bg-surface-2 px-3.5 text-base text-ink transition-colors placeholder:text-ink-3 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15";
+  "h-12 w-full rounded-token border border-line bg-surface-2 px-3.5 text-base text-ink transition-colors placeholder:text-ink-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25";
 const labelClasses = "mb-1.5 block text-sm font-semibold text-ink";
 const errorClasses = "mt-1 text-xs text-red-600";
 
@@ -197,7 +197,7 @@ export function ContactForm() {
         <select
           id="subject"
           defaultValue=""
-          className={clsx(inputClasses, "focus:border-primary")}
+          className={inputClasses}
           aria-invalid={!!errors.subject}
           aria-describedby={errors.subject ? "subject-error" : undefined}
           {...register("subject")}

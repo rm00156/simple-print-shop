@@ -37,7 +37,7 @@ export function SiteHeader() {
 
   return (
     <header>
-      <div className="flex items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-6">
+      <div className="flex items-center justify-between gap-4 border-b border-line bg-surface-2 px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.webp"
@@ -58,7 +58,7 @@ export function SiteHeader() {
                   className={clsx(
                     "flex items-center gap-1",
                     pathname === link.href
-                      ? "text-primary"
+                      ? "text-primary underline decoration-teal decoration-2 underline-offset-8"
                       : "text-ink hover:text-primary",
                   )}
                 >
@@ -87,7 +87,11 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={clsx(pathname === link.href ? "text-primary" : "text-ink hover:text-primary")}
+                className={clsx(
+                  pathname === link.href
+                    ? "text-primary underline decoration-teal decoration-2 underline-offset-8"
+                    : "text-ink hover:text-primary",
+                )}
               >
                 {link.label}
               </Link>

@@ -5,33 +5,52 @@
   compiled utilities, so redefining these custom properties inside .c-blue
   cascades into every descendant utility. @theme inline would substitute
   literal hex at build time and break the scope-rebinding below.
+
+  Palette follows the "Professional Print Identity" design system:
+  Deep Navy anchors, Vibrant Cyan reserved for CTAs, Trust Gold for stars.
 */
 @theme {
-  --color-surface-1: #f3f4f6;
+  --color-surface-1: #f7f9fb;
   --color-surface-2: #ffffff;
 
-  --color-line: #e4e6ea;
-  --color-line-strong: #c8ccd4;
+  /* Card surface: white on light pages, frosted tile inside .c-blue. */
+  --color-card: #ffffff;
 
-  --color-ink: #14171c;
-  --color-ink-2: #5a6270;
-  --color-ink-3: #8b92a0;
+  --color-line: #e3e7ed;
+  --color-line-strong: #c4c6cf;
 
-  --color-primary: #1b56d3;
-  --color-primary-hover: #1747ad;
+  --color-ink: #0f172a;
+  --color-ink-2: #43474e;
+  --color-ink-3: #74777f;
+
+  --color-primary: #1a365d;
+  --color-primary-hover: #142a49;
   --color-on-primary: #ffffff;
-  --color-primary-300: #8ec5ff;
-  --color-primary-600: #2f66e6;
-  --color-primary-800: #163a92;
-  --color-primary-900: #12327d;
+  --color-primary-300: #86a0cd;
+  --color-primary-600: #1a365d;
+  --color-primary-800: #0f2a4d;
+  --color-primary-900: #002045;
 
-  --color-gold: #f7b733;
+  /* Vibrant Cyan — strictly for primary CTAs and key interactive accents. */
+  --color-accent: #00e3fd;
+  --color-accent-hover: #00c9e2;
+  --color-on-accent: #002045;
 
-  --color-placeholder: #e9ebef;
+  /* Sophisticated teal — secondary accent for links and icon tints. */
+  --color-teal: #006875;
+
+  --color-gold: #f59e0b;
+
+  --color-placeholder: #e9edf2;
 
   --radius-token: 10px;
 
   --font-sans: var(--font-inter);
+  --font-display: var(--font-montserrat);
+
+  /* Ambient elevation — depth via diffuse light, not hard outlines. */
+  --shadow-card: 0px 4px 20px rgb(0 0 0 / 0.05);
+  --shadow-card-hover: 0px 12px 28px rgb(0 32 69 / 0.12);
 }
 
 :root {
@@ -43,28 +62,53 @@ body {
   color: var(--color-ink);
 }
 
-/* Accent colour scope: rebinds tokens within a subtree to sit on the brand blue. */
-.c-blue {
-  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-800) 100%);
-  color: #cddcf8;
-  --color-surface-1: #1a3f92;
-  --color-surface-2: #ffffff;
-  --color-ink: #12327d;
-  --color-ink-2: #cddcf8;
-  --color-ink-3: #9fb8e8;
-  --color-line: rgb(255 255 255 / 0.18);
-  --color-placeholder: rgb(255 255 255 / 0.13);
-}
-.c-blue .ts {
-  color: #cddcf8;
+/* Montserrat for headings, per the design system's type pairing. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
 }
 
-/* Footer scope: dark navy treatment, independent of the light surface tokens above. */
-.c-footer {
-  background: #161c2b;
-  color: #98a2b8;
+/* Accent colour scope: rebinds tokens within a subtree to sit on deep navy. */
+.c-blue {
+  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-900) 100%);
+  color: #b9c7dd;
+  --color-surface-1: rgb(255 255 255 / 0.06);
+  --color-surface-2: #ffffff;
+  --color-card: rgb(255 255 255 / 0.07);
   --color-ink: #ffffff;
-  --color-ink-2: #98a2b8;
-  --color-ink-3: #626c80;
+  --color-ink-2: #b9c7dd;
+  --color-ink-3: #8298b8;
+  --color-line: rgb(255 255 255 / 0.14);
+  --color-placeholder: rgb(255 255 255 / 0.12);
+}
+.c-blue .ts {
+  color: #b9c7dd;
+}
+
+/* Teal conversion band, used for the closing call-to-action panels. */
+.c-teal {
+  background: linear-gradient(135deg, #006875 0%, #00404b 100%);
+  color: #b8e3e9;
+  --color-surface-1: rgb(255 255 255 / 0.06);
+  --color-surface-2: #ffffff;
+  --color-card: rgb(255 255 255 / 0.07);
+  --color-ink: #ffffff;
+  --color-ink-2: #b8e3e9;
+  --color-ink-3: #8fc4cc;
+  --color-line: rgb(255 255 255 / 0.14);
+  --color-placeholder: rgb(255 255 255 / 0.12);
+}
+.c-teal .ts {
+  color: #b8e3e9;
+}
+
+/* Footer scope: ink-black treatment, independent of the light surface tokens above. */
+.c-footer {
+  background: #0f172a;
+  color: #94a3b8;
+  --color-ink: #ffffff;
+  --color-ink-2: #94a3b8;
+  --color-ink-3: #64748b;
   --color-line: rgb(255 255 255 / 0.1);
 }
