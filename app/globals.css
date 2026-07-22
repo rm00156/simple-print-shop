@@ -39,6 +39,12 @@
   /* Sophisticated teal — secondary accent for links and icon tints. */
   --color-teal: #006875;
 
+  /* Dark slate + soft "fixed" container tints, used for varied icon badges. */
+  --color-tertiary: #112235;
+  --color-primary-fixed: #d6e3ff;
+  --color-secondary-fixed: #9cf0ff;
+  --color-tertiary-fixed: #d3e4fe;
+
   --color-gold: #f59e0b;
 
   --color-placeholder: #e9edf2;
