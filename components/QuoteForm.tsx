@@ -20,7 +20,7 @@ if (!TURNSTILE_SITE_KEY && process.env.NODE_ENV !== "production") {
 }
 
 const inputClasses =
-  "h-11 w-full rounded-xl border border-line bg-surface-2 px-3 text-base text-ink transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15 md:h-10 md:text-sm";
+  "h-11 w-full rounded-token border border-line bg-surface-2 px-3 text-base text-ink transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25 md:h-10 md:text-sm";
 const labelClasses = "mb-1 block text-xs text-ink-2";
 const errorClasses = "mt-1 text-xs text-red-600";
 

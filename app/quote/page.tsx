@@ -50,7 +50,7 @@ export default function QuotePage() {
               <ul className="mt-4 flex flex-col gap-4">
                 {features.map((feature) => (
                   <li key={feature.title} className="flex gap-3">
-                    <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent/15 text-teal">
                       <feature.icon size={18} aria-hidden="true" />
                     </div>
                     <div>

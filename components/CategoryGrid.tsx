@@ -18,7 +18,7 @@ export function CategoryGrid({
           key={category.slug}
           href={`/products/${category.slug}`}
           className={clsx(
-            "group grow-0 shrink-0 rounded-2xl border border-line bg-surface-1 p-3 text-center transition-all hover:-translate-y-0.5 hover:border-line-strong hover:bg-surface-2 hover:shadow-md",
+            "group grow-0 shrink-0 rounded-2xl bg-card p-3 text-center shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover",
             "basis-[calc(50%-0.25rem)]",
             columns === 5 &&
               "sm:basis-[calc(33.3333%-0.3333rem)] md:basis-[calc(20%-0.4rem)]",
