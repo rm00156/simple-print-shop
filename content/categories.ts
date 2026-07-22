@@ -383,14 +383,14 @@ export const categories: Category[] = [
         description:
           "Orders of service printed with care and a fast turnaround, personalised with photos if wished.",
         tags: ["Sensitive turnaround", "Custom photos"],
-        image: "/order-service.png",
+        image: "/order.webp",
       },
       {
         name: "Memorial cards",
         description:
           "Premium card-stock memorial cards with personalised wording, printed quickly when it matters.",
         tags: ["Premium card stock", "Personalised wording"],
-        image: "/memorial.png",
+        image: "/mem.webp",
       },
 
       {
@@ -398,7 +398,7 @@ export const categories: Category[] = [
         description:
           "Large-format photo tributes printed to a high quality for services and gatherings.",
         tags: ["Large format", "High quality printing"],
-        image: "/mem-photo.png",
+        image: "/photo-tribute.webp",
       },
     ],
     cta: { label: "Call us", href: "tel:+442072777663" },
