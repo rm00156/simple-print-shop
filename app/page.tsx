@@ -9,6 +9,13 @@ import { services } from "@/content/services";
 import { features, site, testimonials } from "@/content/site";
 import { getGoogleReviews } from "@/lib/google-reviews";
 
+// Per-card icon-badge tints for the trust bar, matching the Stitch home mockup.
+const featureTints = [
+  "bg-primary-fixed text-primary-900",
+  "bg-secondary-fixed text-teal",
+  "bg-tertiary-fixed text-tertiary",
+];
+
 export default async function Home() {
   const liveReviews = await getGoogleReviews();
 
@@ -54,18 +61,22 @@ export default async function Home() {
       </section>
 
       <div className="relative -mt-14 px-4 sm:-mt-16 sm:px-6 md:-mt-20">
-        <div className="grid grid-cols-1 divide-y divide-line rounded-3xl bg-surface-2 shadow-xl shadow-primary-900/15 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          {features.map((feature) => (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {features.map((feature, i) => (
             <div
               key={feature.title}
-              className="flex flex-col items-center gap-2 px-6 py-6 text-center sm:px-4 sm:py-7"
+              className="flex flex-col items-center gap-5 rounded-2xl bg-surface-2 px-6 py-8 text-center shadow-card"
             >
-              <div className="flex size-12 items-center justify-center rounded-full bg-accent/15 text-teal">
-                <feature.icon size={22} aria-hidden="true" />
+              <div
+                className={`flex size-16 items-center justify-center rounded-full ${featureTints[i]}`}
+              >
+                <feature.icon size={28} aria-hidden="true" />
               </div>
               <div>
-                <p className="text-sm font-bold text-ink">{feature.title}</p>
-                <p className="mt-1 text-xs text-ink-2">{feature.subtitle}</p>
+                <p className="font-display text-base font-bold text-ink">
+                  {feature.title}
+                </p>
+                <p className="mt-1 text-sm text-ink-2">{feature.subtitle}</p>
               </div>
             </div>
           ))}
