@@ -51,8 +51,9 @@
 
   --radius-token: 10px;
 
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-montserrat);
+  /* Quicksand throughout — rounded geometric type from the Stitch mockup. */
+  --font-sans: var(--font-quicksand);
+  --font-display: var(--font-quicksand);
 
   /* Ambient elevation — depth via diffuse light, not hard outlines. */
   --shadow-card: 0px 4px 20px rgb(0 0 0 / 0.05);

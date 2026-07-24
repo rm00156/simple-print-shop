@@ -1,18 +1,24 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import type { CategoryItem } from "@/content/categories";
 
 export function ProductCard({
   item,
+  href,
   fallbackIcon: FallbackIcon,
 }: {
   item: CategoryItem;
+  href: string;
   fallbackIcon: LucideIcon;
 }) {
   const Icon = item.icon ?? FallbackIcon;
 
   return (
-    <div className="group flex flex-col rounded-2xl bg-surface-2 p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover">
+    <Link
+      href={href}
+      className="group flex flex-col rounded-2xl bg-surface-2 p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
+    >
       <div className="relative mb-3 aspect-[16/10] overflow-hidden rounded-xl bg-surface-1">
         {item.image ? (
           <Image
@@ -56,6 +62,6 @@ export function ProductCard({
           ))}
         </ul>
       )}
-    </div>
+    </Link>
   );
 }
