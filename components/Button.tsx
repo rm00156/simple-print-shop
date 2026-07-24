@@ -39,8 +39,13 @@ export function Button({ variant = "primary", size = "md", className, children, 
   const classes = clsx(base, variantClasses[variant], sizeClasses[size], className);
 
   if (href) {
+    // Hash-only links are in-page jumps, not route navigations — Next's Link
+    // hijacks the click for client-side routing, and its scroll-into-view
+    // effect doesn't fire when the navigation only changes the hash (no
+    // segment re-renders). A plain anchor lets the browser handle it natively.
     const isExternalOrTel = href.startsWith("tel:") || href.startsWith("http");
-    if (isExternalOrTel) {
+    const isHashOnly = href.startsWith("#");
+    if (isExternalOrTel || isHashOnly) {
       return (
         <a href={href} className={classes} {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}>
           {children}

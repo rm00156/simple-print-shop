@@ -1,19 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+// Quicksand is a variable font (300–700), so no explicit weight list is needed.
+// It drives both body and display type, per the Stitch "Azure Horizon" mockup.
+const quicksand = Quicksand({
+  variable: "--font-quicksand",
   subsets: ["latin"],
-});
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -111,7 +107,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB" className={`${inter.variable} ${montserrat.variable} antialiased`}>
+    <html lang="en-GB" className={`${quicksand.variable} antialiased`}>
       <body>
         <script
           type="application/ld+json"

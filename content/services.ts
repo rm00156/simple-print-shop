@@ -2,6 +2,7 @@ import {
   Layers,
   Palette,
   Printer,
+  ScanLine,
   Scissors,
   Truck,
   type LucideIcon,
@@ -213,28 +214,74 @@ export const services: Service[] = [
       "In-house folding, binding, lamination and finishing from Bluwave in Lower Sydenham, south east London.",
   },
   {
+    slug: "scanning",
+    name: "Document & Plan Scanning",
+    description:
+      "High-resolution scanning of documents, plans and drawings, digitised and delivered on file.",
+    icon: ScanLine,
+    intro:
+      "High-resolution scanning of documents, plans and large-format drawings, turning your paperwork into digital files you can store, share and back up. Ideal for clearing archives, digitising records and getting old drawings off the shelf and onto your system.",
+    overview: [
+      "We scan everything from single sheets and bound documents to A0 architectural drawings, capturing them at high resolution as PDFs or image files. Loose paper, files and large-format plans are all handled in-house, and we can OCR documents so the text inside them is searchable rather than just a flat picture.",
+      "Files come back to you on a USB drive, by secure transfer, or however suits your setup, and we can name and index them to a structure that matches how you file. It's a practical way to reclaim office space, protect important records against loss, and make years of paperwork findable in seconds.",
+    ],
+    highlights: [
+      "Documents, files and large-format plans",
+      "Searchable PDFs with OCR on request",
+      "Indexed and named to your filing structure",
+      "Delivered on USB or by secure transfer",
+    ],
+    useCases: [
+      "Archiving & records",
+      "Architectural drawings",
+      "Clearing office space",
+      "Backing up paperwork",
+      "Digitising old files",
+    ],
+    faqs: [
+      {
+        question: "What sizes can you scan?",
+        answer:
+          "From standard A4 documents up to A0 plans and drawings. If it's larger or an awkward format, bring it in and we'll take a look.",
+      },
+      {
+        question: "Can the scans be searchable?",
+        answer:
+          "Yes. We can run OCR on document scans so the text becomes selectable and searchable, which makes finding things in a large archive far quicker.",
+      },
+      {
+        question: "How do I get the files back?",
+        answer:
+          "Whatever suits you — a USB drive, secure file transfer, or a shared link. We can also name and organise the files to match your own filing system.",
+      },
+    ],
+    metaDescription:
+      "High-resolution document and large-format plan scanning, digitised and indexed, from Bluwave in Lower Sydenham, south east London.",
+  },
+  {
     slug: "delivery",
-    name: "Delivery",
+    name: "Delivery & Fulfilment",
     image: "/delivery.png",
     description:
-      "Free delivery and collection across Lower Sydenham and south east London.",
+      "Free local delivery, plus storage and fulfilment so we can hold your print and send it out as you need it.",
     icon: Truck,
     intro:
-      "Free delivery and collection across Lower Sydenham and south east London. Order remotely and we'll bring your finished job to your door, or have it ready and waiting for you to collect.",
+      "Free delivery and collection across Lower Sydenham and south east London, plus storage and fulfilment for print you'd rather not warehouse yourself. Order remotely and we'll bring your finished job to your door, hold stock on your behalf, or pick, pack and post it out as orders come in.",
     overview: [
-      "Order without leaving your desk. We offer free delivery and collection across Lower Sydenham and the surrounding south east London area, so your finished job comes to you.",
-      "Further afield? We can arrange a nationwide courier on request. Either way, we'll let you know the moment your job is ready and agree a time that works for you.",
+      "Order without leaving your desk. We offer free delivery and collection across Lower Sydenham and the surrounding south east London area, so your finished job comes to you, with a nationwide courier available on request.",
+      "For regular or bulk print, we can also store your stock and fulfil it as you need it — releasing a few boxes of leaflets at a time, mailing letters and mailshots on your behalf, or picking and packing items to send direct to your customers. It saves you the space and the hassle of handling it all in-house.",
     ],
     highlights: [
       "Free local delivery and collection",
-      "Across Lower Sydenham and south east London",
       "Nationwide courier options on request",
-      "We'll let you know the moment it's ready",
+      "Print storage so you don't have to warehouse it",
+      "Pick, pack and mailing fulfilment on request",
     ],
     useCases: [
       "Local business deliveries",
-      "Office print drops",
-      "Collection when it suits you",
+      "Print storage & stock holding",
+      "Mailshots & mailing",
+      "Pick & pack fulfilment",
       "Nationwide courier on request",
     ],
     faqs: [
@@ -244,18 +291,18 @@ export const services: Service[] = [
           "Local delivery and collection across Lower Sydenham and south east London is free. For deliveries outside the area we'll quote a courier cost up front.",
       },
       {
-        question: "How will I know when my order's ready?",
+        question: "Can you store our print for us?",
         answer:
-          "We'll call or email you as soon as your job is finished and arrange delivery or collection at a time that suits you.",
+          "Yes. For regular or bulk jobs we can hold your stock and release or send it out as you need it, so you're not finding space for pallets of print in your own office.",
       },
       {
-        question: "Can I collect in person?",
+        question: "Do you handle mailshots?",
         answer:
-          "Of course. You're welcome to collect from us — we'll have your order ready and waiting.",
+          "We can print, pack and post mailshots and letters on your behalf, and pick and pack items to send direct to your customers. Tell us what you need fulfilled and we'll sort out the details.",
       },
     ],
     metaDescription:
-      "Free local print delivery and collection across Lower Sydenham and south east London from Bluwave.",
+      "Free local print delivery, plus storage, mailing and pick-and-pack fulfilment from Bluwave in Lower Sydenham, south east London.",
   },
 ];
 

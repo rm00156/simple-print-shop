@@ -24,7 +24,13 @@ const inputClasses =
 const labelClasses = "mb-1 block text-xs text-ink-2";
 const errorClasses = "mt-1 text-xs text-red-600";
 
-export function QuoteForm({ defaultNeed }: { defaultNeed?: string } = {}) {
+export function QuoteForm({
+  defaultNeed,
+  defaultDetails,
+}: {
+  defaultNeed?: string;
+  defaultDetails?: string;
+} = {}) {
   const [status, setStatus] = useState<Status>("idle");
   const [mountedAt] = useState(() => Date.now());
   const [hasTurnstileToken, setHasTurnstileToken] = useState(false);
@@ -42,7 +48,7 @@ export function QuoteForm({ defaultNeed }: { defaultNeed?: string } = {}) {
       email: "",
       phone: "",
       need: defaultNeed ?? categories[0].slug,
-      details: "",
+      details: defaultDetails ?? "",
       company: "",
       ts: mountedAt,
       turnstileToken: "",

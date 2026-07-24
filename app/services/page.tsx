@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/Button";
+import { HowItWorks } from "@/components/HowItWorks";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
 
@@ -92,7 +93,10 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      <div className="px-4 pb-14 sm:px-6">
+      {/* How it works */}
+      <HowItWorks />
+
+      <div className="px-4 py-14 sm:px-6">
         <section className="c-blue rounded-3xl px-6 py-12 text-center sm:px-10 sm:py-16">
           <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
             Ready to start your project?
