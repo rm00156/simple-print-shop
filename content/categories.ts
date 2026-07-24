@@ -553,6 +553,7 @@ export const categories: Category[] = [
           "Canvases arrive ready to hang with fixings attached, in standard sizes or made to your dimensions. They're a favourite for family photography, restaurant and office interiors, and artists selling work at fairs and markets.",
         ],
         tags: ["Wooden bar frame", "Ready to hang"],
+        image: "/stretched-canvas.webp",
       },
     ],
     cta: { label: "Request a quote", href: "/quote" },
