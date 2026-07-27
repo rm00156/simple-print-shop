@@ -58,6 +58,14 @@ export default async function Home() {
           className="absolute inset-0 -z-20 size-full object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-primary-900/65" />
+        {/* Masks a watermark baked into the bottom-right corner of the source video */}
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(circle at 100% 100%, rgba(0,32,69,1) 0%, rgba(0,32,69,1) 15%, rgba(0,32,69,0) 36%)",
+          }}
+        />
         <div className="mx-auto w-full max-w-6xl">
           <div className="max-w-2xl space-y-5">
             <p className="text-sm font-bold tracking-[0.18em] text-accent uppercase">
