@@ -2,16 +2,10 @@ import type { Metadata } from "next";
 import {
   ArrowRight,
   BadgeCheck,
-  CheckCircle2,
   Clock,
   ExternalLink,
-  Layers,
   Leaf,
-  Palette,
   Phone,
-  Ruler,
-  ShieldCheck,
-  Sparkles,
   Star,
   StarHalf,
   type LucideIcon,
@@ -32,17 +26,6 @@ import { site } from "@/content/site";
 type Props = {
   params: Promise<{ slug: string; item: string }>;
 };
-
-// Cycled purely for visual variety across the spec tiles — the label is the
-// real data (item.tags); the icon carries no meaning.
-const featureIcons: LucideIcon[] = [
-  CheckCircle2,
-  ShieldCheck,
-  Sparkles,
-  Ruler,
-  Layers,
-  Palette,
-];
 
 const qualityPoints: { icon: LucideIcon; label: string }[] = [
   { icon: BadgeCheck, label: "Every job hand-checked for colour & finish" },
@@ -192,24 +175,11 @@ export default async function ProductPage({ params }: Props) {
             ))}
           </div>
 
-          {item.tags && item.tags.length > 0 && (
-            <div className="mt-8 grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2">
-              {item.tags.map((tag, i) => {
-                const TileIcon = featureIcons[i % featureIcons.length];
-                return (
-                  <div
-                    key={tag}
-                    className="group rounded-2xl bg-surface-2 p-6 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
-                  >
-                    <div className="mb-4 flex size-11 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform group-hover:scale-110">
-                      <TileIcon size={20} strokeWidth={2} aria-hidden="true" />
-                    </div>
-                    <p className="font-display font-bold text-ink">{tag}</p>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          <p className="mt-8 max-w-2xl text-base font-medium leading-[1.7] text-ink-2">
+            Made to your spec — choose your size, sheet count and paper
+            stock. Tell us what you need below and we&apos;ll quote it
+            exactly.
+          </p>
 
           <div className="mt-8 flex flex-col items-start justify-between gap-3 rounded-2xl bg-primary/5 px-5 py-4 sm:flex-row sm:items-center">
             <p className="font-medium text-ink-2">

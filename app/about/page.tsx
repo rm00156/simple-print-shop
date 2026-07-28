@@ -1,42 +1,51 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Star, TrendingUp } from "lucide-react";
+import { ArrowRight, CalendarCheck, Star, Wrench } from "lucide-react";
 import { Button } from "@/components/Button";
-import { site } from "@/content/site";
+import { GoogleReviews } from "@/components/GoogleReviews";
+import { TrustBar } from "@/components/TrustBar";
+import { site, testimonials, yearsTrading } from "@/content/site";
+import { getGoogleReviews } from "@/lib/google-reviews";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${site.name} provides professional digital printing and creative services to businesses across London and Kent, with a guaranteed ${site.turnaround} turnaround from Lower Sydenham.`,
+  description: `Independent print shop in south east London since ${site.foundedYear}. Business stationery, funeral stationery, marketing and large-format print, with a ${site.turnaround} standard turnaround from our press in ${site.address.addressLocality}.`,
   alternates: { canonical: "/about" },
 };
 
+// Every card carries at least one detail that is specifically ours — a stock, a finish,
+// a material, the sister site — rather than copy that would fit any print shop in the UK.
 const capabilities = [
   {
     title: "Business & Marketing",
     description:
-      "High-quality business cards, flyers, multipage brochures, presentation folders, and complete business starter packs.",
+      "Business cards, flyers, multi-page brochures, presentation folders and full starter packs. Printed on 14pt, 18pt or recycled stock, finished matte, gloss or spot UV, and Pantone matched to your brand.",
     image: "/bcards.webp",
   },
   {
-    title: "Large Format Prints",
-    description: "Posters ranging from A7 up to A0 and full billboard sizes.",
+    title: "Large Format",
+    description:
+      "Posters from A7 up to A0, plus site boards, hoarding and Heras fencing banners. Weatherproof Foamex or Correx with fixing holes, and artwork tiled to read as one design across a whole hoarding run.",
     image: "/poster.webp",
   },
   {
     title: "Specialist Divisions",
     description:
-      "Expert, sensitive design and printing for Funeral Order of Service programs, as well as seasonal initiatives like Kids Cards 4 Christmas.",
+      "Orders of service, memorial cards and photo tributes, proofed with the family and turned around to fit the funeral director's timescale. We run a dedicated funeral stationery site alongside seasonal work like Kids Cards 4 Christmas.",
     image: "/order.webp",
   },
   {
     title: "Creative Design",
     description:
-      "Don't have your own artwork? Our in-house team offers cutting-edge design and layout services to bring your concepts to life.",
+      "No artwork? Our in-house team works from a brief, a logo or a scribble on a napkin. Send print-ready files instead and we check them free — low-res images, missing fonts, RGB colour — before they cost you a reprint.",
     image: "/design.jpg",
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const liveReviews = await getGoogleReviews();
+  const years = yearsTrading();
+
   return (
     <>
       <section className="c-blue grid grid-cols-1 items-center gap-8 px-4 pt-10 pb-20 sm:px-6 sm:pb-24 md:grid-cols-2">
@@ -45,18 +54,32 @@ export default function AboutPage() {
             South East London&apos;s Finest
           </span>
           <h1 className="mt-4 text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[42px]">
-            Professional, customer-driven printers
+            Print you can pick up in a day, from people you can actually get
+            hold of
           </h1>
+          {/* TODO: once confirmed, name the founder here — "Just [Founder Name] and the
+              team" lands harder than "the same small team". */}
           <p className="ts mt-4 max-w-md text-base leading-[1.7]">
-            Your vision, delivered fast. We combine years of heritage with
-            cutting-edge technology to bring your print projects to life.
+            We&apos;ve been printing for south east London since{" "}
+            {site.foundedYear} — from Old Kent Road, to Peckham, to our press in{" "}
+            {site.address.addressLocality}. No call centres, no account managers
+            you&apos;ve never met. Just the same small team, on the end of the
+            same phone.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button href="/products" variant="onAccent" className="w-full sm:w-auto">
+            <Button
+              href="/products"
+              variant="onAccent"
+              className="w-full sm:w-auto"
+            >
               Explore Products
               <ArrowRight size={16} aria-hidden="true" />
             </Button>
-            <Button href="/quote" variant="ghost" className="ts w-full sm:w-auto">
+            <Button
+              href="/quote"
+              variant="ghost"
+              className="ts w-full sm:w-auto"
+            >
               Request a quote
             </Button>
           </div>
@@ -79,32 +102,46 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.6fr_1fr]">
           <div className="rounded-3xl bg-surface-2 p-6 shadow-card sm:p-8">
             <h2 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
-              Rooted in South East London
+              {years} years in south east London, and we still answer the phone
+              ourselves
             </h2>
+            {/* TODO: add the founder's name and a one-line founding story to open this
+                paragraph, and confirm the years for Old Kent Road → Peckham → Beckenham
+                if the move is ever turned into a timeline graphic. */}
             <p className="mt-4 text-sm leading-[1.7] text-ink-2">
-              Based in Lower Sydenham, Bromley, The Bluwave Group provides
-              superior digital printing and cutting-edge creative services to
-              businesses and individuals across London and Kent. From essential
-              business stationery to bespoke funeral programs and large-scale
-              marketing materials, we make the printing process simple from
-              start to finish.
+              Bluwave started in {site.foundedYear} and has grown up alongside
+              this part of London — starting out on Old Kent Road, moving to
+              Peckham, and now based at our press in {site.address.addressLocality}
+              . We&apos;re still independent, still local, and still doing the
+              same thing: business stationery, funeral programmes, marketing
+              print and large-format work for businesses and families across
+              Lower Sydenham, Sydenham, Catford and Bromley.
             </p>
             <p className="mt-3 text-sm leading-[1.7] text-ink-2">
-              We know that speed and reliability matter. That is why we pride
-              ourselves on a guaranteed 24 to 48-hour turnaround on all digital
-              printing jobs, ensuring your projects are delivered exactly when
-              you need them.
+              What hasn&apos;t changed is the promise:{" "}
+              <strong className="font-semibold text-ink">
+                24 to 48 hours as standard on digital jobs, and a clear
+                timescale agreed up front on bigger runs and litho work.
+              </strong>{" "}
+              If we say Thursday, we mean Thursday.
             </p>
           </div>
 
           <div className="flex flex-col gap-4">
             <div className="c-blue flex flex-1 flex-col items-center justify-center rounded-2xl px-6 py-6 text-center shadow-card">
-              <p className="font-display text-3xl font-bold text-accent">15+</p>
+              <p className="font-display text-3xl font-bold text-accent">
+                {years}
+              </p>
               <p className="ts mt-1 text-[11px] font-semibold tracking-wide uppercase">
                 Years Trading
               </p>
             </div>
-            <div className="flex flex-1 flex-col items-center justify-center rounded-2xl bg-surface-2 px-6 py-6 text-center shadow-card">
+            {/* Plain <a>, not Link: same-page hash navigation doesn't scroll through the
+                router in this version. */}
+            <a
+              href="#reviews"
+              className="flex flex-1 flex-col items-center justify-center rounded-2xl bg-surface-2 px-6 py-6 text-center shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
               <div className="flex gap-0.5 text-gold" aria-hidden="true">
                 {Array.from({ length: 5 }, (_, i) => (
                   <Star key={i} size={14} fill="currentColor" strokeWidth={0} />
@@ -116,9 +153,15 @@ export default function AboutPage() {
               <p className="mt-1 text-[11px] font-semibold tracking-wide text-ink-2 uppercase">
                 Google rating
               </p>
-            </div>
+              <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-teal">
+                Read the reviews
+                <ArrowRight size={11} aria-hidden="true" />
+              </span>
+            </a>
             <div className="c-teal flex flex-1 flex-col items-center justify-center rounded-2xl px-6 py-6 text-center shadow-card">
-              <p className="font-display text-3xl font-bold text-white">24-48h</p>
+              <p className="font-display text-3xl font-bold text-white">
+                24-48h
+              </p>
               <p className="ts mt-1 text-[11px] font-semibold tracking-wide uppercase">
                 Standard Turnaround
               </p>
@@ -130,39 +173,43 @@ export default function AboutPage() {
       <div className="px-4 pt-12 sm:px-6 sm:pt-16">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
-            What drives us
+            Why businesses stick with us
           </h2>
           <p className="mt-3 text-sm leading-[1.7] text-ink-2">
-            Our B2B relationships are built on excellent customer care and
-            superior print quality. We believe that choosing the right print
-            partner should function as an asymmetric bet.
+            Our relationships are built on customer care and print quality. In
+            practice, that comes down to two things.
           </p>
         </div>
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div className="rounded-2xl bg-surface-2 p-6 shadow-card">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-red-50 text-red-500">
-              <ShieldCheck size={20} aria-hidden="true" />
+            <div className="flex size-10 items-center justify-center rounded-lg bg-teal/10 text-teal">
+              <CalendarCheck size={20} aria-hidden="true" />
             </div>
             <h3 className="mt-4 text-lg font-bold text-ink">
-              Low risk on the downside
+              We show up on time, every time
             </h3>
+            {/* TODO: if the on-time percentage is tracked, put the real number in place of
+                "standard digital jobs go out within" — a hard stat is worth more here. */}
             <p className="mt-2 text-sm leading-[1.7] text-ink-2">
-              Fast turnarounds, competitive pricing and dedicated aftercare keep
-              your operational risk to a minimum. We handle the stress of
-              production so you don&apos;t have to.
+              Late print doesn&apos;t just cost you money — it costs you the
+              launch date, the event, the deadline you promised a client.
+              Standard digital jobs go out within the {site.turnaround} window,
+              and if something is ever going to run late, we call you before you
+              have to call us.
             </p>
           </div>
           <div className="rounded-2xl bg-surface-2 p-6 shadow-card">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-teal/10 text-teal">
-              <TrendingUp size={20} aria-hidden="true" />
+            <div className="flex size-10 items-center justify-center rounded-lg bg-primary-fixed text-primary">
+              <Wrench size={20} aria-hidden="true" />
             </div>
             <h3 className="mt-4 text-lg font-bold text-ink">
-              High gain on the upside
+              We handle the fiddly bits so you don&apos;t have to
             </h3>
             <p className="mt-2 text-sm leading-[1.7] text-ink-2">
-              Premium materials and professional finishing deliver maximum
-              upside for your brand&apos;s impact. Your physical assets will
-              reflect the quality of your services.
+              No artwork? Our in-house design team builds it from scratch. Wrong
+              bleed, wrong colour profile, a file that won&apos;t open — we
+              catch it and fix it before it goes anywhere near a press, at no
+              extra charge.
             </p>
           </div>
         </div>
@@ -170,7 +217,7 @@ export default function AboutPage() {
 
       <div className="px-4 pt-12 sm:px-6 sm:pt-16">
         <h2 className="text-center text-xl font-bold tracking-tight text-ink sm:text-2xl">
-          Our core capabilities
+          What we&apos;re known for
         </h2>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {capabilities.map((cap) => (
@@ -199,20 +246,39 @@ export default function AboutPage() {
           ))}
         </div>
         <p className="mx-auto mt-8 max-w-prose text-center text-sm leading-[1.7] text-ink-2">
-          Whether you are looking to launch a marketing campaign or print simple
-          menus, you can trust us to handle the production while you focus on
-          running your business.
+          Launching a campaign or reprinting the menus — either way, you can
+          trust us to handle the production while you get on with running your
+          business.
         </p>
       </div>
 
-      <section className="c-blue mt-12 px-4 py-12 text-center sm:mt-16 sm:py-16">
+      <div className="mt-12 sm:mt-16">
+        <TrustBar />
+      </div>
+
+      {/* Anchor target for the Google rating tile above, so the 4.9 is checkable
+          rather than just claimed. */}
+      <section id="reviews" className="px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-8 text-center text-xl font-bold tracking-tight text-ink sm:text-2xl">
+            What our customers say
+          </h2>
+          <GoogleReviews
+            liveData={liveReviews}
+            fallbackRating={site.reviews.rating}
+            fallbackCount={site.reviews.count}
+            fallbackReviews={testimonials}
+          />
+        </div>
+      </section>
+
+      <section className="c-blue px-4 py-12 text-center sm:py-16">
         <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
           Ready to get started?
         </h2>
         <p className="ts mx-auto mt-3 max-w-md text-sm leading-[1.7]">
-          Free design quotations and a {site.turnaround}{" "}
-          turnaround on standard jobs. Let&apos;s make your next project a
-          reality.
+          Free design quotations and a {site.turnaround} turnaround on standard
+          jobs. Let&apos;s make your next project a reality.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Button href="/quote" variant="onAccent">
