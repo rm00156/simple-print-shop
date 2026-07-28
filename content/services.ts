@@ -219,6 +219,7 @@ export const services: Service[] = [
     description:
       "High-resolution scanning of documents, plans and drawings, digitised and delivered on file.",
     icon: ScanLine,
+    image: "/document-plan.webp",
     intro:
       "High-resolution scanning of documents, plans and large-format drawings, turning your paperwork into digital files you can store, share and back up. Ideal for clearing archives, digitising records and getting old drawings off the shelf and onto your system.",
     overview: [
