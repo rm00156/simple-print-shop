@@ -19,9 +19,9 @@ const process = [
   },
   {
     step: "4",
-    title: "Collect or delivered free",
+    title: "Free collection, or we deliver",
     description:
-      "Pick it up or we deliver free across south east London — usually within 24-48 hours.",
+      "Pick it up free from our press, or we'll arrange delivery across south east London — usually within 24-48 hours.",
   },
 ];
 
@@ -43,8 +43,8 @@ export function HowItWorks({
           How it works
         </h2>
         <p className="mt-3 text-base leading-[1.7] text-ink-2">
-          From initial brief to free delivery, we&apos;ve streamlined the design
-          and print process for speed and precision.
+          From initial brief to collection or delivery, we&apos;ve streamlined
+          the design and print process for speed and precision.
         </p>
       </div>
       <div className="mx-auto mt-12 grid w-full max-w-6xl auto-rows-fr grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">

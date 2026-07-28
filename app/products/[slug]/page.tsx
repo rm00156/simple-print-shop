@@ -14,14 +14,14 @@ import { Button } from "@/components/Button";
 import { ProductCard } from "@/components/ProductCard";
 import { QuoteForm } from "@/components/QuoteForm";
 import { categories, getCategory, slugifyItemName } from "@/content/categories";
-import { site } from "@/content/site";
+import { site, yearsTrading } from "@/content/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 const bannerStats = [
-  { value: "15+", label: "Years Experience" },
+  { value: String(yearsTrading()), label: "Years Experience" },
   { value: "2k+", label: "Jobs Delivered" },
   { value: "100%", label: "Quality Guarantee" },
 ];

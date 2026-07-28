@@ -18,8 +18,8 @@ export const site = {
   funeralSiteUrl: "https://thefuneralstationery.co.uk/",
   email: "info@thebluwavegroup.com",
   social: {
-    facebook: "TODO_FACEBOOK_URL",
-    instagram: "TODO_INSTAGRAM_URL",
+    facebook: "https://www.facebook.com/BluWavePrinters",
+    instagram: "https://www.instagram.com/thebluwavegroup/",
   },
   area: "Lower Sydenham, SE London",
   foundedYear: 2008,
@@ -62,6 +62,14 @@ export const site = {
     "https://www.google.com/maps/search/?api=1&query=Bluwave+Ltd+Printers,+Unit+4+Gardner+Industrial+Estate,+Kent+House+Lane,+Beckenham+BR3+1QZ",
 } as const;
 
+// Derived, never hard-coded, so the "years trading" figure on the About page and the
+// product banners can't drift away from the schema.org foundingDate in the root layout.
+// Computed per call (like SiteFooter's copyright year) so it rolls over on the daily
+// revalidate rather than freezing at whenever the page was last built.
+export function yearsTrading() {
+  return new Date().getFullYear() - site.foundedYear;
+}
+
 export const features: { icon: LucideIcon; title: string; subtitle: string }[] = [
   {
     icon: Rocket,
@@ -81,7 +89,7 @@ export const features: { icon: LucideIcon; title: string; subtitle: string }[] =
 ];
 
 export const stats = [
-  { value: "15+", label: "Years trading" },
+  { value: String(yearsTrading()), label: "Years trading" },
   { value: "4.9", label: "Google rating" },
   { value: "24-48h", label: "Standard turnaround" },
 ];

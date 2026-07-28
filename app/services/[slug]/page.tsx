@@ -28,7 +28,7 @@ type Props = {
 const heroBadges: { icon: LucideIcon; label: string }[] = [
   { icon: BadgeCheck, label: "Free design quotations" },
   { icon: Clock, label: `${site.turnaround} turnaround` },
-  { icon: Truck, label: "Free local delivery" },
+  { icon: Truck, label: "Free collection" },
 ];
 
 // Quality-band features — title + supporting line, mirroring the mockup's
@@ -51,8 +51,8 @@ const qualityPoints: { icon: LucideIcon; title: string; body: string }[] = [
   },
   {
     icon: Truck,
-    title: "Free local delivery",
-    body: "Delivered free across Lower Sydenham and south east London.",
+    title: "Free collection",
+    body: "Collect free from our press, or we'll arrange delivery across Lower Sydenham and south east London.",
   },
 ];
 
