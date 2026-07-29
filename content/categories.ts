@@ -10,6 +10,7 @@ import {
   Flower,
   Frame,
   Gift,
+  GraduationCap,
   IdCard,
   Megaphone,
   Mail,
@@ -27,6 +28,7 @@ export type CategorySlug =
   | "boxes-and-packaging"
   | "copying-and-business-forms"
   | "calendars"
+  | "schools"
   | "funeral-stationery";
 
 export type CategoryItem = {
@@ -745,6 +747,53 @@ export const categories: Category[] = [
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
       "Custom printed calendars, produced locally in Lower Sydenham, south east London.",
+  },
+  {
+    slug: "schools",
+    name: "Schools & Education",
+    tagline: "Prospectuses, newsletters and everyday school print",
+    intro:
+      "Prospectuses, newsletters, exercise books and open day signage — the everyday print that keeps a school running and looking its best to prospective parents.",
+    icon: GraduationCap,
+    image: "/school-prospectuses.webp",
+    items: [
+      {
+        name: "Prospectuses & open day brochures",
+        description:
+          "Full-colour prospectuses and open day brochures for schools, printed and bound ready for prospective parents.",
+        longDescription: [
+          "A prospectus is often a parent's first real impression of a school, so it needs to read as polished as the education on offer. We print full colour on quality gloss or matte stock, saddle-stitched for a slim, open-day-ready booklet or perfect bound with a squared spine for a fuller admissions pack, and can carry your school's photography, crest and house colours throughout. Every layout is proofed with you before it goes anywhere near a press.",
+          "We work with primary and secondary schools each year ahead of open evenings and application deadlines, when a fast turnaround matters most. Updates for a new intake are quick once your layout is on file, and we can print matching open day signage and feeder-school mailers from the same artwork so everything a visiting parent sees looks joined-up.",
+        ],
+        tags: ["A4 or A5 formats", "Saddle-stitch or perfect bound", "Open day ready"],
+        image: "/school-prospectuses.webp",
+      },
+      {
+        name: "Yearbooks",
+        description:
+          "Full-colour yearbooks capturing the school year, printed and bound as a keepsake pupils will hang onto.",
+        longDescription: [
+          "A yearbook is one of the few things a pupil keeps for decades, so it needs to hold up to that. We print full colour throughout on quality stock, in softback or hardback with a squared, perfect-bound spine, handling photo-heavy layouts — class photos, leavers' pages, house and club sections — without the colour or detail dropping off.",
+          "These are proofed carefully given how many individual photos are usually involved, and we work to end-of-term deadlines so copies are ready before the summer holidays. Bulk pricing applies per year group, and we can hold your cover artwork on file for next year's edition.",
+        ],
+        tags: ["Softback or hardback", "Full-colour photo pages", "End-of-year ready"],
+        image: "/school-yearbooks.webp",
+      },
+      {
+        name: "Open day signage & banners",
+        description:
+          "Directional signage, pull-up banners and welcome boards for open days, tours and school events.",
+        longDescription: [
+          "Visitors need clear direction from the car park to the hall, so we print weatherproof board signage for outdoor routes and pull-up banners for reception and welcome desks, matched to the branding and photography used in your prospectus.",
+          "Turnaround is kept fast ahead of a fixed open evening date that can't move, and banner graphics can be swapped out on the same stand if your messaging changes before the next event.",
+        ],
+        tags: ["Indoor & outdoor options", "Matches your prospectus branding", "Fast turnaround"],
+        image: "/school-open-day-signage.webp",
+      },
+    ],
+    cta: { label: "Request a quote", href: "/quote" },
+    metaDescription:
+      "Prospectuses, newsletters, exercise books and open day signage, printed locally for schools in Lower Sydenham, south east London.",
   },
   {
     slug: "funeral-stationery",
