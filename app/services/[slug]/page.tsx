@@ -37,12 +37,12 @@ const qualityPoints: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: BadgeCheck,
     title: "Hand-checked quality",
-    body: "Every job is inspected for colour accuracy and finish before it leaves the studio.",
+    body: "Every job is inspected before it leaves the studio.",
   },
   {
     icon: Palette,
     title: "Perfect colour",
-    body: "Pantone matching keeps your brand colours consistent across every run.",
+    body: "Calibration check keeps your brand colours consistent across every run.",
   },
   {
     icon: Leaf,
@@ -52,7 +52,7 @@ const qualityPoints: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Truck,
     title: "Free collection",
-    body: "Collect free from our premises, or we'll arrange delivery across Lower Sydenham and south east London.",
+    body: "Collect free from our premises, or we'll arrange delivery across the UK.",
   },
 ];
 
@@ -315,10 +315,9 @@ export default async function ServiceDetailPage({ params }: Props) {
               Uncompromising quality
             </h2>
             <p className="mt-4 max-w-lg text-base leading-[1.7] text-ink-2">
-              Every job that leaves our studio is inspected for colour accuracy
-              and finish before it reaches you. Your print is an extension of
-              your brand, so we treat it that way — with proofs and guidance
-              before every run.
+              Every job that leaves our studio is inspected before it reaches
+              you. Your print is an extension of your brand, so we treat it
+              that way — with pdf proofs and guidance before every run.
             </p>
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
               {qualityPoints.map(({ icon: PointIcon, title, body }) => (
