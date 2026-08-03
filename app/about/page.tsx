@@ -45,12 +45,9 @@ export default async function AboutPage() {
       <section className="c-blue px-4 pt-10 pb-24 sm:px-6 sm:pb-28">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:items-center md:gap-8">
           <div>
-            <span className="inline-flex rounded-full bg-accent px-3 py-1 text-xs font-semibold text-on-accent">
-              South East London&apos;s Finest
-            </span>
             <h1 className="mt-4 text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[42px]">
-              Print you can pick up in a day, from printers you can actually
-              get hold of via telephone
+              Print you can pick up in a day, from printers you can actually get
+              hold of via telephone
             </h1>
             {/* TODO: once confirmed, name the founder here — "Just [Founder Name] and the
                 team" lands harder than "the same small team". */}
@@ -58,8 +55,8 @@ export default async function AboutPage() {
               We&apos;ve been printing for south east London since{" "}
               {site.foundedYear} — from Old Kent Road, to Peckham, to our
               premises in {site.address.addressLocality}. No call centres, no
-              account managers you&apos;ve never met. Just the same small
-              team, on the end of the phone.
+              account managers you&apos;ve never met. Just the same small team,
+              on the end of the phone.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button
@@ -100,10 +97,10 @@ export default async function AboutPage() {
                   <Star key={i} size={14} fill="currentColor" strokeWidth={0} />
                 ))}
               </div>
-              <p className="font-display mt-1.5 text-2xl font-bold text-ink sm:text-3xl">
+              <p className="font-display mt-1.5 text-2xl font-bold text-primary sm:text-3xl">
                 {site.reviews.rating}
               </p>
-              <p className="mt-1 text-[11px] font-semibold tracking-wide text-ink-2 uppercase">
+              <p className="mt-1 text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
                 Google rating
               </p>
               <span className="mt-1.5 hidden items-center gap-1 text-[11px] font-semibold text-teal sm:inline-flex">
@@ -136,16 +133,15 @@ export default async function AboutPage() {
             Bluwave started in {site.foundedYear} and has grown up alongside
             this part of London — starting out on Old Kent Road, moving to
             Peckham, and now based at our premises in{" "}
-            {site.address.addressLocality}. We&apos;re still independent,
-            still local, and still producing printed matter, marketing
-            materials and large-format work for businesses and families
-            across the UK.
+            {site.address.addressLocality}. We&apos;re still independent, still
+            local, and still producing printed matter, marketing materials and
+            large-format work for businesses and families across the UK.
           </p>
           <p className="mt-3 text-sm leading-[1.7] text-ink-2">
             What hasn&apos;t changed is the promise:{" "}
             <strong className="font-semibold text-ink">
-              24 to 48 hours as standard on digital jobs, and a clear
-              timescale agreed up front on bigger runs and litho work.
+              24 to 48 hours as standard on digital jobs, and a clear timescale
+              agreed up front on bigger runs and litho work.
             </strong>{" "}
             If we say Thursday, we mean Thursday.
           </p>
