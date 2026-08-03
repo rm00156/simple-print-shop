@@ -108,11 +108,6 @@ export const services: Service[] = [
           "Most standard digital jobs are ready in 24-48 hours. Same-day is often possible on smaller runs — call us if you're up against a deadline.",
       },
       {
-        question: "Is there a minimum order?",
-        answer:
-          "No. Digital printing means you can order as few or as many as you need without paying for plates.",
-      },
-      {
         question: "Digital or litho — which do I need?",
         answer:
           "As a rule of thumb, digital wins on shorter runs and speed, litho on large quantities and premium stocks. Send us your quantity and we'll recommend the most cost-effective option.",
