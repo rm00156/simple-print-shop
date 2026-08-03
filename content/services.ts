@@ -40,13 +40,13 @@ export const services: Service[] = [
       "Free design quotations and artwork checks, so your job is print-ready first time. Our in-house designers can take you from a rough idea to finished artwork, or simply check and tidy the files you already have.",
     overview: [
       "Whether you're starting from a blank page or already have a design in mind, our studio makes sure your job looks right and prints right. We'll set up your artwork to the correct size, bleed and colour so there are no surprises on the press.",
-      "Already have print-ready files? We'll check them free of charge and flag anything — low-resolution images, missing fonts, RGB colours — before it costs you a reprint. No design skills or special software needed at your end.",
+      "Already have print-ready files? We'll check them free of charge and flag anything — low-resolution images, missing fonts, RGB colours — before it costs you a reprint. No design skills or special software needed at your end. Please note a small fee will be charged if we have to make changes to your document.",
     ],
     highlights: [
       "Free, no-obligation design quotations",
       "Print-ready checks on files you supply",
       "Logo, layout and typesetting from scratch",
-      "A proof to approve before we print",
+      "A pdf proof for your approval before we print",
     ],
     useCases: [
       "Logos & brand identity",
@@ -267,14 +267,14 @@ export const services: Service[] = [
       "Free collection from our premises, delivery arranged across south east London and nationwide, plus storage and fulfilment.",
     icon: Truck,
     intro:
-      "Free collection from our premises, with delivery arranged across Lower Sydenham and south east London, plus storage and fulfilment for print you'd rather not warehouse yourself. Call or request a quote and we'll get your finished job to you, hold stock on your behalf, or pick, pack and post it out as orders come in.",
+      "Free collection from our premises, with delivery arranged across the UK, plus storage and fulfilment for print you'd rather not warehouse yourself. Call or request a quote and we'll get your finished job to you, hold stock on your behalf, or pick, pack and post it out as orders come in.",
     overview: [
-      "No need to visit us in person — call or request a quote and we'll take it from there. Collection from our premises is always free, and we arrange delivery across Lower Sydenham and the surrounding south east London area — with a nationwide courier available on request. We'll quote the delivery cost for your job when we quote the rest of it, so there are no surprises on the invoice.",
-      "For regular or bulk print, we can also store your stock and fulfil it as you need it — releasing a few boxes of leaflets at a time, mailing letters and mailshots on your behalf, or picking and packing items to send direct to your customers. It saves you the space and the hassle of handling it all in-house.",
+      "No need to visit us in person — call or request a quote and we'll take it from there. Collection from our premises is always free, and we arrange delivery across the UK — with a nationwide courier available on request. We'll quote the delivery cost for your job when we quote the rest of it, so there are no surprises on the invoice.",
+      "For regular or bulk print, we can also store your stock and fulfil it as you need it for a fee — releasing a few boxes of leaflets at a time, mailing letters and mailshots on your behalf, or picking and packing items to send direct to your customers. It saves you the space and the hassle of handling it all in-house.",
     ],
     highlights: [
       "Free collection from our premises",
-      "Local delivery and nationwide courier arranged for you",
+      "UK delivery and nationwide courier arranged for you",
       "Print storage so you don't have to warehouse it",
       "Pick, pack and mailing fulfilment on request",
     ],

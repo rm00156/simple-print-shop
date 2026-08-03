@@ -4,7 +4,7 @@ import { services } from "./services";
 
 export const site = {
   name: "Bluwave",
-  tagline: "South east London's local print shop, since 2008",
+  tagline: "South east London's local print shop, since 2004",
   strapline: "Design & print made simple",
   heroKicker: "Premium Print.",
   heroHighlight: "Design & Print Made Simple",
@@ -22,7 +22,7 @@ export const site = {
     instagram: "https://www.instagram.com/thebluwavegroup/",
   },
   area: "Lower Sydenham, SE London",
-  foundedYear: 2008,
+  foundedYear: 2004,
   turnaround: "24-48hr",
   reviews: {
     rating: 4.9,
