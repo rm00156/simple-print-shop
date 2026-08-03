@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MessageSquareText, Package, Phone } from "lucide-react";
 import { Button } from "@/components/Button";
+import { SearchBox } from "@/components/SearchBox";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -60,7 +61,18 @@ export default function NotFound() {
         </div>
       </section>
 
-      <section className="px-4 py-14 sm:px-6 sm:py-16">
+      <section className="px-4 pt-12 sm:px-6 sm:pt-14">
+        <div className="mx-auto max-w-xl text-center">
+          <p className="text-sm font-semibold text-ink-2">
+            Looking for something in particular?
+          </p>
+          <div className="mt-3 text-left">
+            <SearchBox />
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-12 sm:px-6 sm:py-16">
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-3">
           {quickLinks.map(({ href, icon: Icon, title, description }) => {
             const cardClassName =

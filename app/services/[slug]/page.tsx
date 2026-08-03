@@ -52,7 +52,7 @@ const qualityPoints: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Truck,
     title: "Free collection",
-    body: "Collect free from our press, or we'll arrange delivery across Lower Sydenham and south east London.",
+    body: "Collect free from our premises, or we'll arrange delivery across Lower Sydenham and south east London.",
   },
 ];
 

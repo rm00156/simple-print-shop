@@ -9,7 +9,7 @@ import { getGoogleReviews } from "@/lib/google-reviews";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `Independent print shop in south east London since ${site.foundedYear}. Business stationery, funeral stationery, marketing and large-format print, with a ${site.turnaround} standard turnaround from our press in ${site.address.addressLocality}.`,
+  description: `Independent print shop in south east London since ${site.foundedYear}. Business stationery, funeral stationery, marketing and large-format print, with a ${site.turnaround} standard turnaround from our premises in ${site.address.addressLocality}.`,
   alternates: { canonical: "/about" },
 };
 
@@ -61,10 +61,10 @@ export default async function AboutPage() {
               team" lands harder than "the same small team". */}
           <p className="ts mt-4 max-w-md text-base leading-[1.7]">
             We&apos;ve been printing for south east London since{" "}
-            {site.foundedYear} — from Old Kent Road, to Peckham, to our press in{" "}
-            {site.address.addressLocality}. No call centres, no account managers
-            you&apos;ve never met. Just the same small team, on the end of the
-            same phone.
+            {site.foundedYear} — from Old Kent Road, to Peckham, to our premises
+            in {site.address.addressLocality}. No call centres, no account
+            managers you&apos;ve never met. Just the same small team, on the end
+            of the same phone.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Button
@@ -111,11 +111,12 @@ export default async function AboutPage() {
             <p className="mt-4 text-sm leading-[1.7] text-ink-2">
               Bluwave started in {site.foundedYear} and has grown up alongside
               this part of London — starting out on Old Kent Road, moving to
-              Peckham, and now based at our press in {site.address.addressLocality}
-              . We&apos;re still independent, still local, and still doing the
-              same thing: business stationery, funeral programmes, marketing
-              print and large-format work for businesses and families across
-              Lower Sydenham, Sydenham, Catford and Bromley.
+              Peckham, and now based at our premises in{" "}
+              {site.address.addressLocality}. We&apos;re still independent,
+              still local, and still doing the same thing: business stationery,
+              funeral programmes, marketing print and large-format work for
+              businesses and families across Lower Sydenham, Sydenham, Catford
+              and Bromley.
             </p>
             <p className="mt-3 text-sm leading-[1.7] text-ink-2">
               What hasn&apos;t changed is the promise:{" "}

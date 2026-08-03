@@ -264,16 +264,16 @@ export const services: Service[] = [
     name: "Delivery & Fulfilment",
     image: "/delivery.png",
     description:
-      "Free collection from our press, delivery arranged across south east London and nationwide, plus storage and fulfilment.",
+      "Free collection from our premises, delivery arranged across south east London and nationwide, plus storage and fulfilment.",
     icon: Truck,
     intro:
-      "Free collection from our press, with delivery arranged across Lower Sydenham and south east London, plus storage and fulfilment for print you'd rather not warehouse yourself. Call or request a quote and we'll get your finished job to you, hold stock on your behalf, or pick, pack and post it out as orders come in.",
+      "Free collection from our premises, with delivery arranged across Lower Sydenham and south east London, plus storage and fulfilment for print you'd rather not warehouse yourself. Call or request a quote and we'll get your finished job to you, hold stock on your behalf, or pick, pack and post it out as orders come in.",
     overview: [
-      "No need to visit us in person — call or request a quote and we'll take it from there. Collection from our press is always free, and we arrange delivery across Lower Sydenham and the surrounding south east London area — with a nationwide courier available on request. We'll quote the delivery cost for your job when we quote the rest of it, so there are no surprises on the invoice.",
+      "No need to visit us in person — call or request a quote and we'll take it from there. Collection from our premises is always free, and we arrange delivery across Lower Sydenham and the surrounding south east London area — with a nationwide courier available on request. We'll quote the delivery cost for your job when we quote the rest of it, so there are no surprises on the invoice.",
       "For regular or bulk print, we can also store your stock and fulfil it as you need it — releasing a few boxes of leaflets at a time, mailing letters and mailshots on your behalf, or picking and packing items to send direct to your customers. It saves you the space and the hassle of handling it all in-house.",
     ],
     highlights: [
-      "Free collection from our press",
+      "Free collection from our premises",
       "Local delivery and nationwide courier arranged for you",
       "Print storage so you don't have to warehouse it",
       "Pick, pack and mailing fulfilment on request",
@@ -289,7 +289,7 @@ export const services: Service[] = [
       {
         question: "Is delivery free?",
         answer:
-          "Collection from our press is always free. Delivery is quoted per job — local south east London runs are often low-cost or included depending on the order, and we'll always confirm the price before you commit.",
+          "Collection from our premises is always free. Delivery is quoted per job — local south east London runs are often low-cost or included depending on the order, and we'll always confirm the price before you commit.",
       },
       {
         question: "Can you store our print for us?",
