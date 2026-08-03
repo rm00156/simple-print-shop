@@ -7,9 +7,9 @@ const process = [
   },
   {
     step: "2",
-    title: "Free quote & proof",
+    title: "Free quote & a pdf proof",
     description:
-      "We come back the same day with a price and, where needed, a proof for you to approve.",
+      "We'll come back to you the same day with a price and, where needed, a pdf proof for you to approval.",
   },
   {
     step: "3",
@@ -21,7 +21,7 @@ const process = [
     step: "4",
     title: "Free collection, or we deliver",
     description:
-      "Pick it up free from our press, or we'll arrange delivery across south east London — usually within 24-48 hours.",
+      "Pick it up free from our premises, or we'll arrange delivery across the UK — usually within 24-48 hours.",
   },
 ];
 
