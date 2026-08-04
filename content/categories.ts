@@ -60,7 +60,7 @@ export const categories: Category[] = [
     name: "Business Stationery",
     tagline: "Cards, letterheads and personal stationery",
     intro:
-      "Cards, letterheads and personal stationery. Not sure what you need? Call us.",
+      "Cards, letterheads, stamps and personal stationery. Not sure what you need? Call us.",
     icon: IdCard,
     image: "/bcards.webp",
     items: [
@@ -72,11 +72,7 @@ export const categories: Category[] = [
           "Handing out a well-made business card is one of the simplest ways to make a lasting impression, and it's often the one thing people remember from meeting you. We print in full colour on sturdy card from 300gsm to 700gsm depending on how much weight you want it to carry, then finish with your choice of matte, gloss, silk or recycled stock, with lamination available as an extra finishing option.",
           "Whether you need fifty cards before a meeting tomorrow or a few thousand for the whole team, our digital presses make short runs cost-effective and quick, with a standard 24-48hr turnaround.",
         ],
-        tags: [
-          "300–700gsm stock",
-          "Matte, gloss or silk",
-          "Lamination available",
-        ],
+        tags: ["Spot UV", "Matte or gloss"],
         badge: "Bestseller",
         image: "/bcards.webp",
       },
@@ -88,7 +84,7 @@ export const categories: Category[] = [
           "A loyalty card is one of the cheapest ways to turn a first-time customer into a regular, and it works best when the card feels worth keeping rather than something to drop in the bin on the way out. We print on durable card stock cut to wallet size, with space for stamps depending on how you'd rather track visits.",
           "Coffee shops, barbers, nail bars and takeaways are our most frequent loyalty card customers, usually ordering a few hundred at a time and topping up as they're handed out.",
         ],
-        tags: ["Wallet sized", "Stamps"],
+        tags: ["Wallet sized", "Stamp or punch"],
         image: "/loyalty-cards.webp",
         icon: CreditCard,
       },
@@ -155,7 +151,7 @@ export const categories: Category[] = [
           "A certificate is a small piece of print that someone might keep for years, so it needs to feel substantial in the hand rather than like a page off the office printer. We print on heavyweight, bright-white or subtly textured stock.",
           "Training providers, schools, clubs and workplaces order these for course completions, competitions and long-service awards. We can print names individually so each certificate comes out personalised, or leave the name line blank for you to complete by hand.",
         ],
-        tags: ["Heavyweight stock", "Personalised names"],
+        tags: ["Heavyweight stock", "Foiling available"],
         image: "/certificates.webp",
         icon: Award,
       },
@@ -222,8 +218,9 @@ export const categories: Category[] = [
         description:
           "Coordinated RSVP cards to complete your invitation suite, in custom sizes.",
         longDescription: [
-          "RSVP cards are usually the smallest item in an invitation suite but the one guests handle most, so we print them on the same premium stock as the rest of your set for a coordinated finish. Custom layouts are no trouble, including space for meal choices or gift registry details.",
+          "RSVP cards are usually the smallest item in an invitation suite but the one guests handle most, so we print them on the same premium stock as the rest of your set for a coordinated finish.",
           "Matching, often pre-addressed envelopes are available to make replying as easy as possible for your guests, and we can print these alongside your invitations or as a top-up run if you underestimated your guest list.",
+          "Made to your spec — choose your size, sheet count and paper stock. Tell us what you need below and we'll quote it exactly.",
         ],
         tags: ["Matching sets", "Custom sizes"],
         image: "/rsvp.png",
@@ -303,7 +300,7 @@ export const categories: Category[] = [
         description:
           "Durable spiral or comb-bound manuals that lie flat and stand up to daily use.",
         longDescription: [
-          "Technical manuals and training guides get used hard, so we bind them with spiral or comb binding that lies flat on a workbench and survives repeated flicking through. Durable card covers protect the pages inside, and we can laminate covers for an extra layer of protection in workshop or outdoor environments.",
+          "Technical manuals and training guides get used hard, so we bind them with spiral binding that lies flat on a workbench and survives repeated flicking through. Durable card covers protect the pages inside, and we can laminate covers for an extra layer of protection in workshop or outdoor environments.",
           "Because binding is done in-house, updates and reprints are straightforward once the original layout is on file — useful when a manual needs a page or two revised rather than a full reprint.",
         ],
         tags: ["Spiral or comb bound", "Durable covers"],
@@ -347,7 +344,7 @@ export const categories: Category[] = [
         description:
           "Branded folders with custom inserts, ideal for pitches, proposals and client packs.",
         longDescription: [
-          "A branded folder holds a pitch or proposal together and signals that you've made an effort before the recipient reads a word of it. We print custom folders with pocket inserts sized for your documents, business cards and USB drives, finished in your brand colours with foiling or spot UV available for a premium edge.",
+          "A branded folder holds a pitch or proposal together and signals that you've made an effort before the recipient reads a word of it. We print custom folders with pocket inserts sized for your documents, business cards, finished in your brand colours with optional foiling or spot UV available for a premium edge.",
           "Popular with agencies, consultancies and anyone preparing a new business pitch, these are usually a litho job once you're ordering enough to make die-cutting the folder shape cost-effective — we'll advise on the right quantity to make that worthwhile.",
         ],
         tags: ["Branded folders", "Custom inserts"],
@@ -383,7 +380,7 @@ export const categories: Category[] = [
         description:
           "Portable pull-up banner stands, full-colour printed and ready for events or your shopfront.",
         longDescription: [
-          "A pull-up banner packs down into a carry case and sets up in under a minute, which makes it one of the most practical ways to add branded presence to an event stand, trade show or shop entrance. We print full colour on scratch-resistant media and supply the stand ready to use straight out of the box.",
+          "A pull-up banner packs down into a carry case and sets up in under a minute, which makes it one of the most practical ways to add branded presence to an event stand, trade show or shop entrance.",
           "Replacement graphics are available if your messaging changes before the stand does, so there's no need to buy a whole new unit for an updated offer or a rebrand.",
         ],
         tags: ["Portable stands", "Full colour print"],
@@ -547,9 +544,9 @@ export const categories: Category[] = [
   {
     slug: "boxes-and-packaging",
     name: "Boxes & Packaging",
-    tagline: "Branded boxes, tape and tissue",
+    tagline: "Branded boxes and swing tags",
     intro:
-      "Short-run printed boxes, branded tape, tissue and swing tags to make your packaging part of the experience.",
+      "Short-run printed boxes and swing tags to make your packaging part of the experience.",
     icon: Package,
     image: "/printed-boxes.webp",
     items: [
@@ -565,28 +562,6 @@ export const categories: Category[] = [
         image: "/printed-boxes.webp",
       },
       {
-        name: "Branded tape",
-        description:
-          "Custom-printed packing tape that seals parcels and reinforces your brand at the same time.",
-        longDescription: [
-          "Branded packing tape is one of the cheapest ways to make a plain box look considered, wrapping your logo or message right across the seam of every parcel that leaves you. We print in one or more colours onto strong paper or polypropylene tape that seals securely and still looks the part on the doorstep.",
-          "It's a favourite with online sellers and subscription boxes because a single roll covers a lot of parcels, keeping the per-parcel branding cost tiny. Reorders are quick once your artwork is on file.",
-        ],
-        tags: ["Paper or poly", "One or more colours"],
-        image: "/branded-tape.webp",
-      },
-      {
-        name: "Tissue paper & wrap",
-        description:
-          "Custom-printed tissue paper and wrapping to give unboxing that premium, considered feel.",
-        longDescription: [
-          "Tissue paper is a small touch that makes opening a parcel feel like a gift rather than a delivery, and printing it with your logo or a repeating pattern ties the whole unboxing back to your brand. We print onto lightweight tissue in your choice of colours, ideal for lining boxes, wrapping garments or nesting delicate items.",
-          "It pairs naturally with our printed boxes, branded tape and swing tags for a coordinated set, and short runs mean boutiques and makers can order sensible quantities rather than a warehouse full.",
-        ],
-        tags: ["Custom colours", "Premium unboxing"],
-        image: "/tissue-paper.webp",
-      },
-      {
         name: "Swing tags",
         description:
           "Printed swing tags and product tags on premium card, strung and ready to attach.",
@@ -600,7 +575,7 @@ export const categories: Category[] = [
     ],
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
-      "Short-run printed boxes, branded packing tape, tissue paper and swing tags, printed locally in Lower Sydenham, south east London.",
+      "Short-run printed boxes, tissue paper and swing tags, printed locally in Lower Sydenham, south east London.",
   },
   {
     slug: "copying-and-business-forms",
@@ -616,7 +591,7 @@ export const categories: Category[] = [
         description:
           "Fast, affordable black and white copying with bulk discounts on larger runs.",
         longDescription: [
-          "Sometimes you just need clean, reliable mono copies fast, and that's exactly what our walk-in and trade copying service is built for. Pricing steps down as volume goes up, so a large print run costs proportionally less per sheet than a handful of copies.",
+          "Sometimes you just need clean, reliable mono copies fast, and that's exactly what we can help with. Pricing steps down as volume goes up, so a large print run costs proportionally less per sheet than a handful of copies.",
           "Same-day collection is standard, with binding or hole-punching added on request, and there's no need to book ahead for a quick job — walk in with a file or bring your own pages.",
         ],
         tags: ["Fast turnaround", "Bulk discounts"],
@@ -627,7 +602,7 @@ export const categories: Category[] = [
         description:
           "Vivid colour copying with same-day options for when you're up against a deadline.",
         longDescription: [
-          "Our colour copiers are calibrated regularly so what comes off the machine matches what's on your screen, which matters for presentations, artwork proofs and anything client-facing. Same-day turnaround is available for last-minute jobs, and we print single copies or bulk runs on the same equipment.",
+          "Our colour copiers are calibrated regularly which matters for presentations, artwork proofs and anything client-facing. Same-day turnaround is available for last-minute jobs, and we print single copies or bulk runs on the same equipment.",
           "A range of paper weights, including card stock, is available for covers and inserts, so a bound presentation can have a sturdier front page without needing a separate print run.",
         ],
         tags: ["Vivid colour", "Same-day options"],
