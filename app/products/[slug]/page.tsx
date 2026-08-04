@@ -80,7 +80,7 @@ export default async function ServicePage({ params }: Props) {
               src={category.image}
               alt={category.name}
               fill
-              priority
+              loading="eager"
               sizes="100vw"
               className="object-cover"
             />

@@ -94,7 +94,7 @@ export default async function ProductPage({ params }: Props) {
               src={heroImage}
               alt={item.name}
               fill
-              priority
+              loading="eager"
               sizes="100vw"
               className="object-cover"
             />
@@ -321,7 +321,7 @@ export default async function ProductPage({ params }: Props) {
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 25vw, 45vw"
-                    className="object-cover"
+                    className="scale-110 object-cover"
                   />
                 </div>
               ))}

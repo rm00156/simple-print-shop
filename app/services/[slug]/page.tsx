@@ -116,7 +116,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               src={service.image}
               alt={service.name}
               fill
-              priority
+              loading="eager"
               sizes="100vw"
               className="object-cover"
             />
