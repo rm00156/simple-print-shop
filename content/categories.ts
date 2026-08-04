@@ -58,33 +58,37 @@ export const categories: Category[] = [
   {
     slug: "business-stationery",
     name: "Business Stationery",
-    tagline: "Cards, letterheads and stamps",
+    tagline: "Cards, letterheads and personal stationery",
     intro:
-      "Cards, letterheads, stamps and personal stationery. Not sure what you need? Call us.",
+      "Cards, letterheads and personal stationery. Not sure what you need? Call us.",
     icon: IdCard,
     image: "/bcards.webp",
     items: [
       {
         name: "Business cards",
         description:
-          "Make a strong first impression with 14pt, 18pt or recycled stock, matte, gloss or spot UV finishes.",
+          "Make a strong first impression with card weights from 300gsm to 700gsm, recycled stock, matte, gloss or silk finishes and lamination.",
         longDescription: [
-          "Handing out a well-made business card is one of the simplest ways to make a lasting impression, and it's often the one thing people remember from meeting you. We print in full colour on sturdy 14pt or 18pt stock, or a recycled option if that matters to your brand, then finish with your choice of matte, gloss or a raised spot UV highlight over your logo. Pantone colour matching keeps your brand consistent from the card in someone's wallet to everything else you print.",
-          "Every design is proofed before it goes anywhere near a press, so you can check wording, layout and colour before we commit to the run. Whether you need fifty cards before a meeting tomorrow or a few thousand for the whole team, our digital presses make short runs cost-effective and quick, with a standard 24-48hr turnaround.",
+          "Handing out a well-made business card is one of the simplest ways to make a lasting impression, and it's often the one thing people remember from meeting you. We print in full colour on sturdy card from 300gsm to 700gsm depending on how much weight you want it to carry, then finish with your choice of matte, gloss, silk or recycled stock, with lamination available as an extra finishing option.",
+          "Whether you need fifty cards before a meeting tomorrow or a few thousand for the whole team, our digital presses make short runs cost-effective and quick, with a standard 24-48hr turnaround.",
         ],
-        tags: ["Spot UV", "Matte or gloss", "14pt–18pt stock"],
+        tags: [
+          "300–700gsm stock",
+          "Matte, gloss or silk",
+          "Lamination available",
+        ],
         badge: "Bestseller",
         image: "/bcards.webp",
       },
       {
         name: "Loyalty cards",
         description:
-          "Stamp and punch loyalty cards on durable stock, sized to slip into a wallet and keep customers coming back.",
+          "Stamp loyalty cards on durable stock, sized to slip into a wallet and keep customers coming back.",
         longDescription: [
-          "A loyalty card is one of the cheapest ways to turn a first-time customer into a regular, and it works best when the card feels worth keeping rather than something to drop in the bin on the way out. We print on durable card stock cut to wallet size, with space for stamps, punches or scratch panels depending on how you'd rather track visits.",
-          "Coffee shops, barbers, nail bars and takeaways are our most frequent loyalty card customers, usually ordering a few hundred at a time and topping up as they're handed out. We can match the design to your existing business cards and menus so the whole set looks like it came from the same place.",
+          "A loyalty card is one of the cheapest ways to turn a first-time customer into a regular, and it works best when the card feels worth keeping rather than something to drop in the bin on the way out. We print on durable card stock cut to wallet size, with space for stamps depending on how you'd rather track visits.",
+          "Coffee shops, barbers, nail bars and takeaways are our most frequent loyalty card customers, usually ordering a few hundred at a time and topping up as they're handed out.",
         ],
-        tags: ["Wallet sized", "Stamp or punch"],
+        tags: ["Wallet sized", "Stamps"],
         image: "/loyalty-cards.webp",
         icon: CreditCard,
       },
@@ -93,11 +97,11 @@ export const categories: Category[] = [
         description:
           "Branded A4 letterheads on quality bond paper, printed to match your corporate identity.",
         longDescription: [
-          "A letterhead is often the most-used piece of stationery in a business, so getting it right matters more than it might seem. We print A4 letterheads in full colour on 100gsm or 120gsm bond paper, matching your logo, fonts and Pantone colours exactly so every letter that leaves your office looks consistent.",
+          "A letterhead is often the most-used piece of stationery in a business, so getting it right matters more than it might seem. We print A4 letterheads in full colour on 100gsm or 120gsm bond paper.",
           "Order compliment slips and envelopes to the same specification for a stationery set that looks joined-up rather than assembled from different suppliers. It's a popular choice with solicitors, accountants and any business that still relies on formal correspondence, and reorders are quick once your layout is on file.",
         ],
         tags: ["120gsm bond", "Matching envelopes"],
-        image: "/letterhead.png",
+        image: "/letterhead.webp",
       },
       {
         name: "Compliment slips",
@@ -122,28 +126,6 @@ export const categories: Category[] = [
         image: "/personal.png",
       },
       {
-        name: "Resumes",
-        description:
-          "Sharp, clean CV printing on heavyweight paper that stands out from the pile.",
-        longDescription: [
-          "A CV printed on flimsy office paper gets handled like flimsy office paper, and that's the last impression you want to make before an interview. We print on heavyweight, bright-white stock with crisp, smudge-free text, so the copy in someone's hand feels as considered as the content on the page.",
-          "It's a popular job for graduates and anyone job-hunting locally, and because it's a small, fast print run, we can usually turn it around the same day if you're up against an application deadline.",
-        ],
-        tags: ["Heavyweight paper", "Crisp finish"],
-        image: "/screen.png",
-      },
-      {
-        name: "Rubber stamps",
-        description:
-          "Self-inking and traditional wooden-handle stamps for documents, packaging and address stamping.",
-        longDescription: [
-          "From a simple 'PAID' stamp to a full company address block, we make self-inking and traditional wooden-handle stamps to your exact wording and layout. Self-inking stamps give thousands of clean impressions before they need re-inking, which makes them a good fit for busy reception desks and warehouse dispatch benches.",
-          "We can also make up date stamps and signature stamps for everyday office use, and because these are made to order rather than stocked off a shelf, wording changes and reorders are straightforward.",
-        ],
-        tags: ["Self-inking", "Long-lasting ink"],
-        image: "/stamp.png",
-      },
-      {
         name: "Labels",
         description:
           "Custom-shaped labels for products, packaging and mailing, including waterproof options.",
@@ -152,7 +134,7 @@ export const categories: Category[] = [
           "Small businesses and market traders are some of our most regular label customers, often ordering in batches to match new stock or seasonal packaging, and we can hold your artwork on file so reorders don't mean starting from scratch.",
         ],
         tags: ["Custom shapes", "Waterproof options"],
-        image: "/label.png",
+        image: "/label.webp",
       },
       {
         name: "Note pads",
@@ -170,17 +152,17 @@ export const categories: Category[] = [
         description:
           "Award and training certificates on heavyweight stock, printed to look worth framing.",
         longDescription: [
-          "A certificate is a small piece of print that someone might keep for years, so it needs to feel substantial in the hand rather than like a page off the office printer. We print on heavyweight, bright-white or subtly textured stock, with options like gold or silver foiling on borders and seals for awards that deserve a bit of ceremony.",
+          "A certificate is a small piece of print that someone might keep for years, so it needs to feel substantial in the hand rather than like a page off the office printer. We print on heavyweight, bright-white or subtly textured stock.",
           "Training providers, schools, clubs and workplaces order these for course completions, competitions and long-service awards. We can print names individually so each certificate comes out personalised, or leave the name line blank for you to complete by hand.",
         ],
-        tags: ["Heavyweight stock", "Foiling available"],
+        tags: ["Heavyweight stock", "Personalised names"],
         image: "/certificates.webp",
         icon: Award,
       },
     ],
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
-      "Business cards, letterheads, compliment slips, stamps and personal stationery, printed locally in Lower Sydenham, south east London.",
+      "Business cards, letterheads, compliment slips and personal stationery, printed locally in Lower Sydenham, south east London.",
   },
   {
     slug: "flyers-leaflets-and-invites",
@@ -765,7 +747,11 @@ export const categories: Category[] = [
           "A prospectus is often a parent's first real impression of a school, so it needs to read as polished as the education on offer. We print full colour on quality gloss or matte stock, saddle-stitched for a slim, open-day-ready booklet or perfect bound with a squared spine for a fuller admissions pack, and can carry your school's photography, crest and house colours throughout. Every layout is proofed with you before it goes anywhere near a press.",
           "We work with primary and secondary schools each year ahead of open evenings and application deadlines, when a fast turnaround matters most. Updates for a new intake are quick once your layout is on file, and we can print matching open day signage and feeder-school mailers from the same artwork so everything a visiting parent sees looks joined-up.",
         ],
-        tags: ["A4 or A5 formats", "Saddle-stitch or perfect bound", "Open day ready"],
+        tags: [
+          "A4 or A5 formats",
+          "Saddle-stitch or perfect bound",
+          "Open day ready",
+        ],
         image: "/school-prospectuses.webp",
       },
       {
@@ -776,7 +762,11 @@ export const categories: Category[] = [
           "A yearbook is one of the few things a pupil keeps for decades, so it needs to hold up to that. We print full colour throughout on quality stock, in softback or hardback with a squared, perfect-bound spine, handling photo-heavy layouts — class photos, leavers' pages, house and club sections — without the colour or detail dropping off.",
           "These are proofed carefully given how many individual photos are usually involved, and we work to end-of-term deadlines so copies are ready before the summer holidays. Bulk pricing applies per year group, and we can hold your cover artwork on file for next year's edition.",
         ],
-        tags: ["Softback or hardback", "Full-colour photo pages", "End-of-year ready"],
+        tags: [
+          "Softback or hardback",
+          "Full-colour photo pages",
+          "End-of-year ready",
+        ],
         image: "/school-yearbooks.webp",
       },
       {
@@ -787,7 +777,11 @@ export const categories: Category[] = [
           "Visitors need clear direction from the car park to the hall, so we print weatherproof board signage for outdoor routes and pull-up banners for reception and welcome desks, matched to the branding and photography used in your prospectus.",
           "Turnaround is kept fast ahead of a fixed open evening date that can't move, and banner graphics can be swapped out on the same stand if your messaging changes before the next event.",
         ],
-        tags: ["Indoor & outdoor options", "Matches your prospectus branding", "Fast turnaround"],
+        tags: [
+          "Indoor & outdoor options",
+          "Matches your prospectus branding",
+          "Fast turnaround",
+        ],
         image: "/school-open-day-signage.webp",
       },
     ],
