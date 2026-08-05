@@ -317,7 +317,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             <p className="mt-4 max-w-lg text-base leading-[1.7] text-ink-2">
               Every job that leaves our studio is inspected before it reaches
               you. Your print is an extension of your brand, so we treat it
-              that way — with pdf proofs and guidance before every run.
+              that way.
             </p>
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
               {qualityPoints.map(({ icon: PointIcon, title, body }) => (

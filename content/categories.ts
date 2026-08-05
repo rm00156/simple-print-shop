@@ -3,6 +3,7 @@ import {
   Award,
   BookOpen,
   Calendar,
+  ClipboardList,
   Construction,
   Copy,
   CreditCard,
@@ -28,6 +29,7 @@ export type CategorySlug =
   | "boxes-and-packaging"
   | "copying-and-business-forms"
   | "calendars"
+  | "planners"
   | "schools"
   | "funeral-stationery";
 
@@ -683,27 +685,97 @@ export const categories: Category[] = [
   {
     slug: "calendars",
     name: "Calendars",
-    tagline: "Custom printed calendars",
+    tagline: "Custom printed calendars for the desk, wall or counter",
     intro:
       "Custom printed calendars for the office, the workshop or as a client gift.",
     icon: Calendar,
     image: "/calendars.webp",
     items: [
       {
-        name: "Calendars",
+        name: "Desktop Calendars",
         description:
-          "Custom printed wall or desk calendars with your own photos and dates, ideal as a client gift.",
+          "Wire-bound, tent-fold desk calendars with your own photos and dates, ideal as a client gift.",
         longDescription: [
-          "A calendar sits somewhere visible for a full twelve months, making it one of the longest-lasting branded gifts you can send to clients or keep in the workshop yourself. We print wall and desk formats with your own photography, company dates and public holidays marked, wire-bound for easy turning and hanging.",
-          "Order ahead of the new year for the best choice of turnaround slots, since this is one of our more seasonal jobs and slots do fill up as December approaches.",
+          "A desktop calendar sits within arm's reach for a full twelve months, making it one of the longest-lasting branded gifts you can hand to a client or keep on your own desk in the workshop. We print easel-fold pages on sturdy card, wire-bound along the top edge so they turn cleanly and stand unaided in a neat tent shape.",
+          "Add your own photography, company dates and public holidays through the year, and order ahead of the new year for the best choice of turnaround slots, since this is one of our more seasonal jobs and slots do fill up as December approaches.",
         ],
-        tags: ["Wall or desk formats", "Custom photos and dates"],
+        tags: ["Wire-bound", "Tent-fold desk format"],
+        badge: "Bestseller",
+        image: "/calendars.webp",
+      },
+      {
+        name: "Tent Calendars",
+        description:
+          "Free-standing single-card tent calendars that hold their shape on a counter or reception desk with no separate stand needed.",
+        longDescription: [
+          "A tent calendar folds flat for posting and pops up into a self-supporting triangle the moment it's creased, which makes it a cheap, cheerful way to get twelve months of branding onto a customer's counter or a client's desk without the cost of a wire-bound pad. We print full colour on both visible faces so the branding shows whichever way it's turned.",
+          "Because there's no binding involved, these are quick and inexpensive to produce in bulk, which suits trade show giveaways and mass client mailings where a full desktop calendar wouldn't be cost-effective.",
+        ],
+        tags: ["Free-standing card", "Bulk-friendly pricing"],
+        image: "/tent-calendars.webp",
+      },
+      {
+        name: "Wiro-Bound Wall Calendars",
+        description:
+          "Full-size wire-bound wall calendars with a photo page above each month, ready to hang straight out of the pack.",
+        longDescription: [
+          "A wall calendar earns its spot on the wall by looking good enough to stay there, so we wire-bind ours with a full photo page above each month's grid, punched and ready to hang. Use your own photography throughout, or a single cover image repeated behind every month if that suits your brand better.",
+          "They're a popular corporate gift precisely because they're useful rather than decorative, and the wire binding means pages turn cleanly month after month without the spine cracking the way a stapled pad eventually does.",
+        ],
+        tags: ["Wire-bound", "Photo page per month"],
         image: "/calendar2.webp",
+      },
+      {
+        name: "Stapled Wall Calendars",
+        description:
+          "A simpler stapled bind for wall calendars, keeping cost down on larger giveaway quantities.",
+        longDescription: [
+          "For calendars that are being handed out in volume rather than kept as a premium gift, a stapled bind gets you the same twelve months of branded wall space at a lower cost per copy than wire binding. We print full colour throughout on the same quality stock as our wire-bound calendars, just finished with a simple saddle-stitch spine.",
+          "It's the format we recommend when you're ordering in the hundreds — trade counters, community groups and local sports clubs are regular customers for a stapled run each autumn ahead of the new year.",
+        ],
+        tags: ["Stapled binding", "Cost-effective at volume"],
+        image: "/stapled-wall-calendars.webp",
       },
     ],
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
       "Custom printed calendars, produced locally in Lower Sydenham, south east London.",
+  },
+  {
+    slug: "planners",
+    name: "Planners",
+    tagline: "Desk and wall planners for tracking the year",
+    intro:
+      "Custom printed desk and wall planners to keep your team, project or household on schedule.",
+    icon: ClipboardList,
+    image: "/wall-planners.webp",
+    items: [
+      {
+        name: "Desk Planners",
+        description:
+          "Flat desk planner pads with a weekly or monthly grid, sitting open on the desk for everyday scheduling.",
+        longDescription: [
+          "A desk planner stays open on the desk rather than hanging on a wall, which suits anyone who plans their week sitting down rather than glancing up. We print pads with a clear weekly or monthly grid, tear-off pages, and space along the edge for your logo and contact details.",
+          "They make a practical client gift alongside a desktop calendar, and because they're a straightforward pad format, reordering a fresh one when the current pad runs low is quick and inexpensive.",
+        ],
+        tags: ["Weekly or monthly grid", "Tear-off pages"],
+        image: "/desk-planners.webp",
+      },
+      {
+        name: "Wall Planners",
+        description:
+          "Full-year wall planners with a grid layout for tracking holidays, shifts or project deadlines at a glance.",
+        longDescription: [
+          "A wall planner puts the whole year on one sheet, which makes it the format teams reach for when they need to see holidays, shifts or deadlines at a glance rather than flipping through monthly pages. We print large-format planners with a clear full-year grid, and can mark out your own key dates before it goes to press.",
+          "Office managers and small teams are our most regular wall planner customers, usually ordering a fresh one each January, and we can hold last year's layout on file to make that a quick reorder.",
+        ],
+        tags: ["Full-year grid", "Large format"],
+        image: "/wall-planners.webp",
+      },
+    ],
+    cta: { label: "Request a quote", href: "/quote" },
+    metaDescription:
+      "Custom printed desk and wall planners, produced locally in Lower Sydenham, south east London.",
   },
   {
     slug: "schools",
