@@ -286,10 +286,9 @@ export default async function ProductPage({ params }: Props) {
               Uncompromising quality
             </h2>
             <p className="mt-4 max-w-lg text-base leading-[1.7] text-ink-2">
-              Every job that leaves our studio is inspected for colour accuracy
-              and finish before it reaches you. Your print is an extension of
-              your brand, so we treat it that way — with proofs and guidance
-              before every run.
+              Every job that leaves our studio is inspected before it reaches
+              you. Your print is an extension of your brand, so we treat it
+              that way.
             </p>
             <ul className="mt-6 space-y-3">
               {qualityPoints.map(({ icon: PointIcon, label }) => (
@@ -322,6 +321,7 @@ export default async function ProductPage({ params }: Props) {
                     fill
                     sizes="(min-width: 1024px) 25vw, 45vw"
                     className="scale-110 object-cover"
+                    priority={i === 0}
                   />
                 </div>
               ))}
