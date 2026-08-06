@@ -284,7 +284,7 @@ export const services: Service[] = [
       {
         question: "Is delivery free?",
         answer:
-          "Collection from our premises is always free. Delivery is quoted per job — local south east London runs are often low-cost or included depending on the order, and we'll always confirm the price before you commit.",
+          "Collection from our premises is always free. Delivery is quoted per job - we'll always confirm the price before you commit.",
       },
       {
         question: "Can you store our print for us?",

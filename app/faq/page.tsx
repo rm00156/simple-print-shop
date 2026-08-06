@@ -39,7 +39,7 @@ export default function FaqPage() {
           <p className="ts mx-auto mt-3 max-w-xl text-base leading-[1.7]">
             Answers to what we&apos;re asked most about design, printing,
             turnaround and delivery. Can&apos;t find what you need? Call{" "}
-            {site.phone} and we&apos;ll help directly.
+            {site.phone}{" "}and we&apos;ll help directly.
           </p>
         </div>
       </section>
