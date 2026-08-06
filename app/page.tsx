@@ -51,10 +51,12 @@ export default async function Home() {
       <section className="c-blue relative isolate flex min-h-[560px] items-center overflow-hidden px-4 pt-24 pb-40 sm:px-6 md:min-h-[680px] md:pt-32 md:pb-52">
         <video
           src="/video.mp4"
+          poster="/hero-video-poster.webp"
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
           className="absolute inset-0 -z-20 size-full object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-primary-900/65" />
