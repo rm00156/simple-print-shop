@@ -4,7 +4,7 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Shipping Info",
-  description: `Collection and delivery information for ${site.name} — free collection from our ${site.address.addressLocality} press, or we arrange delivery across south east London and nationwide.`,
+  description: `Collection and delivery information for ${site.name} — free collection from our ${site.address.addressLocality} press, or we arrange delivery across London and the UK nationwide.`,
   alternates: { canonical: "/shipping" },
 };
 
@@ -24,7 +24,16 @@ export default function ShippingPage() {
         {
           heading: "Delivery",
           body: [
-            "We arrange delivery across Lower Sydenham, the surrounding south east London area, and nationwide by courier on request. Cost depends on the job and the distance, and we'll always quote it up front when you get your quote — never a surprise on the invoice. (Collection, on the other hand, is always free — see above.)",
+            <>
+              We arrange delivery across{" "}
+              <strong className="font-semibold text-ink">
+                London and the UK nationwide
+              </strong>{" "}
+              also by courier on request. Cost depends on the job and the
+              distance, and we&apos;ll always quote it up front when you get
+              your quote — never a surprise on the invoice. (Collection, on the
+              other hand, is always free — see above.)
+            </>,
             `Delivery time comes on top of production time, so factor in both if you're working to a deadline. Call ${site.phone} and we'll give you a realistic date and price for your specific job and postcode, rather than a general estimate that might not hold.`,
             "For regular or bulk orders we can also hold your stock and dispatch it as you need it — ask about pick, pack and mailing fulfilment if that would save you the hassle of warehousing it yourself.",
           ],
