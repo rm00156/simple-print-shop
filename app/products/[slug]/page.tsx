@@ -78,7 +78,7 @@ export default async function ServicePage({ params }: Props) {
           {category.image ? (
             <Image
               src={category.image}
-              alt={category.name}
+              alt={`${category.name} - printed by Bluwave in South East London`}
               fill
               loading="eager"
               sizes="100vw"

@@ -23,7 +23,7 @@ export function ProductCard({
         {item.image ? (
           <Image
             src={item.image}
-            alt={item.name}
+            alt={`${item.name} - professional printing by Bluwave`}
             fill
             sizes="(min-width: 1024px) 22vw, (min-width: 640px) 40vw, 90vw"
             className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"

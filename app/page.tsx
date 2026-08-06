@@ -148,7 +148,7 @@ export default async function Home() {
                   {category.image && (
                     <Image
                       src={category.image}
-                      alt={category.name}
+                      alt={`${category.name} - quality printing services by Bluwave`}
                       fill
                       sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
