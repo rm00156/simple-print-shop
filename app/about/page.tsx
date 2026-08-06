@@ -43,7 +43,7 @@ export default async function AboutPage() {
   return (
     <>
       <section className="c-blue px-4 pt-10 pb-24 sm:px-6 sm:pb-28">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:items-center md:gap-8">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:items-center md:gap-8">
           <div>
             <h1 className="mt-4 text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[42px]">
               Print you can pick up in a day, from printers you can actually get
@@ -149,85 +149,89 @@ export default async function AboutPage() {
       </div>
 
       <div className="px-4 pt-12 sm:px-6 sm:pt-16">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
-            Why businesses stick with us
-          </h2>
-          <p className="mt-3 text-sm leading-[1.7] text-ink-2">
-            Our relationships are built on customer care and print quality. In
-            practice, that comes down to two things.
-          </p>
-        </div>
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div className="rounded-2xl bg-surface-2 p-6 shadow-card">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-teal/10 text-teal">
-              <CalendarCheck size={20} aria-hidden="true" />
-            </div>
-            <h3 className="mt-4 text-lg font-bold text-ink">
-              We show up on time, every time
-            </h3>
-            {/* TODO: if the on-time percentage is tracked, put the real number in place of
-                "standard digital jobs go out within" — a hard stat is worth more here. */}
-            <p className="mt-2 text-sm leading-[1.7] text-ink-2">
-              Late print doesn&apos;t just cost you money — it costs you the
-              launch date, the event, the deadline you promised a client.
-              Standard digital jobs go out within the {site.turnaround} window,
-              and if something is ever going to run late, we call you before you
-              have to call us.
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
+              Why businesses stick with us
+            </h2>
+            <p className="mt-3 text-sm leading-[1.7] text-ink-2">
+              Our relationships are built on customer care and print quality.
+              In practice, that comes down to two things.
             </p>
           </div>
-          <div className="rounded-2xl bg-surface-2 p-6 shadow-card">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-primary-fixed text-primary">
-              <Wrench size={20} aria-hidden="true" />
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div className="rounded-2xl bg-surface-2 p-6 shadow-card">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-teal/10 text-teal">
+                <CalendarCheck size={20} aria-hidden="true" />
+              </div>
+              <h3 className="mt-4 text-lg font-bold text-ink">
+                We show up on time, every time
+              </h3>
+              {/* TODO: if the on-time percentage is tracked, put the real number in place of
+                  "standard digital jobs go out within" — a hard stat is worth more here. */}
+              <p className="mt-2 text-sm leading-[1.7] text-ink-2">
+                Late print doesn&apos;t just cost you money — it costs you the
+                launch date, the event, the deadline you promised a client.
+                Standard digital jobs go out within the {site.turnaround}{" "}
+                window, and if something is ever going to run late, we call
+                you before you have to call us.
+              </p>
             </div>
-            <h3 className="mt-4 text-lg font-bold text-ink">
-              We handle the fiddly bits so you don&apos;t have to
-            </h3>
-            <p className="mt-2 text-sm leading-[1.7] text-ink-2">
-              No artwork? Our in-house design team builds it from scratch. Wrong
-              bleed, wrong colour profile, a file that won&apos;t open — we
-              catch it and fix it. A fee is chargeable if it&apos;s gone to
-              print.
-            </p>
+            <div className="rounded-2xl bg-surface-2 p-6 shadow-card">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-primary-fixed text-primary">
+                <Wrench size={20} aria-hidden="true" />
+              </div>
+              <h3 className="mt-4 text-lg font-bold text-ink">
+                We handle the fiddly bits so you don&apos;t have to
+              </h3>
+              <p className="mt-2 text-sm leading-[1.7] text-ink-2">
+                No artwork? Our in-house design team builds it from scratch.
+                Wrong bleed, wrong colour profile, a file that won&apos;t open
+                — we catch it and fix it. A fee is chargeable if it&apos;s
+                gone to print.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="px-4 pt-12 sm:px-6 sm:pt-16">
-        <h2 className="text-center text-xl font-bold tracking-tight text-ink sm:text-2xl">
-          What we&apos;re known for
-        </h2>
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {capabilities.map((cap) => (
-            <div
-              key={cap.title}
-              className="overflow-hidden rounded-2xl bg-surface-2 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
-            >
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={cap.image}
-                  alt={cap.title}
-                  fill
-                  sizes="(min-width: 640px) 33vw, 100vw"
-                  className="object-cover"
-                />
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-center text-xl font-bold tracking-tight text-ink sm:text-2xl">
+            What we&apos;re known for
+          </h2>
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {capabilities.map((cap) => (
+              <div
+                key={cap.title}
+                className="overflow-hidden rounded-2xl bg-surface-2 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
+              >
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={cap.image}
+                    alt={cap.title}
+                    fill
+                    sizes="(min-width: 640px) 33vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-display text-base font-bold text-ink">
+                    {cap.title}
+                  </h3>
+                  <p className="mt-1.5 text-xs leading-[1.6] text-ink-2">
+                    {cap.description}
+                  </p>
+                </div>
               </div>
-              <div className="p-4">
-                <h3 className="font-display text-base font-bold text-ink">
-                  {cap.title}
-                </h3>
-                <p className="mt-1.5 text-xs leading-[1.6] text-ink-2">
-                  {cap.description}
-                </p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <p className="mx-auto mt-8 max-w-prose text-center text-sm leading-[1.7] text-ink-2">
+            Launching a campaign or reprinting the menus — either way, you can
+            trust us to handle the production while you get on with running
+            your business.
+          </p>
         </div>
-        <p className="mx-auto mt-8 max-w-prose text-center text-sm leading-[1.7] text-ink-2">
-          Launching a campaign or reprinting the menus — either way, you can
-          trust us to handle the production while you get on with running your
-          business.
-        </p>
       </div>
 
       <div className="mt-12 sm:mt-16">
