@@ -114,7 +114,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           {service.image ? (
             <Image
               src={service.image}
-              alt={service.name}
+              alt={`${service.name} - Bluwave printing service`}
               fill
               loading="eager"
               sizes="100vw"
@@ -348,7 +348,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 >
                   <Image
                     src={src}
-                    alt=""
+                    alt={`Example of ${service.name} by Bluwave`}
                     fill
                     sizes="(min-width: 1024px) 25vw, 45vw"
                     className="object-cover"
