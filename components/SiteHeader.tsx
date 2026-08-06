@@ -110,7 +110,7 @@ export function SiteHeader() {
             </nav>
           </div>
 
-          <div className="flex min-w-0 flex-1 items-center gap-4">
+          <div className="flex min-w-0 flex-1 items-center justify-end gap-4">
             {/* Inline from md up, where there's room; min-w-0 lets it shrink
               before anything else in the bar wraps. */}
             <div className="hidden min-w-0 flex-1 justify-end md:flex">
