@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import {
   FileText,
@@ -17,7 +18,7 @@ import { site } from "@/content/site";
 
 export type InfoPageSection = {
   heading: string;
-  body: string[];
+  body: ReactNode[];
 };
 
 function slugify(value: string) {

@@ -321,7 +321,7 @@ export default async function ProductPage({ params }: Props) {
                     fill
                     sizes="(min-width: 1024px) 25vw, 45vw"
                     className="scale-110 object-cover"
-                    priority={i === 0}
+                    loading={i === 0 ? "eager" : "lazy"}
                   />
                 </div>
               ))}
