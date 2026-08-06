@@ -27,8 +27,6 @@ export const site = {
   reviews: {
     rating: 4.9,
     count: 33,
-    // TODO: link to the real Google Business profile once confirmed.
-    url: "TODO_GOOGLE_PROFILE_URL",
   },
   address: {
     streetAddress: "Unit 4, Gardner Industrial Estate, Kent House Lane",
@@ -159,6 +157,7 @@ export const footerColumns = [
       { href: "/quote", label: "Request a Quote" },
       { href: "/contact", label: "Contact Us" },
       { href: "/shipping", label: "Shipping Info" },
+      { href: "/faq", label: "FAQ" },
     ],
   },
   {
