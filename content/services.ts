@@ -69,7 +69,7 @@ export const services: Service[] = [
       {
         question: "Will I see a proof before printing?",
         answer:
-          "Yes. We send a proof to approve before anything goes to print, so you can check the wording, layout and colours.",
+          "We can provide an electronic PDF proof for your approval before anything goes to print, so you can check the wording and layout. If you would like a physical sample of your print job, please note that a proofing fee applies, with delivery costs handled separately.",
       },
     ],
     metaDescription:
@@ -192,12 +192,12 @@ export const services: Service[] = [
       {
         question: "What binding options do you offer?",
         answer:
-          "Saddle-stitch (stapled), perfect binding (glued spine), and spiral or comb binding for documents that need to lie flat. We'll recommend the best fit for your page count and use.",
+          "Saddle-stitch (stapled), perfect binding (glued spine), spiral binding, riveting, 2-4 hole drilling for ring binders, for documents that need to lie flat. We'll recommend the best fit for your page count and use.",
       },
       {
         question: "Can you finish print I've had done elsewhere?",
         answer:
-          "In many cases yes — bring it in and we'll take a look. Trimming, folding, lamination and binding of supplied print are often possible.",
+          "Please call to discuss.",
       },
       {
         question: "Do you laminate?",
@@ -238,17 +238,7 @@ export const services: Service[] = [
       {
         question: "What sizes can you scan?",
         answer:
-          "From standard A4 documents up to A0 plans and drawings. If it's larger or an awkward format, bring it in and we'll take a look.",
-      },
-      {
-        question: "Can the scans be searchable?",
-        answer:
-          "Yes. We can run OCR on document scans so the text becomes selectable and searchable, which makes finding things in a large archive far quicker.",
-      },
-      {
-        question: "How do I get the files back?",
-        answer:
-          "Whatever suits you — a USB drive, secure file transfer, or a shared link. We can also name and organise the files to match your own filing system.",
+          "Up to A3. If it's larger or an awkward format, call.",
       },
     ],
     metaDescription:
@@ -289,7 +279,7 @@ export const services: Service[] = [
       {
         question: "Can you store our print for us?",
         answer:
-          "Yes. For regular or bulk jobs we can hold your stock and release or send it out as you need it, so you're not finding space for pallets of print in your own office.",
+          "Only for contract work with an agreed timescale (call for rates).",
       },
       {
         question: "Do you handle mailshots?",
