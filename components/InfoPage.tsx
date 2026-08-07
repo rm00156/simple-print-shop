@@ -124,12 +124,12 @@ export function InfoPage({
                           </h2>
                         </div>
                         {section.body.map((paragraph, i) => (
-                          <p
+                          <div
                             key={i}
                             className="mt-3 text-sm leading-[1.8] text-ink-2"
                           >
                             {paragraph}
-                          </p>
+                          </div>
                         ))}
                       </section>
                     );
