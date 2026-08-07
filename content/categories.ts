@@ -696,12 +696,13 @@ export const categories: Category[] = [
         description:
           "Wire-bound, tent-fold desk calendars with your own photos and dates, ideal as a client gift.",
         longDescription: [
-          "A desktop calendar sits within arm's reach for a full twelve months, making it one of the longest-lasting branded gifts you can hand to a client or keep on your own desk in the workshop. We print easel-fold pages on sturdy card, wire-bound along the top edge so they turn cleanly and stand unaided in a neat tent shape.",
-          "Add your own photography, company dates and public holidays through the year, and order ahead of the new year for the best choice of turnaround slots, since this is one of our more seasonal jobs and slots do fill up as December approaches.",
+          "A desk calendar keeps meetings, deadlines and appointments in easy view alongside your digital calendar, and doubles as a client gift — branded with your logo and colours, and personalised with up to 13 of your own photos so your brand sits in their schedule all year.",
+          "We print landscape in A5 or DL, wire-bound along the top edge so the pages turn cleanly and stand unaided, with a choice of covers to suit how it'll be used — dressed up for a client gift or kept plain for the workshop.",
+          "Please note: once your artwork's print-ready, we'll email a PDF proof for sign-off, which can take up to 48 hours. Your chosen delivery option runs from when you approve that proof, not from checkout.",
         ],
         tags: ["Wire-bound", "Tent-fold desk format"],
         badge: "Bestseller",
-        image: "/calendars.webp",
+        image: "/desktop-calendars.webp",
       },
       {
         name: "Tent Calendars",
@@ -719,8 +720,10 @@ export const categories: Category[] = [
         description:
           "Full-size wire-bound wall calendars with a photo page above each month, ready to hang straight out of the pack.",
         longDescription: [
-          "A wall calendar earns its spot on the wall by looking good enough to stay there, so we wire-bind ours with a full photo page above each month's grid, punched and ready to hang. Use your own photography throughout, or a single cover image repeated behind every month if that suits your brand better.",
-          "They're a popular corporate gift precisely because they're useful rather than decorative, and the wire binding means pages turn cleanly month after month without the spine cracking the way a stapled pad eventually does.",
+          "A wire-bound wall calendar suits the office wall as easily as it suits a corporate gift box, branded with your logo and personalised with up to 13 of your own photos across the cover and each month.",
+          "Available in A3, A4 or A5, landscape or portrait, wire-bound so the pages turn cleanly month after month without the spine cracking the way a stapled pad eventually does.",
+          "One thing to watch when supplying images: for a landscape calendar, the cover photo should be landscape and each of the 12 monthly photos portrait; for a portrait calendar, it's the other way round — portrait cover, landscape monthly images.",
+          "Please note: once your artwork's print-ready, we'll email a PDF proof for sign-off, which can take up to 48 hours. Your chosen delivery option runs from when you approve that proof, not from checkout.",
         ],
         tags: ["Wire-bound", "Photo page per month"],
         image: "/calendar2.webp",
@@ -730,8 +733,10 @@ export const categories: Category[] = [
         description:
           "A simpler stapled bind for wall calendars, keeping cost down on larger giveaway quantities.",
         longDescription: [
-          "For calendars that are being handed out in volume rather than kept as a premium gift, a stapled bind gets you the same twelve months of branded wall space at a lower cost per copy than wire binding. We print full colour throughout on the same quality stock as our wire-bound calendars, just finished with a simple saddle-stitch spine.",
-          "It's the format we recommend when you're ordering in the hundreds — trade counters, community groups and local sports clubs are regular customers for a stapled run each autumn ahead of the new year.",
+          "Fill twelve months with your own photography and a Stapled Wall Calendar becomes a piece of merchandise, a consumer item or a giveaway that keeps your name on the wall for a full year rather than a single glance.",
+          "Each one prints in full colour on your choice of paper stock, with a drill hole included for hanging, so it holds up whether it ends up in a workplace or a family kitchen.",
+          "Supply 14 images of your own, or send over artwork you've already had designed — whichever suits how you work.",
+          "Please note: once our pre-press team have your artwork print-ready, we'll email a PDF proof for sign-off, which can take up to 48 hours. Your chosen delivery option runs from when you approve that proof, not from checkout.",
         ],
         tags: ["Stapled binding", "Cost-effective at volume"],
         image: "/stapled-wall-calendars.webp",
@@ -755,8 +760,9 @@ export const categories: Category[] = [
         description:
           "Flat desk planner pads with a weekly or monthly grid, sitting open on the desk for everyday scheduling.",
         longDescription: [
-          "A desk planner stays open on the desk rather than hanging on a wall, which suits anyone who plans their week sitting down rather than glancing up. We print pads with a clear weekly or monthly grid, tear-off pages, and space along the edge for your logo and contact details.",
-          "They make a practical client gift alongside a desktop calendar, and because they're a straightforward pad format, reordering a fresh one when the current pad runs low is quick and inexpensive.",
+          "A desk planner pad works two ways: as a daily list you tear off once the day's done, or as a longer-range layout for mapping out a week, month or year ahead. We leave extra margin space for notes, quick sketches or the odd doodle, plus room for your logo and a brand message so it stays visible on every page.",
+          "Because a pad sits open on the desk rather than up on a wall, it stays in view all day — handy for keeping your business front of mind for clients and staff alike.",
+          "Please note: each pad is glued along the bottom edge, which keeps the pages flat and stops them curling or coming loose as they're used.",
         ],
         tags: ["Weekly or monthly grid", "Tear-off pages"],
         image: "/desk-planners.webp",
@@ -766,8 +772,8 @@ export const categories: Category[] = [
         description:
           "Full-year wall planners with a grid layout for tracking holidays, shifts or project deadlines at a glance.",
         longDescription: [
-          "A wall planner puts the whole year on one sheet, which makes it the format teams reach for when they need to see holidays, shifts or deadlines at a glance rather than flipping through monthly pages. We print large-format planners with a clear full-year grid, and can mark out your own key dates before it goes to press.",
-          "Office managers and small teams are our most regular wall planner customers, usually ordering a fresh one each January, and we can hold last year's layout on file to make that a quick reorder.",
+          "A wall planner puts the full year on a single sheet, so a quick glance is all it takes to check what's coming up — no flipping between monthly pages to avoid a double-booking.",
+          "Order one for internal use and it becomes a shared reference for the team, handy for mapping out projects and deadlines across the months ahead. Or have a batch printed as a giveaway, so your branding sits in homes and offices for the whole year.",
         ],
         tags: ["Full-year grid", "Large format"],
         image: "/wall-planners.webp",
