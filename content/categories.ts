@@ -147,7 +147,7 @@ export const categories: Category[] = [
           "They're a popular addition to trade show stands and client welcome packs, and because they're a straightforward digital print job, reordering a fresh box when the last one runs low is quick and inexpensive.",
         ],
         tags: ["Tear-off binding", "Custom branding"],
-        image: "/notepad.png",
+        image: "/notepad.webp",
       },
       {
         name: "Certificates",
@@ -626,23 +626,12 @@ export const categories: Category[] = [
         image: "/plan-printing.webp",
       },
       {
-        name: "Business forms",
-        description:
-          "Custom-layout business forms for invoicing, ordering and internal office use.",
-        longDescription: [
-          "Off-the-shelf forms rarely match exactly how your business actually works, so we design and print custom-layout forms for invoicing, ordering, timesheets and internal paperwork built around your fields and branding. Sequential numbering can be added for auditing and stock control, in pad or pack formats.",
-          "Reordering is quick once the original layout is on file, and if your fields need to change down the line, we can update the artwork rather than starting the design from scratch.",
-        ],
-        tags: ["Custom layouts", "Sequential numbering"],
-        image: "/forms.webp",
-      },
-      {
         name: "Carbonless forms",
         description:
           "Two and three-part carbonless form sets with sequential numbering, ready to write and tear.",
         longDescription: [
           "Carbonless sets let you write once and keep a copy for the customer, your files and dispatch, without a single sheet of carbon paper in sight. We print two and three-part sets with sequential numbering for tracking, collated and glued into pads that tear off cleanly.",
-          "Popular with tradespeople for job sheets, delivery notes and receipt books, these are made to your exact layout rather than a generic template, so the fields match what you actually need to record.",
+          "Popular with tradespeople for job sheets, delivery notes and receipt books, these are made to your exact layout, so the fields match what you actually need to record.",
         ],
         tags: ["2–3 part sets", "Sequential numbering"],
         image: "/carbonless.webp",
@@ -734,16 +723,6 @@ export const categories: Category[] = [
         tags: ["Stapled binding", "Cost-effective at volume"],
         image: "/stapled-wall-calendars.webp",
       },
-      {
-        name: "Wall Hung Calendar",
-        description:
-          "A single-sheet, full-year wall calendar with a grid layout for tracking holidays, shifts or project deadlines at a glance.",
-        longDescription: [
-          "Keep your team organised and your brand visible with a custom Wall Hung Calendar. Designed for seamless year-at-a-glance scheduling, it makes it easy for individuals and teams to track projects, coordinate timelines and completely avoid scheduling conflicts. Use it internally to boost workplace productivity, or gift it to clients as a high-value promotional tool that keeps your branding on display in homes and offices all year long.",
-        ],
-        tags: ["Full-year grid", "Large format"],
-        image: "/wall-planners.webp",
-      },
     ],
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
@@ -752,9 +731,9 @@ export const categories: Category[] = [
   {
     slug: "planners",
     name: "Planners",
-    tagline: "Desk planners for tracking the week, month or year",
+    tagline: "Desk and wall planners for tracking the week, month or year",
     intro:
-      "Custom printed desk planners to keep your team, project or household on schedule.",
+      "Custom printed desk and wall planners to keep your team, project or household on schedule.",
     icon: ClipboardList,
     image: "/desk-planners.webp",
     items: [
@@ -769,10 +748,20 @@ export const categories: Category[] = [
         tags: ["Weekly or monthly grid", "Tear-off pages"],
         image: "/desk-planners.webp",
       },
+      {
+        name: "Wall Planner",
+        description:
+          "A single-sheet, full-year wall planner with a grid layout for tracking holidays, shifts or project deadlines at a glance.",
+        longDescription: [
+          "Keep your team organised and your brand visible with a custom Wall Planner. Designed for seamless year-at-a-glance scheduling, it makes it easy for individuals and teams to track projects, coordinate timelines and completely avoid scheduling conflicts. Use it internally to boost workplace productivity, or gift it to clients as a high-value promotional tool that keeps your branding on display in homes and offices all year long.",
+        ],
+        tags: ["Full-year grid", "Large format"],
+        image: "/wall-planners.webp",
+      },
     ],
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
-      "Custom printed desk planners, produced locally in Lower Sydenham, south east London.",
+      "Custom printed desk and wall planners, produced locally in Lower Sydenham, south east London.",
   },
   {
     slug: "schools",
