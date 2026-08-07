@@ -719,6 +719,17 @@ export const categories: Category[] = [
         tags: ["Stapled binding", "Cost-effective at volume"],
         image: "/stapled-wall-calendars.webp",
       },
+      {
+        name: "Wall Hung Calendar",
+        description:
+          "A single-sheet, full-year wall calendar with a grid layout for tracking holidays, shifts or project deadlines at a glance.",
+        longDescription: [
+          "Unlike our bound wall calendars, a wall hung calendar puts the full year on one single sheet, so a quick glance is all it takes to check what's coming up — no flipping between monthly pages to avoid a double-booking.",
+          "Order one for internal use and it becomes a shared reference for the team, handy for mapping out projects and deadlines across the months ahead. Or have a batch printed as a giveaway, so your branding sits in homes and offices for the whole year.",
+        ],
+        tags: ["Full-year grid", "Large format"],
+        image: "/wall-planners.webp",
+      },
     ],
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
@@ -727,11 +738,11 @@ export const categories: Category[] = [
   {
     slug: "planners",
     name: "Planners",
-    tagline: "Desk and wall planners for tracking the year",
+    tagline: "Desk planners for tracking the week, month or year",
     intro:
-      "Custom printed desk and wall planners to keep your team, project or household on schedule.",
+      "Custom printed desk planners to keep your team, project or household on schedule.",
     icon: ClipboardList,
-    image: "/wall-planners.webp",
+    image: "/desk-planners.webp",
     items: [
       {
         name: "Desk Planners",
@@ -745,21 +756,10 @@ export const categories: Category[] = [
         tags: ["Weekly or monthly grid", "Tear-off pages"],
         image: "/desk-planners.webp",
       },
-      {
-        name: "Wall Planners",
-        description:
-          "Full-year wall planners with a grid layout for tracking holidays, shifts or project deadlines at a glance.",
-        longDescription: [
-          "A wall planner puts the full year on a single sheet, so a quick glance is all it takes to check what's coming up — no flipping between monthly pages to avoid a double-booking.",
-          "Order one for internal use and it becomes a shared reference for the team, handy for mapping out projects and deadlines across the months ahead. Or have a batch printed as a giveaway, so your branding sits in homes and offices for the whole year.",
-        ],
-        tags: ["Full-year grid", "Large format"],
-        image: "/wall-planners.webp",
-      },
     ],
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
-      "Custom printed desk and wall planners, produced locally in Lower Sydenham, south east London.",
+      "Custom printed desk planners, produced locally in Lower Sydenham, south east London.",
   },
   {
     slug: "schools",
