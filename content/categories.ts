@@ -25,7 +25,7 @@ export type CategorySlug =
   | "booklets-catalogues-and-brochures"
   | "marketing-and-promo"
   | "site-and-display-boards"
-  | "fine-art-and-canvas"
+  | "canvas"
   | "boxes-and-packaging"
   | "copying-and-business-forms"
   | "calendars"
@@ -508,25 +508,14 @@ export const categories: Category[] = [
       "Site boards, hoarding panels, Heras fencing banners and display boards, printed weatherproof in Lower Sydenham, south east London.",
   },
   {
-    slug: "fine-art-and-canvas",
-    name: "Fine Art & Canvas",
-    tagline: "Giclée prints and stretched canvas",
+    slug: "canvas",
+    name: "Canvas",
+    tagline: "Stretched canvas prints",
     intro:
-      "Gallery-quality giclée prints and stretched canvas, printed with archival inks for artists, photographers and the home.",
+      "Stretched canvas prints, made with archival inks for artists, photographers and the home.",
     icon: Frame,
-    image: "/fine-art-prints.webp",
+    image: "/stretched-canvas.webp",
     items: [
-      {
-        name: "Fine art prints",
-        description:
-          "Giclée prints on archival papers with pigment inks, colour-matched to your original.",
-        longDescription: [
-          "Giclée printing uses pigment inks on heavyweight archival paper to reproduce artwork and photography at a quality that holds its colour for decades rather than fading after a few summers on a sunny wall. We print on textured watercolour and smooth cotton rag papers, and can profile the print to match your original as closely as the paper allows.",
-          "Artists selling limited editions, photographers producing portfolio pieces and galleries reproducing works all use this service. We'll run a small test print first on anything colour-critical, so you can approve the match before we commit to the full edition.",
-        ],
-        tags: ["Archival pigment inks", "Cotton rag & watercolour"],
-        image: "/fine-art-prints.webp",
-      },
       {
         name: "Stretched canvas",
         description:
@@ -541,7 +530,7 @@ export const categories: Category[] = [
     ],
     cta: { label: "Request a quote", href: "/quote" },
     metaDescription:
-      "Giclée fine art prints and stretched canvas, printed with archival inks in Lower Sydenham, south east London.",
+      "Stretched canvas prints, printed with archival inks in Lower Sydenham, south east London.",
   },
   {
     slug: "boxes-and-packaging",
@@ -653,17 +642,6 @@ export const categories: Category[] = [
         ],
         tags: ["2–3 part sets", "Sequential numbering"],
         image: "/carbonless.webp",
-      },
-      {
-        name: "Continuous forms",
-        description:
-          "Pre-printed continuous stationery for high-volume office printing needs.",
-        longDescription: [
-          "Continuous stationery still earns its place in warehouses and back offices running older line printers, feeding through as one perforated strip rather than individual sheets. We pre-print your branding, form fields or numbering onto the stock so only the variable data needs printing on your own equipment.",
-          "It's a cost-effective option for high-volume, repetitive paperwork, and because it's a straightforward, high-run job, larger orders bring the per-form cost down significantly.",
-        ],
-        tags: ["Pre-printed", "Bulk runs"],
-        image: "/continuous.webp",
       },
       {
         name: "Paper supplies",
