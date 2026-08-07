@@ -38,6 +38,10 @@ export type CategoryItem = {
   description: string;
   // A couple of paragraphs of real detail, shown on the product's own page.
   longDescription: string[];
+  // Short bullet-style callouts shown as a checklist under longDescription.
+  highlights?: { label: string; detail: string }[];
+  // A closing note (e.g. proofing/delivery caveat) shown after highlights.
+  note?: string;
   tags?: string[];
   badge?: string;
   icon?: LucideIcon;
@@ -674,9 +678,22 @@ export const categories: Category[] = [
         description:
           "Wire-bound, tent-fold desk calendars with your own photos and dates, ideal as a client gift.",
         longDescription: [
-          "A desk calendar keeps meetings, deadlines and appointments in easy view alongside your digital calendar, and doubles as a client gift — branded with your logo and colours, and personalised with up to 13 of your own photos so your brand sits in their schedule all year.",
-          "We print landscape in A5 or DL, wire-bound along the top edge so the pages turn cleanly and stand unaided, with a choice of covers to suit how it'll be used — dressed up for a client gift or kept plain for the workshop.",
-          "Please note: once your artwork's print-ready, we'll email a PDF proof for sign-off, which can take up to 48 hours. Your chosen delivery option runs from when you approve that proof, not from checkout.",
+          "Streamline your schedule and stay on top of critical client meetings, deadlines and appointments with a personalised desktop calendar. The perfect analogue companion to your digital workflow, these high-impact marketing tools make an exceptional corporate gift — fully customised with your business logo, branding and up to 13 of your own images to keep your brand visible on your clients' desks all year long.",
+        ],
+        note: "Please note: once your artwork's print-ready, we'll email a PDF proof for sign-off, which can take up to 48 hours. Your chosen delivery option runs from when you approve that proof, not from checkout.",
+        highlights: [
+          {
+            label: "Flexible options",
+            detail: "Available in landscape A5 or DL printing sizes.",
+          },
+          {
+            label: "Premium finishes",
+            detail: "Choose from a curated selection of cover options.",
+          },
+          {
+            label: "Full customisation",
+            detail: "Personalise each month with your own custom imagery.",
+          },
         ],
         tags: ["Wire-bound", "Tent-fold desk format"],
         badge: "Bestseller",
@@ -698,6 +715,7 @@ export const categories: Category[] = [
         description:
           "Full-size wire-bound wall calendars with a photo page above each month, ready to hang straight out of the pack.",
         longDescription: [
+          "Enhance workplace organization or elevate your corporate gifting strategy with our premium Wiro-Bound Wall Calendars. Featuring a durable wire spine that allows pages to turn a full 360 degrees, these calendars are a highly professional addition to any office environment. They serve as an exceptional corporate giveaway, offering your clients a practical tool while keeping your branding prominently displayed on their walls for the entire year.",
           "A wire-bound wall calendar suits the office wall as easily as it suits a corporate gift box, branded with your logo and personalised with up to 13 of your own photos across the cover and each month.",
           "Available in A3, A4 or A5, landscape or portrait, wire-bound so the pages turn cleanly month after month without the spine cracking the way a stapled pad eventually does.",
           "One thing to watch when supplying images: for a landscape calendar, the cover photo should be landscape and each of the 12 monthly photos portrait; for a portrait calendar, it's the other way round — portrait cover, landscape monthly images.",
@@ -711,10 +729,7 @@ export const categories: Category[] = [
         description:
           "A simpler stapled bind for wall calendars, keeping cost down on larger giveaway quantities.",
         longDescription: [
-          "Fill twelve months with your own photography and a Stapled Wall Calendar becomes a piece of merchandise, a consumer item or a giveaway that keeps your name on the wall for a full year rather than a single glance.",
-          "Each one prints in full colour on your choice of paper stock, with a drill hole included for hanging, so it holds up whether it ends up in a workplace or a family kitchen.",
-          "Supply 14 images of your own, or send over artwork you've already had designed — whichever suits how you work.",
-          "Please note: once our pre-press team have your artwork print-ready, we'll email a PDF proof for sign-off, which can take up to 48 hours. Your chosen delivery option runs from when you approve that proof, not from checkout.",
+          "Transform your company's photography, artwork or portfolio into a year-long showcase with custom Stapled Wall Calendars. These classic, professional-looking calendars offer a budget-friendly way to display your brand imagery while helping clients keep track of important dates. It's the perfect promotional giveaway to ensure your business remains top-of-mind on office and home walls, month after month.",
         ],
         tags: ["Stapled binding", "Cost-effective at volume"],
         image: "/stapled-wall-calendars.webp",
@@ -724,8 +739,7 @@ export const categories: Category[] = [
         description:
           "A single-sheet, full-year wall calendar with a grid layout for tracking holidays, shifts or project deadlines at a glance.",
         longDescription: [
-          "Unlike our bound wall calendars, a wall hung calendar puts the full year on one single sheet, so a quick glance is all it takes to check what's coming up — no flipping between monthly pages to avoid a double-booking.",
-          "Order one for internal use and it becomes a shared reference for the team, handy for mapping out projects and deadlines across the months ahead. Or have a batch printed as a giveaway, so your branding sits in homes and offices for the whole year.",
+          "Keep your team organised and your brand visible with a custom Wall Hung Calendar. Designed for seamless year-at-a-glance scheduling, it makes it easy for individuals and teams to track projects, coordinate timelines and completely avoid scheduling conflicts. Use it internally to boost workplace productivity, or gift it to clients as a high-value promotional tool that keeps your branding on display in homes and offices all year long.",
         ],
         tags: ["Full-year grid", "Large format"],
         image: "/wall-planners.webp",
@@ -749,9 +763,8 @@ export const categories: Category[] = [
         description:
           "Flat desk planner pads with a weekly or monthly grid, sitting open on the desk for everyday scheduling.",
         longDescription: [
-          "A desk planner pad works two ways: as a daily list you tear off once the day's done, or as a longer-range layout for mapping out a week, month or year ahead. We leave extra margin space for notes, quick sketches or the odd doodle, plus room for your logo and a brand message so it stays visible on every page.",
-          "Because a pad sits open on the desk rather than up on a wall, it stays in view all day — handy for keeping your business front of mind for clients and staff alike.",
-          "Please note: each pad is glued along the bottom edge, which keeps the pages flat and stops them curling or coming loose as they're used.",
+          "Boost your audience's productivity while keeping your brand front and centre. Whether they need a daily to-do list to tear away, or a reliable tool for long-term organisation, these pads provide the perfect canvas. With generous space for notes, sketches and doodles, your custom branding sits on prime desktop real estate all year round.",
+          "Note: our planners are glued at the bottom edge to completely eliminate page curling and corner damage.",
         ],
         tags: ["Weekly or monthly grid", "Tear-off pages"],
         image: "/desk-planners.webp",

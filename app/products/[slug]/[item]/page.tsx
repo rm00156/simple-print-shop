@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {
   ArrowRight,
   BadgeCheck,
+  Check,
   Clock,
   ExternalLink,
   Leaf,
@@ -174,6 +175,31 @@ export default async function ProductPage({ params }: Props) {
               <p key={i}>{paragraph}</p>
             ))}
           </div>
+
+          {item.highlights && item.highlights.length > 0 && (
+            <ul className="mt-6 max-w-2xl space-y-3">
+              {item.highlights.map(({ label, detail }) => (
+                <li key={label} className="flex items-start gap-3">
+                  <Check
+                    size={20}
+                    strokeWidth={2.5}
+                    className="mt-0.5 shrink-0 text-teal"
+                    aria-hidden="true"
+                  />
+                  <span className="text-base leading-[1.7] text-ink-2">
+                    <span className="font-bold text-ink">{label}:</span>{" "}
+                    {detail}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {item.note && (
+            <p className="mt-6 max-w-2xl text-base leading-[1.7] text-ink-2">
+              {item.note}
+            </p>
+          )}
 
           <p className="mt-8 max-w-2xl text-base font-medium leading-[1.7] text-ink-2">
             Made to your spec — choose your size, sheet count and paper
