@@ -22,7 +22,6 @@ type Props = {
 
 const bannerStats = [
   { value: String(yearsTrading()), label: "Years Experience" },
-  { value: "2k+", label: "Jobs Delivered" },
   { value: "100%", label: "Quality Guarantee" },
 ];
 
@@ -61,9 +60,8 @@ export default async function ServicePage({ params }: Props) {
     new Set(category.items.flatMap((item) => item.tags ?? [])),
   );
   const secondaryImage =
-    category.items.find(
-      (item) => item.image && item.image !== category.image,
-    )?.image ?? category.image;
+    category.items.find((item) => item.image && item.image !== category.image)
+      ?.image ?? category.image;
 
   // Star row for the trust badge — full stars, then a half for the remainder.
   const rating = site.reviews.rating;
@@ -248,8 +246,8 @@ export default async function ServicePage({ params }: Props) {
           <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
             <div>
               <p className="text-base leading-[1.7] text-ink-2">
-                {category.intro} Every order is hand-checked before it
-                leaves our studio in {site.area}.
+                {category.intro} Every order is hand-checked before it leaves
+                our studio in {site.area}.
               </p>
 
               {specHighlights.length > 0 && (
