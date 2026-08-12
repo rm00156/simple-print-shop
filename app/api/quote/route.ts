@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { getCategory } from "@/content/categories";
+import { getCategory, getCategoryItem } from "@/content/categories";
 import { getService } from "@/content/services";
 import { quoteSchema } from "@/lib/quote-schema";
 import { verifyTurnstileToken } from "@/lib/verify-turnstile";
@@ -89,6 +89,9 @@ export async function POST(request: Request) {
   const category = getCategory(values.need);
   const service = getService(values.need);
   const categoryName = category?.name ?? service?.name ?? values.need;
+  const productName = values.product
+    ? getCategoryItem(values.need, values.product)?.item.name
+    : undefined;
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.QUOTE_TO_EMAIL ?? process.env.CONTACT_TO_EMAIL;
@@ -106,6 +109,9 @@ export async function POST(request: Request) {
     `Email: ${values.email}`,
     `Phone: ${values.phone}`,
     `Need: ${categoryName}`,
+    productName ? `Product: ${productName}` : null,
+    `Quantity: ${values.quantity}`,
+    `Size: ${values.size}`,
     values.details ? `Details: ${values.details}` : null,
   ].filter(Boolean);
 
@@ -114,6 +120,9 @@ export async function POST(request: Request) {
     ["Email", values.email],
     ["Phone", values.phone],
     ["Need", categoryName],
+    productName ? ["Product", productName] : null,
+    ["Quantity", String(values.quantity)],
+    ["Size", values.size],
     values.details ? ["Details", values.details] : null,
   ].filter((row): row is [string, string] => row !== null);
 
@@ -122,7 +131,7 @@ export async function POST(request: Request) {
       from,
       to,
       replyTo: values.email,
-      subject: `Quote request — ${sanitizeHeaderValue(values.name)} — ${categoryName}`,
+      subject: `Quote request — ${sanitizeHeaderValue(values.name)} — ${productName ?? categoryName}`,
       text: textLines.join("\n"),
       html: `<table>${htmlRows
         .map(([label, value]) => `<tr><td><strong>${escapeHtml(label)}</strong></td><td>${escapeHtml(value)}</td></tr>`)

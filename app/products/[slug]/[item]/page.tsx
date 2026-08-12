@@ -296,6 +296,7 @@ export default async function ProductPage({ params }: Props) {
               <div className="mt-5">
                 <QuoteForm
                   defaultNeed={category.slug}
+                  defaultProduct={itemSlug}
                   defaultDetails={`I'm interested in: ${item.name}. `}
                 />
               </div>
