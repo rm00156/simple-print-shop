@@ -9,7 +9,7 @@ import clsx from "clsx";
 import { categories, slugifyItemName } from "@/content/categories";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
-import { quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
+import { needsSidesField, quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
 import { Button } from "./Button";
 
 type Status = "idle" | "success" | "error" | "rate_limited" | "captcha_failed";
@@ -65,7 +65,9 @@ export function QuoteForm({
   });
 
   const need = useWatch({ control, name: "need" });
+  const product = useWatch({ control, name: "product" });
   const productOptions = categories.find((c) => c.slug === need)?.items ?? [];
+  const showSides = needsSidesField(need, product);
 
   function resetTurnstile() {
     setValue("turnstileToken", "", { shouldValidate: false });
@@ -293,7 +295,33 @@ export function QuoteForm({
         </div>
       )}
 
-      <div className="mb-2.5 grid grid-cols-1 gap-2 @md:grid-cols-2">
+      {showSides && (
+        <div className="mb-2.5">
+          <label htmlFor="sides" className={labelClasses}>
+            Sides
+          </label>
+          <select
+            id="sides"
+            className={inputClasses}
+            aria-invalid={!!errors.sides}
+            aria-describedby={errors.sides ? "sides-error" : undefined}
+            {...register("sides")}
+          >
+            <option value="" disabled>
+              Select…
+            </option>
+            <option value="single">Single sided</option>
+            <option value="double">Double sided</option>
+          </select>
+          {errors.sides && (
+            <p id="sides-error" className={errorClasses}>
+              {errors.sides.message}
+            </p>
+          )}
+        </div>
+      )}
+
+      <div className="mb-2.5 grid grid-cols-2 gap-2">
         <div>
           <label htmlFor="quantity" className={labelClasses}>
             Quantity
