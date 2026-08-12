@@ -11,16 +11,24 @@ const logos: {
     image: { src: "/great.svg", width: 1000, height: 528.6 },
   },
   {
-    name: "Virgin Media",
-    image: { src: "/virgin-media.webp", width: 3840, height: 2234 },
-  },
-  {
-    name: "L'Oréal",
-    image: { src: "/loreal.png", width: 3840, height: 2160 },
-  },
-  {
     name: "Macmillan Cancer Support",
     image: { src: "/macmillan.png", width: 1000, height: 564 },
+  },
+  {
+    name: "Marie Curie",
+    image: { src: "/marie-curie-logo.webp", width: 476, height: 209 },
+  },
+  {
+    name: "Suffolk County Council",
+    image: {
+      src: "/suffolk-county-council-logo.webp",
+      width: 598,
+      height: 187,
+    },
+  },
+  {
+    name: "Bromley Council",
+    image: { src: "/bromley-council.svg", width: 400, height: 251.7 },
   },
 ];
 
