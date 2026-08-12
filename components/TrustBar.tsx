@@ -19,11 +19,11 @@ const logos: {
     image: { src: "/marie-curie-logo.webp", width: 476, height: 209 },
   },
   {
-    name: "Suffolk County Council",
+    name: "Southwark Council",
     image: {
-      src: "/suffolk-county-council-logo.webp",
-      width: 598,
-      height: 187,
+      src: "/southwarklogo.svg",
+      width: 115,
+      height: 51,
     },
   },
   {
