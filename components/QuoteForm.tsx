@@ -4,9 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { Send } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import clsx from "clsx";
-import { categories } from "@/content/categories";
+import { categories, slugifyItemName } from "@/content/categories";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
@@ -26,18 +26,23 @@ const errorClasses = "mt-1 text-xs text-red-600";
 
 export function QuoteForm({
   defaultNeed,
+  defaultProduct,
   defaultDetails,
 }: {
   defaultNeed?: string;
+  defaultProduct?: string;
   defaultDetails?: string;
 } = {}) {
   const [status, setStatus] = useState<Status>("idle");
   const [mountedAt] = useState(() => Date.now());
   const [hasTurnstileToken, setHasTurnstileToken] = useState(false);
   const [turnstileKey, setTurnstileKey] = useState(0);
+  const initialNeed = defaultNeed ?? categories[0].slug;
+  const initialFirstItem = categories.find((c) => c.slug === initialNeed)?.items[0];
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     getValues,
     setValue,
@@ -47,13 +52,20 @@ export function QuoteForm({
       name: "",
       email: "",
       phone: "",
-      need: defaultNeed ?? categories[0].slug,
+      need: initialNeed,
+      product:
+        defaultProduct ?? (initialFirstItem ? slugifyItemName(initialFirstItem.name) : ""),
+      quantity: NaN,
+      size: "",
       details: defaultDetails ?? "",
       company: "",
       ts: mountedAt,
       turnstileToken: "",
     },
   });
+
+  const need = useWatch({ control, name: "need" });
+  const productOptions = categories.find((c) => c.slug === need)?.items ?? [];
 
   function resetTurnstile() {
     setValue("turnstileToken", "", { shouldValidate: false });
@@ -220,7 +232,15 @@ export function QuoteForm({
             className={inputClasses}
             aria-invalid={!!errors.need}
             aria-describedby={errors.need ? "need-error" : undefined}
-            {...register("need")}
+            {...register("need", {
+              onChange: (e) => {
+                const nextCategory = categories.find((c) => c.slug === e.target.value);
+                const firstItem = nextCategory?.items[0];
+                setValue("product", firstItem ? slugifyItemName(firstItem.name) : "", {
+                  shouldValidate: false,
+                });
+              },
+            })}
           >
             <optgroup label="Products">
               {categories.map((c) => (
@@ -245,13 +265,85 @@ export function QuoteForm({
         </div>
       </div>
 
+      {productOptions.length > 0 && (
+        <div className="mb-2.5">
+          <label htmlFor="product" className={labelClasses}>
+            Which product?
+          </label>
+          <select
+            id="product"
+            key={need}
+            className={inputClasses}
+            aria-invalid={!!errors.product}
+            aria-describedby={errors.product ? "product-error" : undefined}
+            {...register("product")}
+          >
+            {productOptions.map((item) => (
+              <option key={item.name} value={slugifyItemName(item.name)}>
+                {item.name}
+              </option>
+            ))}
+            <option value="">Not sure / other</option>
+          </select>
+          {errors.product && (
+            <p id="product-error" className={errorClasses}>
+              {errors.product.message}
+            </p>
+          )}
+        </div>
+      )}
+
+      <div className="mb-2.5 grid grid-cols-1 gap-2 @md:grid-cols-2">
+        <div>
+          <label htmlFor="quantity" className={labelClasses}>
+            Quantity
+          </label>
+          <input
+            id="quantity"
+            type="number"
+            inputMode="numeric"
+            min={1}
+            step={1}
+            placeholder="e.g. 250"
+            className={inputClasses}
+            aria-invalid={!!errors.quantity}
+            aria-describedby={errors.quantity ? "quantity-error" : undefined}
+            {...register("quantity", { valueAsNumber: true })}
+          />
+          {errors.quantity && (
+            <p id="quantity-error" className={errorClasses}>
+              {errors.quantity.message}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="size" className={labelClasses}>
+            Size
+          </label>
+          <input
+            id="size"
+            placeholder="e.g. A5, 85x55mm"
+            className={inputClasses}
+            aria-invalid={!!errors.size}
+            aria-describedby={errors.size ? "size-error" : undefined}
+            {...register("size")}
+          />
+          {errors.size && (
+            <p id="size-error" className={errorClasses}>
+              {errors.size.message}
+            </p>
+          )}
+        </div>
+      </div>
+
       <label htmlFor="details" className={labelClasses}>
         Tell us more
       </label>
       <textarea
         id="details"
         rows={6}
-        placeholder="Quantity, deadline, sizes — anything that helps us quote"
+        placeholder="Deadline, finishing, artwork — anything else that helps us quote"
         className={clsx(
           inputClasses,
           "mb-2.5 h-auto resize-none py-2 md:h-auto",
