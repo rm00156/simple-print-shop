@@ -241,7 +241,7 @@ export function SiteHeader() {
                   className={clsx(
                     "flex flex-col overflow-hidden pl-3",
                     openMobileSection === link.href
-                      ? "max-h-96 pb-2"
+                      ? "max-h-[40rem] pb-2"
                       : "max-h-0",
                   )}
                   style={{ transition: "max-height 200ms ease" }}
