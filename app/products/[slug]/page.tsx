@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
-import {
-  ArrowRight,
-  CheckCircle2,
-  ExternalLink,
-  Phone,
-  Star,
-  StarHalf,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, ExternalLink, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/Button";
 import { ProductCard } from "@/components/ProductCard";
-import { QuoteForm } from "@/components/QuoteForm";
 import { categories, getCategory, slugifyItemName } from "@/content/categories";
 import { site, yearsTrading } from "@/content/site";
 
@@ -47,7 +39,7 @@ export default async function ServicePage({ params }: Props) {
   if (!category) notFound();
 
   // Funeral stationery is handled through a dedicated sister site. Send visitors
-  // there once a real URL is set; otherwise fall back to the standard quote form.
+  // there once a real URL is set.
   const funeralSiteUrl = site.funeralSiteUrl.startsWith("TODO")
     ? null
     : site.funeralSiteUrl;
@@ -62,11 +54,6 @@ export default async function ServicePage({ params }: Props) {
   const secondaryImage =
     category.items.find((item) => item.image && item.image !== category.image)
       ?.image ?? category.image;
-
-  // Star row for the trust badge — full stars, then a half for the remainder.
-  const rating = site.reviews.rating;
-  const fullStars = Math.floor(rating);
-  const hasHalf = rating - fullStars >= 0.25;
 
   return (
     <>
@@ -118,7 +105,7 @@ export default async function ServicePage({ params }: Props) {
               {category.intro}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="#quote-form" className="w-full sm:w-auto">
+              <Button href="#our-range" className="w-full sm:w-auto">
                 Get started
                 <ArrowRight size={16} aria-hidden="true" />
               </Button>
@@ -135,105 +122,42 @@ export default async function ServicePage({ params }: Props) {
         </div>
       </section>
 
-      {/* Range + quote form */}
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-4 pt-12 pb-12 sm:px-6 sm:pt-16 sm:pb-16 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-7">
-          <h2 className="font-display text-2xl font-bold tracking-tight text-primary sm:text-3xl">
-            Our range
-          </h2>
-          <p className="mt-1 text-sm text-ink-2">{category.tagline}</p>
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {category.items.map((item) => (
-              <ProductCard
-                key={item.name}
-                item={item}
-                href={`/products/${category.slug}/${slugifyItemName(item.name)}`}
-                fallbackIcon={category.icon}
-              />
-            ))}
-          </div>
+      {/* Range */}
+      <div
+        id="our-range"
+        className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 pt-12 pb-12 sm:px-6 sm:pt-16 sm:pb-16"
+      >
+        <h2 className="font-display text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+          Our range
+        </h2>
+        <p className="mt-1 text-sm text-ink-2">{category.tagline}</p>
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {category.items.map((item) => (
+            <ProductCard
+              key={item.name}
+              item={item}
+              href={`/products/${category.slug}/${slugifyItemName(item.name)}`}
+              fallbackIcon={category.icon}
+            />
+          ))}
         </div>
 
-        <aside
-          id="quote-form"
-          className="scroll-mt-24 lg:col-span-5 lg:sticky lg:top-24 lg:self-start"
-        >
-          {funeralHandoff ? (
-            <div className="rounded-2xl bg-surface-2 p-5 shadow-card sm:p-6">
-              <p className="font-display text-xl font-bold text-ink">
-                A dedicated funeral service
-              </p>
-              <p className="mt-1 text-sm text-ink-2">
-                We look after funeral stationery through our dedicated service,
-                with the same local care and fast turnaround.
-              </p>
-              <Button
-                href={funeralHandoff}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 w-full"
-              >
-                Visit our funeral site
-                <ExternalLink size={16} aria-hidden="true" />
-              </Button>
-              <p className="mt-2 text-center text-xs text-ink-2">
-                Opens in a new tab
-              </p>
-              <a
-                href={site.phoneHref}
-                className="mt-4 flex items-center justify-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary-hover"
-              >
-                <Phone size={16} aria-hidden="true" />
-                Prefer to talk? Call {site.phone}
-              </a>
-            </div>
-          ) : (
-            <div className="rounded-2xl bg-surface-2 p-6 shadow-card sm:p-8">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="font-display text-xl font-bold text-ink">
-                    Request a quote
-                  </p>
-                  <p className="mt-1 text-sm text-ink-2">
-                    Tell us what you need and we&apos;ll call you back the same
-                    day.
-                  </p>
-                </div>
-                <div className="flex shrink-0 flex-col items-end">
-                  <div
-                    className="flex text-gold"
-                    role="img"
-                    aria-label={`Rated ${rating} out of 5`}
-                  >
-                    {Array.from({ length: fullStars }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        fill="currentColor"
-                        strokeWidth={0}
-                        aria-hidden="true"
-                      />
-                    ))}
-                    {hasHalf && (
-                      <StarHalf
-                        size={16}
-                        fill="currentColor"
-                        strokeWidth={0}
-                        aria-hidden="true"
-                      />
-                    )}
-                  </div>
-                  <span className="mt-0.5 text-[11px] font-bold text-ink-2">
-                    {rating}/5 ({site.reviews.count} reviews)
-                  </span>
-                </div>
-              </div>
-              <div className="mt-5">
-                <QuoteForm defaultNeed={category.slug} />
-              </div>
-            </div>
-          )}
-        </aside>
+        {funeralHandoff && (
+          <div className="mt-8 flex flex-col items-start justify-between gap-3 rounded-2xl bg-primary/5 px-5 py-4 sm:flex-row sm:items-center">
+            <p className="font-medium text-ink-2">
+              We look after funeral stationery through our dedicated service.
+            </p>
+            <Button
+              href={funeralHandoff}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="ghost"
+            >
+              Visit our funeral site
+              <ExternalLink size={16} aria-hidden="true" />
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* More about this category */}

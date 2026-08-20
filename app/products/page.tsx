@@ -90,10 +90,7 @@ export default function ProductsPage() {
             our studio, we&apos;re here to help you achieve the perfect result.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button href="/quote" variant="onAccent">
-              Request a Quick Quote
-            </Button>
-            <Button href="/contact" variant="ghost" className="ts">
+            <Button href="/contact" variant="onAccent">
               Contact Our Studio
             </Button>
           </div>

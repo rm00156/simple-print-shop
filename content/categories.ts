@@ -70,6 +70,11 @@ export const categories: Category[] = [
     icon: IdCard,
     image: "/bcards.webp",
     items: [
+      // TODO(pricing mismatch): copy below advertises 300–700gsm stock,
+      // matte/gloss/silk/lamination finishes, and a "Spot UV" tag, but the 2026
+      // pricing sheet only prices one stock band (Matt 350gsm / Silk 400gsm)
+      // with no finish options priced — lamination is a "Call"-only line, not
+      // a priced column. Needs reconciling by the site owner, not the picker.
       {
         name: "Business cards",
         description:
@@ -186,6 +191,10 @@ export const categories: Category[] = [
         tags: ["A6–A4 sizes", "Gloss or matte"],
         image: "/flyers.webp",
       },
+      // No live price picker here (unlike its sibling Flyers): copy advertises
+      // folded formats (bi-fold/tri-fold/gate-fold), but the 2026 pricing sheet
+      // only prices flat sheets — folding was never a priced dimension. Stays
+      // quote-only rather than showing a picker for something not in the data.
       {
         name: "Leaflets",
         description:
@@ -268,6 +277,11 @@ export const categories: Category[] = [
     icon: BookOpen,
     image: "/booklet.webp",
     items: [
+      // TODO(pricing mismatch): copy advertises a choice of binding (saddle-stitch
+      // vs perfect-bound) and "a range of cover stocks", but the 2026 pricing sheet
+      // prices one spec only (300gsm covers / 150gsm text), with page count (8/12/
+      // 16pp) as the only priced variable besides size and quantity — no binding
+      // method or cover stock choice. Needs reconciling by the site owner.
       {
         name: "Booklets",
         description:
@@ -370,6 +384,12 @@ export const categories: Category[] = [
     icon: Megaphone,
     image: "/promo.webp",
     items: [
+      // TODO(pricing mismatch): copy says sizes run "from A3 up to full shop-window
+      // scale" with indoor/outdoor and matte/gloss finish choice, but the 2026
+      // pricing sheet prices a single stock (170gsm Silk/Matt), single-sided only,
+      // from A4 up to A0 (not "shop-window scale"), with no indoor/outdoor
+      // distinction, and large sizes (A2/A1/A0) only priced up to a quantity of 20.
+      // Needs reconciling by the site owner.
       {
         name: "Posters",
         description:
