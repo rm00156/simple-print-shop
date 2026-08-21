@@ -48,7 +48,7 @@ export default async function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="c-blue relative isolate flex min-h-[560px] items-center overflow-hidden px-4 pt-24 pb-40 sm:px-6 md:min-h-[680px] md:pt-32 md:pb-52">
+      <section className="c-blue relative isolate overflow-hidden px-4 pt-24 pb-16 sm:px-6 md:pt-32 md:pb-20">
         <video
           src="/video.mp4"
           poster="/hero-video-poster.webp"
@@ -98,45 +98,33 @@ export default async function Home() {
               </span>
             </p>
           </div>
+
+          {/* Feature tiles, inside the hero */}
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6 md:mt-16">
+            {features.map((feature, i) => (
+              <div
+                key={feature.title}
+                className="flex flex-col items-center gap-4 rounded-3xl bg-card px-6 py-8 text-center shadow-card ring-1 ring-white/10 backdrop-blur-sm"
+              >
+                <div
+                  className={`flex size-16 items-center justify-center rounded-full ${featureTints[i]}`}
+                >
+                  <feature.icon size={28} aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="font-display text-base font-bold text-white">
+                    {feature.title}
+                  </p>
+                  <p className="mt-1 text-sm text-ink-2">{feature.subtitle}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Floating feature cards overlapping the hero */}
-      <div className="relative z-10 mx-auto -mt-28 w-full max-w-6xl px-4 sm:px-6 md:-mt-36">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-          {features.map((feature, i) => (
-            <div
-              key={feature.title}
-              className="flex flex-col items-center gap-4 rounded-3xl bg-surface-2 px-6 py-8 text-center shadow-card"
-            >
-              <div
-                className={`flex size-16 items-center justify-center rounded-full ${featureTints[i]}`}
-              >
-                <feature.icon size={28} aria-hidden="true" />
-              </div>
-              <div>
-                <p className="font-display text-base font-bold text-ink">
-                  {feature.title}
-                </p>
-                <p className="mt-1 text-sm text-ink-2">{feature.subtitle}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Trusted by leading brands. Wrapped so a white backdrop can sit
-          behind the floating cards above (z-10) and fill the strip where
-          the hero's own bottom edge falls short of the cards' bottom edge —
-          purely cosmetic, doesn't shift the cards or TrustBar's own flow
-          position at all. */}
-      <div className="relative">
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 -top-40 z-0 h-40 bg-surface-2"
-        />
-        <TrustBar />
-      </div>
+      {/* Trusted by leading brands */}
+      <TrustBar />
 
       {/* Featured products */}
       <section className="mx-auto w-full max-w-6xl px-4 pt-16 sm:px-6 sm:pt-20">
