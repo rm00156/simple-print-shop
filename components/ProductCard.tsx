@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
-import type { CategoryItem } from "@/content/categories";
+import { slugifyItemName, type CategoryItem } from "@/content/categories";
+import { getFromPrice } from "@/content/pricing";
 
 export function ProductCard({
   item,
@@ -13,6 +14,7 @@ export function ProductCard({
   fallbackIcon: LucideIcon;
 }) {
   const Icon = item.icon ?? FallbackIcon;
+  const fromPrice = getFromPrice(slugifyItemName(item.name));
 
   return (
     <Link
@@ -48,6 +50,10 @@ export function ProductCard({
       <p className="font-display font-bold text-ink">{item.name}</p>
       <p className="mt-1 text-sm leading-relaxed text-ink-2">
         {item.description}
+      </p>
+
+      <p className="mt-2 text-sm font-bold text-primary">
+        {fromPrice != null ? `From £${fromPrice.toFixed(2)}` : "Request a quote"}
       </p>
 
       {item.tags && item.tags.length > 0 && (

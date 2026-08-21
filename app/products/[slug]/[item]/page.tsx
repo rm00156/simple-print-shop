@@ -22,6 +22,7 @@ import {
   getCategoryItem,
   slugifyItemName,
 } from "@/content/categories";
+import { getFromPrice } from "@/content/pricing";
 import { site } from "@/content/site";
 
 type Props = {
@@ -71,6 +72,7 @@ export default async function ProductPage({ params }: Props) {
   const WatermarkIcon = item.icon ?? category.icon;
   const heroImage = item.image ?? category.image;
   const otherItems = category.items.filter((i) => i.name !== item.name);
+  const fromPrice = getFromPrice(itemSlug);
 
   // Two images for the quality band: this product plus a sibling (falls back to
   // the category shot) so the pair never repeats the same picture.
@@ -146,6 +148,11 @@ export default async function ProductPage({ params }: Props) {
             <p className="mt-5 max-w-xl text-base leading-[1.7] text-white/85 sm:text-lg">
               {item.description}
             </p>
+            {fromPrice != null && (
+              <p className="mt-4 text-lg font-bold text-accent">
+                Prices from £{fromPrice.toFixed(2)}, ex VAT
+              </p>
+            )}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button href="#quote-form" className="w-full sm:w-auto">
                 Request a quote
@@ -166,7 +173,7 @@ export default async function ProductPage({ params }: Props) {
 
       {/* About + quote form */}
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-4 pt-12 pb-12 sm:px-6 sm:pt-16 sm:pb-16 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-6">
           <h2 className="font-display text-2xl font-bold tracking-tight text-primary sm:text-3xl">
             About this product
           </h2>
@@ -222,7 +229,7 @@ export default async function ProductPage({ params }: Props) {
 
         <aside
           id="quote-form"
-          className="scroll-mt-24 lg:col-span-5 lg:sticky lg:top-24 lg:self-start"
+          className="scroll-mt-24 lg:col-span-6 lg:sticky lg:top-24 lg:self-start"
         >
           {funeralHandoff ? (
             <div className="rounded-2xl bg-surface-2 p-5 shadow-card sm:p-6">

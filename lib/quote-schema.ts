@@ -36,6 +36,10 @@ export const quoteSchema = z
     // Which item within `need` (only applies when `need` is a product category with items).
     product: z.string().trim().optional().or(z.literal("")),
     sides: z.enum(["single", "double"], { message: "Choose single or double sided" }).optional(),
+    // Only used by products with a priced stock/page-count axis (see content/pricing.ts) —
+    // rendered as a select on QuoteForm when applicable, otherwise left unset.
+    stock: z.string().trim().optional(),
+    pages: z.string().trim().optional(),
     quantity: z
       .number({ message: "Enter a quantity" })
       .int("Enter a whole number")
