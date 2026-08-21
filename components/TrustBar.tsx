@@ -34,7 +34,7 @@ const logos: {
 
 export function TrustBar() {
   return (
-    <section className="border-y border-line bg-surface-2 px-4 py-12 sm:px-6">
+    <section className="border-b border-line bg-surface-2 px-4 py-12 sm:px-6">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8">
         <h2 className="text-xs font-bold tracking-[0.2em] text-ink-3 uppercase">
           Trusted by leading brands
