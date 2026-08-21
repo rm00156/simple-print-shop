@@ -8,7 +8,7 @@ import { QuoteForm } from "@/components/QuoteForm";
 import { TrustBar } from "@/components/TrustBar";
 import { getCategory } from "@/content/categories";
 import { getService } from "@/content/services";
-import { features, site, testimonials } from "@/content/site";
+import { features, site, testimonials, yearsTrading } from "@/content/site";
 import { getGoogleReviews } from "@/lib/google-reviews";
 
 // Per-card icon-badge tints for the floating feature cards, matching the Stitch home mockup.
@@ -80,14 +80,23 @@ export default async function Home() {
               {site.heroMessage}
             </p>
             <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-              <Button href="/products" variant="onAccent" className="w-full sm:w-auto">
-                Shop Now
+              <Button href="/quote" variant="onAccent" className="w-full sm:w-auto">
+                Request a Quote
                 <ArrowRight size={16} aria-hidden="true" />
               </Button>
-              <Button href="/quote" variant="ghost" className="ts w-full sm:w-auto">
-                Request Quote
+              <Button href="/products" variant="ghost" className="ts w-full sm:w-auto">
+                Shop Products
               </Button>
             </div>
+            <p className="ts flex flex-wrap items-center gap-x-2 gap-y-1 pt-3 text-sm">
+              <span>
+                <strong className="font-bold text-white">{yearsTrading()}+ years</strong> trading
+              </span>
+              <span className="opacity-40">·</span>
+              <span>
+                <strong className="font-bold text-white">1000s</strong> of jobs delivered
+              </span>
+            </p>
           </div>
         </div>
       </section>
@@ -114,6 +123,19 @@ export default async function Home() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Trusted by leading brands. Wrapped so a white backdrop can sit
+          behind the floating cards above (z-10) and fill the strip where
+          the hero's own bottom edge falls short of the cards' bottom edge —
+          purely cosmetic, doesn't shift the cards or TrustBar's own flow
+          position at all. */}
+      <div className="relative">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 -top-40 z-0 h-40 bg-surface-2"
+        />
+        <TrustBar />
       </div>
 
       {/* Featured products */}
@@ -255,9 +277,6 @@ export default async function Home() {
 
       {/* How it works */}
       <HowItWorks className="mt-16 px-4 py-16 sm:mt-20 sm:px-6 sm:py-20" />
-
-      {/* Trusted by leading brands */}
-      <TrustBar />
 
       {/* Customer reviews */}
       <section className="bg-surface-1 px-4 py-16 sm:px-6 sm:py-20">
