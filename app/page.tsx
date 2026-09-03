@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, Mail, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, Phone, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/Button";
@@ -70,9 +70,6 @@ export default async function Home() {
         />
         <div className="mx-auto w-full max-w-6xl">
           <div className="max-w-2xl space-y-5">
-            <p className="text-sm font-bold tracking-[0.18em] text-accent uppercase">
-              {site.heroKicker}
-            </p>
             <h1 className="font-display text-4xl leading-[1.1] font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
               {site.heroHighlight}
             </h1>
@@ -93,8 +90,14 @@ export default async function Home() {
                 <strong className="font-bold text-white">{yearsTrading()}+ years</strong> trading
               </span>
               <span className="opacity-40">·</span>
-              <span>
-                <strong className="font-bold text-white">1000s</strong> of jobs delivered
+              <span className="inline-flex items-center gap-1">
+                <Star
+                  size={14}
+                  className="fill-yellow-400 text-yellow-400"
+                  aria-hidden="true"
+                />
+                <strong className="font-bold text-white">{site.reviews.rating}/5</strong> on
+                Google
               </span>
             </p>
           </div>

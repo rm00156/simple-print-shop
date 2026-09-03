@@ -1,4 +1,4 @@
-import { Paintbrush, Rocket, Star, type LucideIcon } from "lucide-react";
+import { FileCheck, MapPin, Paintbrush, type LucideIcon } from "lucide-react";
 import { categories } from "./categories";
 import { services } from "./services";
 
@@ -6,12 +6,11 @@ export const site = {
   name: "Bluwave",
   tagline: "South east London's local print shop, since 2004",
   strapline: "Design & print made simple",
-  heroKicker: "Premium Print.",
-  heroHighlight: "Design & Print Made Simple",
+  heroHighlight: "Your print job, in your hands in 24–48 hours",
   heroMessage:
-    "Top-tier quality meets seamless service. Transform your concepts into tangible, premium prints that leave a lasting impression.",
+    "Same-day quote, a proof before anything runs, and someone on the end of the phone if you need them.",
   description:
-    "Business cards, flyers, brochures and funeral stationery, printed round the corner in Lower Sydenham and delivered fast.",
+    "Business cards, flyers, brochures and funeral stationery, printed round the corner in Lower Sydenham and Beckenham, south east London, and delivered fast.",
   phone: "020 7277 7663",
   phoneHref: "tel:+442072777663",
   // Dedicated funeral stationery sister site — the funeral page links out to this.
@@ -68,21 +67,26 @@ export function yearsTrading() {
   return new Date().getFullYear() - site.foundedYear;
 }
 
+// The three hero tiles. Each is a concrete promise the subhead doesn't already
+// make — the subhead sells the turnaround, these carry proof, artwork and collection.
 export const features: { icon: LucideIcon; title: string; subtitle: string }[] = [
   {
-    icon: Rocket,
-    title: "Fast 24-48hr Turnaround",
-    subtitle: "On all standard digital printing jobs",
+    icon: FileCheck,
+    title: "Proof before we print",
+    subtitle: "Approve it, then it runs",
   },
   {
     icon: Paintbrush,
-    title: "Free Design Quotations",
-    subtitle: "Expert creative services available",
+    // Deliberately not "free artwork checks" — per the design service's own FAQ the
+    // quotation is free, the work is priced per job, and tweaks are only "often"
+    // included. The subtitle has to keep that distinction.
+    title: "We can design it for you",
+    subtitle: "Quoted free, priced per job",
   },
   {
-    icon: Star,
-    title: "Top-Rated Quality",
-    subtitle: "Premium materials, guaranteed results",
+    icon: MapPin,
+    title: "Collect free, or we deliver",
+    subtitle: "Lower Sydenham unit or UK-wide",
   },
 ];
 

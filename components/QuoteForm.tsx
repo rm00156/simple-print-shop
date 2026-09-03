@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { Send } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import clsx from "clsx";
 import { categories, slugifyItemName } from "@/content/categories";
@@ -19,6 +19,12 @@ import {
 } from "@/content/pricing";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
+import {
+  classifyLeadTime,
+  resolveArtworkDate,
+  toIsoDate,
+  workingDaysBetween,
+} from "@/lib/lead-time";
 import { needsSidesField, quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
 import { Button } from "./Button";
 
@@ -33,6 +39,19 @@ const inputClasses =
   "h-11 w-full rounded-token border border-line bg-surface-2 px-3 text-base text-ink transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25 md:h-10 md:text-sm";
 const labelClasses = "mb-1 block text-xs text-ink-2";
 const errorClasses = "mt-1 text-xs text-red-600";
+
+// Stable module-level callbacks: today's date is read as an external value rather than
+// held in state, so it can differ between server and client without a hydration mismatch.
+const subscribeToToday = () => () => {};
+const getTodaySnapshot = () => toIsoDate(new Date());
+const getServerToday = () => null;
+
+const ARTWORK_OPTIONS: { value: "unsure" | "ready" | "date" | "design"; label: string }[] = [
+  { value: "unsure", label: "Not sure yet" },
+  { value: "ready", label: "It\u2019s print-ready now" },
+  { value: "date", label: "It\u2019ll be ready on\u2026" },
+  { value: "design", label: "We need you to design it" },
+];
 
 function getProductName(needSlug: string, productSlug: string): string {
   const category = categories.find((c) => c.slug === needSlug);
@@ -90,6 +109,9 @@ export function QuoteForm({
       pages: initialAxisValues.pages,
       quantity: initialQuantity,
       size: initialPricing?.fixedSize ?? initialAxisValues.size ?? "",
+      neededBy: "",
+      artworkReady: "unsure",
+      artworkReadyDate: "",
       details: initialDetails,
       company: "",
       ts: mountedAt,
@@ -104,6 +126,9 @@ export function QuoteForm({
   const stock = useWatch({ control, name: "stock" });
   const pages = useWatch({ control, name: "pages" });
   const quantity = useWatch({ control, name: "quantity" });
+  const neededBy = useWatch({ control, name: "neededBy" });
+  const artworkReady = useWatch({ control, name: "artworkReady" });
+  const artworkReadyDate = useWatch({ control, name: "artworkReadyDate" });
 
   const productSlug = product ?? "";
   const productOptions = categories.find((c) => c.slug === need)?.items ?? [];
@@ -120,6 +145,29 @@ export function QuoteForm({
   const price = pricing && !customQuantity ? getPrice(pricing, { ...axisValues, quantity }) : undefined;
   const sizeAxis = pricing?.axes.find((a) => a.field === "size");
   const extraAxes = pricing?.axes.filter((a) => a.field === "stock" || a.field === "pages") ?? [];
+
+  // Null during SSR and hydration, the real date thereafter — the server and the
+  // visitor's browser can sit on opposite sides of midnight, so a date baked into the
+  // SSR output would mismatch on hydration.
+  const today = useSyncExternalStore(subscribeToToday, getTodaySnapshot, getServerToday);
+
+  const artworkDate = today
+    ? resolveArtworkDate(artworkReady, artworkReadyDate, today)
+    : null;
+  const workingDays =
+    neededBy && artworkDate ? workingDaysBetween(artworkDate, neededBy) : null;
+  const leadTimeTier = workingDays === null ? null : classifyLeadTime(workingDays);
+  const dayWord = workingDays === 1 ? "working day" : "working days";
+  // Said here, at enquiry, rather than on the invoice afterwards — an expectation set
+  // up front is a term of business, the same words after the job is done are a row.
+  const leadTimeNote =
+    leadTimeTier === "emergency"
+      ? `That leaves ${workingDays} ${dayWord} once your artwork lands, which is inside our standard ${site.turnaround} production window. We can often do it, but it's priced as a rush job — ring ${site.phone} as well as sending this and we'll tell you straight away whether it's possible.`
+      : leadTimeTier === "express"
+        ? `That leaves ${workingDays} ${dayWord} once your artwork lands. That's tight against our standard ${site.turnaround} turnaround plus delivery, so it may be priced as an express job — worth ringing ${site.phone} to confirm we can hit it.`
+        : artworkReady === "design" && neededBy
+          ? "We'll design it first, so the print clock starts once you've approved the proof. Tell us your deadline when we speak and we'll work back from it."
+          : null;
 
   const detailsField = register("details");
 
@@ -602,13 +650,98 @@ export function QuoteForm({
         </div>
       )}
 
+      <div className="mb-2.5 rounded-token border border-line bg-surface-1 p-3">
+        <p className="mb-2 text-xs font-semibold text-ink">Timings</p>
+
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+          <div>
+            <label htmlFor="neededBy" className={labelClasses}>
+              When do you need it?
+            </label>
+            <input
+              id="neededBy"
+              type="date"
+              min={today ?? undefined}
+              className={inputClasses}
+              aria-invalid={!!errors.neededBy}
+              aria-describedby={errors.neededBy ? "neededBy-error" : undefined}
+              {...register("neededBy")}
+            />
+            {errors.neededBy && (
+              <p id="neededBy-error" className={errorClasses}>
+                {errors.neededBy.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="artworkReady" className={labelClasses}>
+              When will your artwork be ready?
+            </label>
+            <select
+              id="artworkReady"
+              className={inputClasses}
+              {...register("artworkReady")}
+            >
+              {ARTWORK_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {artworkReady === "date" && (
+          <div className="mt-2.5">
+            <label htmlFor="artworkReadyDate" className={labelClasses}>
+              Artwork ready on
+            </label>
+            <input
+              id="artworkReadyDate"
+              type="date"
+              min={today ?? undefined}
+              className={inputClasses}
+              aria-invalid={!!errors.artworkReadyDate}
+              aria-describedby={
+                errors.artworkReadyDate ? "artworkReadyDate-error" : undefined
+              }
+              {...register("artworkReadyDate")}
+            />
+            {errors.artworkReadyDate && (
+              <p id="artworkReadyDate-error" className={errorClasses}>
+                {errors.artworkReadyDate.message}
+              </p>
+            )}
+          </div>
+        )}
+
+        <p className="mt-2 text-xs text-ink-2">
+          Production time runs from the day we receive print-ready artwork, not
+          from the day you order.
+        </p>
+
+        {leadTimeNote && (
+          <p
+            className={clsx(
+              "mt-2 rounded-token px-3 py-2 text-xs leading-[1.6]",
+              leadTimeTier === "emergency"
+                ? "bg-gold/20 text-ink"
+                : "bg-surface-2 text-ink-2",
+            )}
+          >
+            {leadTimeNote}
+          </p>
+        )}
+      </div>
+
       <label htmlFor="details" className={labelClasses}>
         Tell us more
       </label>
       <textarea
         id="details"
         rows={6}
-        placeholder="Deadline, finishing, artwork — anything else that helps us quote"
+        placeholder="Finishing, artwork, delivery — anything else that helps us quote"
         className={clsx(
           inputClasses,
           "mb-2.5 h-auto resize-none py-2 md:h-auto",

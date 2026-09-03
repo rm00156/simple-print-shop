@@ -9,7 +9,7 @@ const process = [
     step: "2",
     title: "Free quote & a pdf proof",
     description:
-      "We'll come back to you the same day with a price and, where needed, a pdf proof for you to approval.",
+      "We'll come back to you the same day with a price and, where needed, a pdf proof for you to approve.",
   },
   {
     step: "3",

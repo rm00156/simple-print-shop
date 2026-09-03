@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/about.html",
+        destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/services.html",
+        destination: "/services",
+        permanent: true,
+      },
+      {
         // Catch-all for remaining legacy pages (e.g. /artwork_specs.html)
         // that have no equivalent on the new site — send them home.
         source: "/:path*.html",

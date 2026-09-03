@@ -36,10 +36,10 @@ export function TrustBar() {
   return (
     <section className="border-b border-line bg-surface-2 px-4 py-12 sm:px-6">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8">
-        <h2 className="text-xs font-bold tracking-[0.2em] text-ink-3 uppercase">
-          Trusted by leading brands
+        <h2 className="font-display max-w-2xl text-center text-lg font-bold text-ink sm:text-xl">
+          Great Ormond Street, Macmillan and the NHS print with us
         </h2>
-        <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 grayscale opacity-70 transition-all duration-500 hover:grayscale-0 hover:opacity-100 sm:gap-x-20">
+        <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-20">
           {logos.map(({ name, image }) => (
             <li key={name} className="flex h-9 items-center sm:h-11">
               <Image

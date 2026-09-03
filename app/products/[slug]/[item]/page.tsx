@@ -148,6 +148,21 @@ export default async function ProductPage({ params }: Props) {
             <p className="mt-5 max-w-xl text-base leading-[1.7] text-white/85 sm:text-lg">
               {item.description}
             </p>
+            {/* At-a-glance specs. Same `tags` the product card shows on the
+                category grid, so the detail page isn't less informative than
+                the tile that linked here. */}
+            {item.tags && item.tags.length > 0 && (
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {item.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur-sm"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
             {fromPrice != null && (
               <p className="mt-4 text-lg font-bold text-accent">
                 Prices from £{fromPrice.toFixed(2)}, ex VAT
@@ -177,14 +192,12 @@ export default async function ProductPage({ params }: Props) {
           <h2 className="font-display text-2xl font-bold tracking-tight text-primary sm:text-3xl">
             About this product
           </h2>
-          <div className="mt-4 max-w-2xl space-y-4 text-base leading-[1.7] text-ink-2">
-            {item.longDescription.map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
-          </div>
-
+          {/* Specs lead, prose follows. The highlights are drawn from the same
+              source copy as longDescription, so putting them first lets a
+              scanner get the key facts before the paragraphs expand on them —
+              the other order reads as a recap of what you just finished. */}
           {item.highlights && item.highlights.length > 0 && (
-            <ul className="mt-6 max-w-2xl space-y-3">
+            <ul className="mt-5 max-w-2xl space-y-3">
               {item.highlights.map(({ label, detail }) => (
                 <li key={label} className="flex items-start gap-3">
                   <Check
@@ -202,6 +215,12 @@ export default async function ProductPage({ params }: Props) {
             </ul>
           )}
 
+          <div className="mt-6 max-w-2xl space-y-4 text-base leading-[1.7] text-ink-2">
+            {item.longDescription.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+
           {item.note && (
             <p className="mt-6 max-w-2xl text-base leading-[1.7] text-ink-2">
               {item.note}
@@ -209,9 +228,8 @@ export default async function ProductPage({ params }: Props) {
           )}
 
           <p className="mt-8 max-w-2xl text-base font-medium leading-[1.7] text-ink-2">
-            Made to your spec — choose your size, sheet count and paper
-            stock. Tell us what you need below and we&apos;ll quote it
-            exactly.
+            Made to your spec — choose your size, sheet count and paper stock.
+            Tell us what you need below and we&apos;ll quote it exactly.
           </p>
 
           <div className="mt-8 flex flex-col items-start justify-between gap-3 rounded-2xl bg-primary/5 px-5 py-4 sm:flex-row sm:items-center">
@@ -321,8 +339,8 @@ export default async function ProductPage({ params }: Props) {
             </h2>
             <p className="mt-4 max-w-lg text-base leading-[1.7] text-ink-2">
               Every job that leaves our studio is inspected before it reaches
-              you. Your print is an extension of your brand, so we treat it
-              that way.
+              you. Your print is an extension of your brand, so we treat it that
+              way.
             </p>
             <ul className="mt-6 space-y-3">
               {qualityPoints.map(({ icon: PointIcon, label }) => (
