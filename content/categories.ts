@@ -83,6 +83,23 @@ export const categories: Category[] = [
           "Handing out a well-made business card is one of the simplest ways to make a lasting impression, and it's often the one thing people remember from meeting you. We print in full colour on sturdy card from 300gsm to 700gsm depending on how much weight you want it to carry, then finish with your choice of matte, gloss, silk or recycled stock, with lamination available as an extra finishing option.",
           "Whether you need fifty cards before a meeting tomorrow or a few thousand for the whole team, our digital presses make short runs cost-effective and quick, with a standard 24-48hr turnaround.",
         ],
+        highlights: [
+          {
+            label: "Card weights",
+            detail:
+              "300gsm up to 700gsm, depending on how much presence you want.",
+          },
+          {
+            label: "Finish options",
+            detail:
+              "Matte, gloss, silk or recycled stock, with lamination available.",
+          },
+          {
+            label: "Any quantity",
+            detail:
+              "Fifty before tomorrow's meeting, or a few thousand for the whole team.",
+          },
+        ],
         tags: ["Spot UV", "Matte or gloss"],
         badge: "Bestseller",
         image: "/bcards.webp",
@@ -94,6 +111,22 @@ export const categories: Category[] = [
         longDescription: [
           "A loyalty card is one of the cheapest ways to turn a first-time customer into a regular, and it works best when the card feels worth keeping rather than something to drop in the bin on the way out. We print on durable card stock cut to wallet size, with space for stamps depending on how you'd rather track visits.",
           "Coffee shops, barbers, nail bars and takeaways are our most frequent loyalty card customers, usually ordering a few hundred at a time and topping up as they're handed out.",
+        ],
+        highlights: [
+          {
+            label: "Wallet sized",
+            detail:
+              "Cut to slip into a wallet rather than get dropped in the bin.",
+          },
+          {
+            label: "Durable stock",
+            detail: "Card that survives months of being carried around.",
+          },
+          {
+            label: "Easy top-ups",
+            detail:
+              "Order a few hundred at a time and reorder as they're handed out.",
+          },
         ],
         tags: ["Wallet sized", "Stamp or punch"],
         image: "/loyalty-cards.webp",
@@ -107,6 +140,21 @@ export const categories: Category[] = [
           "A letterhead is often the most-used piece of stationery in a business, so getting it right matters more than it might seem. We print A4 letterheads in full colour on 100gsm or 120gsm bond paper.",
           "Order compliment slips and envelopes to the same specification for a stationery set that looks joined-up rather than assembled from different suppliers. It's a popular choice with solicitors, accountants and any business that still relies on formal correspondence, and reorders are quick once your layout is on file.",
         ],
+        highlights: [
+          {
+            label: "Quality bond",
+            detail: "Full colour on 100gsm or 120gsm bond paper.",
+          },
+          {
+            label: "Matching set",
+            detail:
+              "Compliment slips and envelopes printed to the same specification.",
+          },
+          {
+            label: "Quick reorders",
+            detail: "Your layout stays on file, so topping up is fast.",
+          },
+        ],
         tags: ["120gsm bond", "Matching envelopes"],
         image: "/letterhead.webp",
       },
@@ -117,6 +165,22 @@ export const categories: Category[] = [
         longDescription: [
           "A compliment slip is a small thing that still says something about how much care you put into your business — a scrappy handwritten note doesn't do the same job as a properly printed one tucked into a parcel or invoice. We print to whatever size and stock weight suits how you actually use them, matched to your existing letterheads and business cards.",
           "Because they're one of our simplest jobs to set up, we can turn a top-up order around quickly if you're running low ahead of a big shipment, and there's no minimum order that makes sense here — from a hundred to several thousand.",
+        ],
+        highlights: [
+          {
+            label: "Sized to suit",
+            detail:
+              "Whatever size and stock weight fits how you actually use them.",
+          },
+          {
+            label: "Brand matched",
+            detail:
+              "Set to match your existing letterheads and business cards.",
+          },
+          {
+            label: "No real minimum",
+            detail: "From a hundred through to several thousand.",
+          },
         ],
         tags: ["Custom sizes", "Fast turnaround"],
         image: "/compliment.png",
@@ -129,6 +193,22 @@ export const categories: Category[] = [
           "For thank-you notes, wedding stationery or a gift that shows you thought about it, we print personal notecards and writing paper on heavier, textured stock that feels noticeably better in the hand than anything from a stationery shop shelf. Add a monogram, a family crest, or simply your name set in a typeface you actually like.",
           "Matching envelopes are available in the same or a complementary stock, and because these are personal orders rather than corporate ones, we're happy to talk you through paper and finish options over the phone rather than leaving you to guess from a swatch book.",
         ],
+        highlights: [
+          {
+            label: "Textured stock",
+            detail:
+              "Heavier paper that feels noticeably better than shop-bought.",
+          },
+          {
+            label: "Personalised",
+            detail:
+              "Add a monogram, a family crest, or your name in a typeface you like.",
+          },
+          {
+            label: "Matching envelopes",
+            detail: "Supplied in the same or a complementary stock.",
+          },
+        ],
         tags: ["Premium paper", "Personalised"],
         image: "/personal.png",
       },
@@ -139,6 +219,21 @@ export const categories: Category[] = [
         longDescription: [
           "Whether it's a roll of address labels for mailing or die-cut product labels that need to survive a trip through the fridge, we print to the shape, size and material the job actually needs. Waterproof, oil-resistant vinyl is available for food, drink and cosmetics packaging, alongside standard paper stock for everyday mailing and stock control.",
           "Small businesses and market traders are some of our most regular label customers, often ordering in batches to match new stock or seasonal packaging, and we can hold your artwork on file so reorders don't mean starting from scratch.",
+        ],
+        highlights: [
+          {
+            label: "Any shape",
+            detail: "Die-cut to the shape, size and material the job needs.",
+          },
+          {
+            label: "Waterproof vinyl",
+            detail:
+              "Oil-resistant options for food, drink and cosmetics packaging.",
+          },
+          {
+            label: "Artwork on file",
+            detail: "Reorders don't mean starting from scratch.",
+          },
         ],
         tags: ["Custom shapes", "Waterproof options"],
         image: "/label.webp",
@@ -151,6 +246,20 @@ export const categories: Category[] = [
           "A branded note pad sits on someone's desk for months, quietly reminding them who supplied it every time they reach for it, which makes it one of the most cost-effective giveaways we print. We produce tear-off pads in your choice of size and page count, with your logo, contact details, or a simple grid or ruled layout.",
           "They're a popular addition to trade show stands and client welcome packs, and because they're a straightforward digital print job, reordering a fresh box when the last one runs low is quick and inexpensive.",
         ],
+        highlights: [
+          {
+            label: "Tear-off pads",
+            detail: "Your choice of size and page count.",
+          },
+          {
+            label: "Your layout",
+            detail: "Logo, contact details, or a simple ruled or grid page.",
+          },
+          {
+            label: "Cheap to repeat",
+            detail: "A straightforward digital job, so a fresh box is quick.",
+          },
+        ],
         tags: ["Tear-off binding", "Custom branding"],
         image: "/notepad.webp",
       },
@@ -161,6 +270,21 @@ export const categories: Category[] = [
         longDescription: [
           "A certificate is a small piece of print that someone might keep for years, so it needs to feel substantial in the hand rather than like a page off the office printer. We print on heavyweight, bright-white or subtly textured stock.",
           "Training providers, schools, clubs and workplaces order these for course completions, competitions and long-service awards. We can print names individually so each certificate comes out personalised, or leave the name line blank for you to complete by hand.",
+        ],
+        highlights: [
+          {
+            label: "Heavyweight stock",
+            detail: "Bright-white or subtly textured, substantial in the hand.",
+          },
+          {
+            label: "Named individually",
+            detail:
+              "Print each name, or leave the line blank to complete by hand.",
+          },
+          {
+            label: "Foiling available",
+            detail: "An optional finish for awards worth framing.",
+          },
         ],
         tags: ["Heavyweight stock", "Foiling available"],
         image: "/certificates.webp",
@@ -188,6 +312,21 @@ export const categories: Category[] = [
           "Flyers are still one of the fastest ways to get a message into someone's hand, and we print them from pocket-sized A6 up to full A4 in gloss or matte finish. Vivid, consistent colour and a fast turnaround make them well suited to time-sensitive promotions, local events and menu drops.",
           "Bulk pricing steps in quickly on flyers, so doubling your quantity rarely doubles the cost, and our standard 24-48hr turnaround means a campaign you decide on this week can be in people's hands by the weekend.",
         ],
+        highlights: [
+          {
+            label: "Gloss or matte",
+            detail: "Vivid, consistent colour on either finish, A6 up to A4.",
+          },
+          {
+            label: "Bulk pricing",
+            detail: "Doubling your quantity rarely doubles the cost.",
+          },
+          {
+            label: "24-48hr turnaround",
+            detail:
+              "Decide on a campaign this week, hand it out at the weekend.",
+          },
+        ],
         tags: ["A6–A4 sizes", "Gloss or matte"],
         image: "/flyers.webp",
       },
@@ -203,6 +342,20 @@ export const categories: Category[] = [
           "A leaflet carries more information than a flyer without the cost of a full booklet, which makes it a natural fit for service explainers, price lists and door-to-door drops. We offer flat sheets or folded formats — bi-fold, tri-fold or gate-fold — on your choice of paper weight and finish.",
           "Bulk pricing and a fast turnaround suit both one-off campaigns and regular monthly mailers, and if you're not sure which fold works best for your content, we'll talk you through the options before you commit to a quantity.",
         ],
+        highlights: [
+          {
+            label: "Fold options",
+            detail: "Bi-fold, tri-fold and gate-fold, or flat sheets.",
+          },
+          {
+            label: "Your paper choice",
+            detail: "Any weight and finish to suit the drop.",
+          },
+          {
+            label: "Advice included",
+            detail: "We'll talk you through which fold suits your content.",
+          },
+        ],
         tags: ["Folded options", "Bulk pricing"],
         image: "/leaflet.png",
       },
@@ -213,6 +366,20 @@ export const categories: Category[] = [
         longDescription: [
           "Your invitation sets the tone for the event before a single guest arrives, so we print on premium card stock with options like foiling and deckled edges for weddings and milestone celebrations. Corporate event invitations can be matched to your brand colours and logo for a more formal finish.",
           "We'll work through custom wording and layout with you until it reads exactly right, and because these are proofed before printing, you'll see exactly how the finished card looks before we commit to the run.",
+        ],
+        highlights: [
+          {
+            label: "Premium card",
+            detail: "Stock that sets the tone before a guest arrives.",
+          },
+          {
+            label: "Special finishes",
+            detail: "Foiling and deckled edges available.",
+          },
+          {
+            label: "Proofed first",
+            detail: "See exactly how the card looks before we run it.",
+          },
         ],
         tags: ["Custom wording", "Premium card"],
         image: "/invitation.png",
@@ -225,6 +392,20 @@ export const categories: Category[] = [
           "Save the dates need to land in mailboxes months ahead of the wedding, so we keep turnaround fast without compromising on the postcard-quality card stock and colour finish. Order them now and match the rest of your invitation suite later, or bring us the full set to print together if your plans are already settled.",
           "A complementary envelope colour is a popular finishing touch, and because it's a smaller, simpler print run than a full invitation set, we can often turn these around in a matter of days.",
         ],
+        highlights: [
+          {
+            label: "Postcard quality",
+            detail: "Card stock and colour finish that holds up in the post.",
+          },
+          {
+            label: "Days, not weeks",
+            detail: "A smaller run than a full suite, so it moves quickly.",
+          },
+          {
+            label: "Envelope colours",
+            detail: "A complementary envelope is a popular finishing touch.",
+          },
+        ],
         tags: ["Postcard format", "Fast turnaround"],
         image: "/save.jpg",
       },
@@ -235,7 +416,20 @@ export const categories: Category[] = [
         longDescription: [
           "RSVP cards are usually the smallest item in an invitation suite but the one guests handle most, so we print them on the same premium stock as the rest of your set for a coordinated finish.",
           "Matching, often pre-addressed envelopes are available to make replying as easy as possible for your guests, and we can print these alongside your invitations or as a top-up run if you underestimated your guest list.",
-          "Made to your spec — choose your size, sheet count and paper stock. Tell us what you need below and we'll quote it exactly.",
+        ],
+        highlights: [
+          {
+            label: "Matched stock",
+            detail: "Printed on the same premium card as your invitations.",
+          },
+          {
+            label: "Guest-ready",
+            detail: "Matching envelopes, often supplied pre-addressed.",
+          },
+          {
+            label: "Top-up runs",
+            detail: "Order more if you underestimated the guest list.",
+          },
         ],
         tags: ["Matching sets", "Custom sizes"],
         image: "/rsvp.png",
@@ -248,6 +442,20 @@ export const categories: Category[] = [
           "Postcards work hard for their size — cheap to post, quick to read, and far more likely to be kept than a folded leaflet. We print full colour on sturdy card in standard A6 and A5 sizes or something custom, with a gloss front and an uncoated reverse if you want people to be able to write on them.",
           "They're popular for direct mail campaigns, appointment reminders, exhibition handouts and as souvenir cards for galleries and visitor attractions. Bulk pricing steps in quickly, so a larger mailing run costs proportionally less per card.",
         ],
+        highlights: [
+          {
+            label: "A6, A5 or custom",
+            detail: "Standard sizes, or made to your own dimensions.",
+          },
+          {
+            label: "Writable reverse",
+            detail: "Gloss front with an uncoated back people can write on.",
+          },
+          {
+            label: "Cheaper in bulk",
+            detail: "A larger mailing costs proportionally less per card.",
+          },
+        ],
         tags: ["A6 & A5 sizes", "Writable reverse"],
         image: "/postcards.webp",
       },
@@ -258,6 +466,20 @@ export const categories: Category[] = [
         longDescription: [
           "Whether you're a designer selling a range or a business sending Christmas cards to clients, a greeting card needs good stock and a clean fold to feel like a proper card rather than a printout. We print folded cards in a range of sizes on heavyweight board, with a choice of matte, gloss or uncoated finishes and matching envelopes supplied.",
           "Short runs make it viable for illustrators and small makers to test a design before committing to a big order, and corporate customers often have us print a run each December with the inside message already printed.",
+        ],
+        highlights: [
+          {
+            label: "Heavyweight board",
+            detail: "A clean fold and proper card, not a printout.",
+          },
+          {
+            label: "Envelopes supplied",
+            detail: "Matched to the cards, in matte, gloss or uncoated.",
+          },
+          {
+            label: "Short runs",
+            detail: "Test a design before committing to a big order.",
+          },
         ],
         tags: ["Matching envelopes", "Heavyweight board"],
         image: "/greeting-cards.webp",
@@ -290,6 +512,21 @@ export const categories: Category[] = [
           "Whether it's a staff handbook, a wedding order booklet or a portfolio of your work, we bind booklets by saddle-stitch for slimmer page counts or perfect-bound for a squared spine on thicker documents. Full-colour printing throughout and a range of cover stocks let you match the finish to how the booklet will actually be used.",
           "Binding is done in-house rather than sent out, which keeps quality control tight and turnaround faster, and short runs are handled just as readily as larger print orders.",
         ],
+        highlights: [
+          {
+            label: "Two bindings",
+            detail:
+              "Saddle-stitch for slimmer page counts, perfect bound for thicker.",
+          },
+          {
+            label: "Bound in-house",
+            detail: "Tighter quality control and a faster turnaround.",
+          },
+          {
+            label: "Short runs welcome",
+            detail: "Handled as readily as a long print order.",
+          },
+        ],
         tags: ["Saddle-stitched", "Perfect bound"],
         image: "/booklet.webp",
       },
@@ -300,6 +537,20 @@ export const categories: Category[] = [
         longDescription: [
           "A well-printed catalogue does a lot of the selling before a customer ever speaks to you, so we print in full colour on stock heavy enough to survive being flicked through repeatedly. Page counts and binding styles are flexible, from a slim seasonal update to a full annual range.",
           "For longer runs, litho printing brings the per-copy cost down and gives exact Pantone colour matching for brand-critical work; shorter runs go through digital print instead, and we'll recommend whichever is more cost-effective for your numbers.",
+        ],
+        highlights: [
+          {
+            label: "Flexible page counts",
+            detail: "A slim seasonal update through to a full annual range.",
+          },
+          {
+            label: "Litho or digital",
+            detail: "We'll recommend whichever is cheaper for your numbers.",
+          },
+          {
+            label: "Pantone matching",
+            detail: "Exact colour matching on longer litho runs.",
+          },
         ],
         tags: ["Full colour", "Multiple page counts"],
         image: "/catalogue.png",
@@ -312,6 +563,21 @@ export const categories: Category[] = [
           "Brochures need to work hard in a short space, and a crisp fold plus the right paper finish makes a real difference to how premium your business looks on the shelf or in a welcome pack. We print tri-fold and bi-fold formats on gloss or matte stock, and can advise on panel layout so your message reads in the right order as it's unfolded.",
           "Estate agents, gyms and clinics are frequent brochure customers, often reordering seasonally as pricing or services change, and we keep your artwork and fold specification on file to make that quick.",
         ],
+        highlights: [
+          {
+            label: "Tri-fold or bi-fold",
+            detail: "Gloss or matte stock to suit the shelf or welcome pack.",
+          },
+          {
+            label: "Panel advice",
+            detail: "We'll help order your message across the folds.",
+          },
+          {
+            label: "Kept on file",
+            detail:
+              "Artwork and fold specification stored for seasonal reorders.",
+          },
+        ],
         tags: ["Tri-fold or bi-fold", "Gloss finish"],
         image: "/brochure.png",
       },
@@ -322,6 +588,20 @@ export const categories: Category[] = [
         longDescription: [
           "Technical manuals and training guides get used hard, so we bind them with spiral binding that lies flat on a workbench and survives repeated flicking through. Durable card covers protect the pages inside, and we can laminate covers for an extra layer of protection in workshop or outdoor environments.",
           "Because binding is done in-house, updates and reprints are straightforward once the original layout is on file — useful when a manual needs a page or two revised rather than a full reprint.",
+        ],
+        highlights: [
+          {
+            label: "Lies flat",
+            detail: "Spiral binding that stays open on a workbench.",
+          },
+          {
+            label: "Protected covers",
+            detail: "Durable card, laminated for workshop or outdoor use.",
+          },
+          {
+            label: "Easy revisions",
+            detail: "Update a page or two without paying for a full reprint.",
+          },
         ],
         tags: ["Spiral or comb bound", "Durable covers"],
         image: "/manual.png",
@@ -334,6 +614,20 @@ export const categories: Category[] = [
           "Annual reports, board packs and tender documents need to look as considered as the work inside them, so we bind in colour or mono with options ranging from simple wire binding to a cased, hardback finish. Consistent colour reproduction across every copy matters for reports going out to shareholders or clients, and we proof accordingly before the full run.",
           "Fast turnaround is available when a board meeting or deadline is looming, and litho printing is worth considering once quantities climb, both for cost and for colour consistency across a long run.",
         ],
+        highlights: [
+          {
+            label: "Binding choice",
+            detail: "Simple wire binding through to a cased, hardback finish.",
+          },
+          {
+            label: "Consistent colour",
+            detail: "Proofed so every copy matches across the run.",
+          },
+          {
+            label: "Deadline friendly",
+            detail: "Fast turnaround when a board meeting is looming.",
+          },
+        ],
         tags: ["Professional finish", "Colour or mono"],
         image: "/report.png",
       },
@@ -344,6 +638,20 @@ export const categories: Category[] = [
         longDescription: [
           "Whether it's a school play, a charity gala or a full theatre run, event programmes need to be ready on time and hold up through an evening of being folded into pockets and bags. We print on a stock that balances cost and quality for larger audiences, with quicker, glossier options for premium events.",
           "A fast turnaround means late running-order changes don't have to mean a missed print deadline, and we can usually accommodate a same-day reprint if the cast list changes at the last minute.",
+        ],
+        highlights: [
+          {
+            label: "Any run size",
+            detail: "A school play or a full theatre season.",
+          },
+          {
+            label: "Holds up",
+            detail: "Stock that survives an evening folded into a pocket.",
+          },
+          {
+            label: "Late changes",
+            detail: "Same-day reprints when the cast list moves.",
+          },
         ],
         tags: ["Event-ready", "Fast turnaround"],
         image: "/programme.png",
@@ -356,6 +664,20 @@ export const categories: Category[] = [
           "When there's more to say than a standard leaflet allows but not quite enough for a booklet, a multi-panel fold packs extra pages into a single mailable piece. We can print gate-folds, roll-folds and accordion folds to suit how the information should unfold for the reader, keeping postage-friendly dimensions where that matters.",
           "Folding and scoring are handled in-house, so unusual fold patterns aren't a problem, and they're popular for detailed service guides and product spec sheets that need structure without full binding.",
         ],
+        highlights: [
+          {
+            label: "Fold patterns",
+            detail: "Gate-folds, roll-folds and accordion folds.",
+          },
+          {
+            label: "Postage friendly",
+            detail: "Dimensions kept mailable where that matters.",
+          },
+          {
+            label: "Folded in-house",
+            detail: "Unusual fold patterns aren't a problem.",
+          },
+        ],
         tags: ["Custom folds", "Bulk runs"],
         image: "/leaflet.png",
       },
@@ -366,6 +688,20 @@ export const categories: Category[] = [
         longDescription: [
           "A branded folder holds a pitch or proposal together and signals that you've made an effort before the recipient reads a word of it. We print custom folders with pocket inserts sized for your documents, business cards, finished in your brand colours with optional foiling or spot UV available for a premium edge.",
           "Popular with agencies, consultancies and anyone preparing a new business pitch, these are usually a litho job once you're ordering enough to make die-cutting the folder shape cost-effective — we'll advise on the right quantity to make that worthwhile.",
+        ],
+        highlights: [
+          {
+            label: "Pocket inserts",
+            detail: "Sized for your documents and business cards.",
+          },
+          {
+            label: "Premium finishes",
+            detail: "Optional foiling or spot UV for a sharper edge.",
+          },
+          {
+            label: "Quantity advice",
+            detail: "We'll say what run makes die-cutting worthwhile.",
+          },
         ],
         tags: ["Branded folders", "Custom inserts"],
         image: "/presentation.png",
@@ -398,6 +734,21 @@ export const categories: Category[] = [
           "Posters need to grab attention from across a room or a street, so we print large-format on bright, sharp media built for either indoor display or weatherproof outdoor use. Sizes run from A3 up to full shop-window scale, with matte or gloss finishes depending on where it's going.",
           "Local events, gig promoters and retail window displays are among our most regular poster jobs, and because these are digitally printed, ordering just one or two isn't a problem if that's all you need.",
         ],
+        highlights: [
+          {
+            label: "Sharp at scale",
+            detail:
+              "Bright large-format print that reads across a room or a street.",
+          },
+          {
+            label: "Indoor or outdoor",
+            detail: "Weatherproof media where the poster is going outside.",
+          },
+          {
+            label: "Single copies fine",
+            detail: "Digitally printed, so ordering one or two is no problem.",
+          },
+        ],
         tags: ["Large format", "Indoor or outdoor"],
         image: "/poster.webp",
       },
@@ -408,6 +759,20 @@ export const categories: Category[] = [
         longDescription: [
           "A pull-up banner packs down into a carry case and sets up in under a minute, which makes it one of the most practical ways to add branded presence to an event stand, trade show or shop entrance.",
           "Replacement graphics are available if your messaging changes before the stand does, so there's no need to buy a whole new unit for an updated offer or a rebrand.",
+        ],
+        highlights: [
+          {
+            label: "Up in a minute",
+            detail: "Packs into a carry case and sets up in under a minute.",
+          },
+          {
+            label: "Replaceable graphics",
+            detail: "Swap the print without buying a whole new stand.",
+          },
+          {
+            label: "Event ready",
+            detail: "Trade show stands, exhibitions and shop entrances.",
+          },
         ],
         tags: ["Portable stands", "Full colour print"],
         image: "/roll.webp",
@@ -420,6 +785,20 @@ export const categories: Category[] = [
           "Outdoor vinyl banners take the brunt of British weather, so we print on heavy-duty, weatherproof material with reinforced hems and eyelets spaced for secure fixing to fences, railings or scaffolding. Full-colour print stays sharp in sun and rain, making them well suited to building wraps, sports club sponsorship and long-running site hoardings.",
           "Custom sizes are made to order however large the job, and because they're built to stay outdoors for months at a time, it's worth telling us how the banner will be fixed so we can get the eyelet spacing right.",
         ],
+        highlights: [
+          {
+            label: "Heavy-duty vinyl",
+            detail: "Weatherproof material with reinforced hems.",
+          },
+          {
+            label: "Eyelets to suit",
+            detail: "Spaced for your fixing, so tell us how it's going up.",
+          },
+          {
+            label: "Any size",
+            detail: "Made to order, however large the fence or scaffold run.",
+          },
+        ],
         tags: ["Weatherproof", "Eyelets included"],
         image: "/vinyl.webp",
       },
@@ -430,6 +809,21 @@ export const categories: Category[] = [
         longDescription: [
           "Menus get handled, spilled on and wiped down daily, so we offer laminated finishes that shrug off grease and moisture while keeping colours vivid under café lighting. Custom sizes and folds suit everything from a single-page café menu to a multi-page dining format.",
           "We can turn round quick reprints when seasonal dishes or prices change, and table talkers or drinks lists can be printed to match so the whole table setting looks consistent.",
+        ],
+        highlights: [
+          {
+            label: "Wipe-clean",
+            detail: "Laminated finishes that shrug off grease and moisture.",
+          },
+          {
+            label: "Custom folds",
+            detail:
+              "A single café sheet through to a multi-page dining format.",
+          },
+          {
+            label: "Matching pieces",
+            detail: "Table talkers and drinks lists printed to match.",
+          },
         ],
         tags: ["Laminated options", "Custom sizes"],
         image: "/menu.png",
@@ -442,6 +836,20 @@ export const categories: Category[] = [
           "Die-cut stickers follow the exact outline of your logo or artwork rather than sitting in a plain rectangle, giving a much more polished finish on packaging, product labelling and promotional giveaways. We print on durable, weatherproof vinyl that holds up outdoors as well as indoors, in any shape and size your design calls for.",
           "Small businesses use them as much for branding parcels and packaging as for standalone merchandise, and die-cutting is handled in-house so unusual shapes aren't a problem.",
         ],
+        highlights: [
+          {
+            label: "Die-cut to shape",
+            detail: "Follows your artwork outline, not a plain rectangle.",
+          },
+          {
+            label: "Weatherproof vinyl",
+            detail: "Holds up outdoors as well as indoors.",
+          },
+          {
+            label: "Cut in-house",
+            detail: "Unusual shapes aren't a problem.",
+          },
+        ],
         tags: ["Die-cut shapes", "Durable vinyl"],
         image: "/sticker.webp",
       },
@@ -453,6 +861,20 @@ export const categories: Category[] = [
           "Rigid signage holds its shape and looks the part whether it's mounted above a shopfront, directing visitors around an office, or marking out a stand at an event. We print on foam board, Foamex or Correx depending on how and where it will be displayed, cut to custom sizes with fixing holes added if needed.",
           "Quick-turnaround options are available for events with a fixed date that can't move, and we're happy to advise on the right board thickness for indoor versus outdoor use.",
         ],
+        highlights: [
+          {
+            label: "Board options",
+            detail: "Foam board, Foamex or Correx to suit the location.",
+          },
+          {
+            label: "Fixing holes",
+            detail: "Added where you need them, cut to custom sizes.",
+          },
+          {
+            label: "Fast for events",
+            detail: "Quick-turnaround options for dates that can't move.",
+          },
+        ],
         tags: ["Rigid boards", "Custom sizes"],
         image: "/sign.webp",
       },
@@ -463,6 +885,21 @@ export const categories: Category[] = [
         longDescription: [
           "A shop or office window is prime advertising space, and the right graphics turn it into a display that works around the clock. We print full-colour vinyl for window posters and full wraps, frosted or etched-effect manifestation that adds privacy and a smart finish to glass partitions, and one-way vision film that lets you brand the outside of a window while keeping the view and daylight from inside.",
           "Everything is printed and cut in-house, and we can supply it application-ready with a squeegee for a straightforward DIY fit or arrange installation for larger shopfronts. It's a popular choice with local retailers refreshing a seasonal promotion and with offices adding privacy and branding to meeting rooms.",
+        ],
+        highlights: [
+          {
+            label: "Three finishes",
+            detail:
+              "Full-colour vinyl, frosted manifestation, or one-way vision film.",
+          },
+          {
+            label: "Fit it yourself",
+            detail: "Supplied application-ready with a squeegee.",
+          },
+          {
+            label: "Or we install",
+            detail: "Installation arranged for larger shopfronts.",
+          },
         ],
         tags: ["Frosted & one-way vision", "Application-ready"],
         image: "/window-graphics.webp",
@@ -490,6 +927,20 @@ export const categories: Category[] = [
           "Every site needs a board at the gate telling people whose job it is and who to call, and it needs to still be legible after a winter of rain and site dust. We print contractor and development boards on rigid, weatherproof Foamex or Correx in whatever size your site requires, with fixing holes added where you need them.",
           "Artwork can carry your logo, contact details, project information and any required notices, and we'll keep it on file so the next site's board is a quick reorder rather than a fresh design job. Larger developments often order a matched set of site boards, hoarding panels and fencing banners together.",
         ],
+        highlights: [
+          {
+            label: "Weatherproof board",
+            detail: "Rigid Foamex or Correx, still legible after a winter out.",
+          },
+          {
+            label: "Fixing holes",
+            detail: "Added wherever your fixings need them.",
+          },
+          {
+            label: "Kept on file",
+            detail: "The next site's board is a reorder, not a new design job.",
+          },
+        ],
         tags: ["Foamex or Correx", "Fixing holes included"],
         image: "/site-boards.webp",
       },
@@ -500,6 +951,22 @@ export const categories: Category[] = [
         longDescription: [
           "Site hoarding is a long run of blank board in a busy street, which makes it some of the cheapest and most visible advertising space a developer will ever have. We print large-format hoarding panels in full colour, matched across multiple boards so a continuous run reads as one clean design rather than a set of mismatched sheets.",
           "Panels are produced on rigid board built to stay outdoors for the length of the build, and we can work from your architect's visuals or lay the artwork out for you. Tell us the run length and panel size and we'll work out how the design should tile across it.",
+        ],
+        highlights: [
+          {
+            label: "Tiled artwork",
+            detail: "Matched across panels so a long run reads as one design.",
+          },
+          {
+            label: "Built to last",
+            detail:
+              "Rigid board that stays outdoors for the length of the build.",
+          },
+          {
+            label: "Layout help",
+            detail:
+              "We'll work from your architect's visuals or lay it out for you.",
+          },
         ],
         tags: ["Large format", "Tiled artwork"],
         image: "/hoarding-boards.webp",
@@ -512,6 +979,22 @@ export const categories: Category[] = [
           "Heras fencing banners are the fastest way to brand a temporary site perimeter, and because they're sized to standard fence panels they go up in minutes with cable ties. We print on reinforced PVC or wind-permeable mesh, the latter being the sensible choice on exposed sites where a solid banner would act like a sail.",
           "Every banner comes hemmed with eyelets spaced for secure fixing, and full-colour print stays sharp through months of British weather. They're a regular order for contractors, plant hire firms and event organisers fencing off a space.",
         ],
+        highlights: [
+          {
+            label: "Panel-sized",
+            detail:
+              "Cut to standard Heras panels and up in minutes with cable ties.",
+          },
+          {
+            label: "Mesh or PVC",
+            detail:
+              "Wind-permeable mesh for exposed sites, reinforced PVC elsewhere.",
+          },
+          {
+            label: "Hemmed and eyeleted",
+            detail: "Spaced for secure fixing through months of weather.",
+          },
+        ],
         tags: ["Mesh or PVC", "Eyelets included"],
         image: "/heras-banners.webp",
       },
@@ -522,6 +1005,21 @@ export const categories: Category[] = [
         longDescription: [
           "A display board turns a printed image into something that stands up on its own, whether it's mounted behind a stand at an exhibition, propped on an easel at a presentation, or fixed to a wall as permanent interior display. We mount onto lightweight foam board for indoor use or heavier Foamex where the board needs to last.",
           "Boards are cut to any size, with the option of a laminated surface to resist fingerprints and scuffs in a busy space. They're popular with estate agents, galleries, schools and anyone presenting plans or photography at scale.",
+        ],
+        highlights: [
+          {
+            label: "Two board weights",
+            detail:
+              "Lightweight foam board indoors, heavier Foamex where it must last.",
+          },
+          {
+            label: "Cut to any size",
+            detail: "Made to your dimensions for stands, easels or walls.",
+          },
+          {
+            label: "Laminate option",
+            detail: "Resists fingerprints and scuffs in a busy space.",
+          },
         ],
         tags: ["Foam board or Foamex", "Any size"],
         image: "/display-boards.webp",
@@ -548,6 +1046,21 @@ export const categories: Category[] = [
           "A stretched canvas gives a photograph or piece of artwork real presence on a wall without the cost and weight of framing behind glass. We print onto poly-cotton canvas and stretch it over a solid wooden bar frame, either wrapping the image around the edges or finishing with a plain or mirrored border, whichever suits the picture.",
           "Canvases arrive ready to hang with fixings attached, in standard sizes or made to your dimensions. They're a favourite for family photography, restaurant and office interiors, and artists selling work at fairs and markets.",
         ],
+        highlights: [
+          {
+            label: "Ready to hang",
+            detail: "Fixings attached, straight out of the box.",
+          },
+          {
+            label: "Edge choices",
+            detail:
+              "Wrap the image round, or finish with a plain or mirrored border.",
+          },
+          {
+            label: "Any dimensions",
+            detail: "Standard sizes or made to yours.",
+          },
+        ],
         tags: ["Wooden bar frame", "Ready to hang"],
         image: "/stretched-canvas.webp",
       },
@@ -573,6 +1086,21 @@ export const categories: Category[] = [
           "For a small business shipping products, the box is the first thing a customer touches, and a plain brown carton is a missed chance to make an impression. We produce short-run printed boxes and postal mailers in your brand colours and logo, die-cut and creased to fold up cleanly around whatever you're sending.",
           "Because these are digitally printed and cut in-house, there's no huge minimum order to justify the setup, so you can order in batches that match your stock rather than committing to a pallet of packaging up front. Send us your product dimensions and we'll advise on the right box style and board weight.",
         ],
+        highlights: [
+          {
+            label: "Die-cut to fit",
+            detail: "Creased to fold up cleanly around your product.",
+          },
+          {
+            label: "No pallet minimums",
+            detail: "Order in batches that match your stock.",
+          },
+          {
+            label: "Spec advice",
+            detail:
+              "Send dimensions and we'll suggest a box style and board weight.",
+          },
+        ],
         tags: ["Custom sizes", "Short runs"],
         image: "/printed-boxes.webp",
       },
@@ -583,6 +1111,20 @@ export const categories: Category[] = [
         longDescription: [
           "A swing tag carries your pricing, sizing and brand story on the product itself, so it needs to feel as good as whatever it's attached to. We print on premium card stock in any shape and size, with options like rounded corners, a punched hole and a choice of string or ribbon, finished to match your packaging.",
           "They're a regular order for local makers, boutiques and market traders, and because they're a quick digital print job, topping up ahead of a busy season or a craft fair is straightforward.",
+        ],
+        highlights: [
+          {
+            label: "Any shape",
+            detail: "Premium card cut to the size and outline you want.",
+          },
+          {
+            label: "Finishing options",
+            detail: "Rounded corners, a punched hole, and string or ribbon.",
+          },
+          {
+            label: "Quick top-ups",
+            detail: "Straightforward to reprint ahead of a busy season.",
+          },
         ],
         tags: ["Premium card", "Custom shapes"],
         image: "/swing-tags.webp",
@@ -609,6 +1151,20 @@ export const categories: Category[] = [
           "Sometimes you just need clean, reliable mono copies fast, and that's exactly what we can help with. Pricing steps down as volume goes up, so a large print run costs proportionally less per sheet than a handful of copies.",
           "Same-day collection is standard, with binding or hole-punching added on request, and there's no need to book ahead for a quick job — walk in with a file or bring your own pages.",
         ],
+        highlights: [
+          {
+            label: "Bulk discounts",
+            detail: "Pricing steps down as the volume goes up.",
+          },
+          {
+            label: "Same-day collection",
+            detail: "Standard, with no need to book ahead.",
+          },
+          {
+            label: "Finishing on request",
+            detail: "Binding or hole-punching added to the job.",
+          },
+        ],
         tags: ["Fast turnaround", "Bulk discounts"],
         image: "/black-white.webp",
       },
@@ -619,6 +1175,20 @@ export const categories: Category[] = [
         longDescription: [
           "Our colour copiers are calibrated regularly which matters for presentations, artwork proofs and anything client-facing. Same-day turnaround is available for last-minute jobs, and we print single copies or bulk runs on the same equipment.",
           "A range of paper weights, including card stock, is available for covers and inserts, so a bound presentation can have a sturdier front page without needing a separate print run.",
+        ],
+        highlights: [
+          {
+            label: "Calibrated regularly",
+            detail: "Colour you can rely on for proofs and client-facing work.",
+          },
+          {
+            label: "One or one thousand",
+            detail: "Single copies and bulk runs on the same equipment.",
+          },
+          {
+            label: "Heavier stocks",
+            detail: "Card stock available for covers and inserts.",
+          },
         ],
         tags: ["Vivid colour", "Same-day options"],
         image: "/color-copy.webp",
@@ -631,6 +1201,20 @@ export const categories: Category[] = [
           "For documents that need to look sharp under close inspection — legal papers, certificates, professional records — we print from digital files at high resolution onto a choice of paper stocks. This keeps text and fine linework crisp even at small point sizes, and allows short runs without the setup cost of traditional litho printing.",
           "Files can be supplied digitally and collected the same day in most cases, which makes this a good option when you need a handful of professional-quality copies rather than a full print run.",
         ],
+        highlights: [
+          {
+            label: "High resolution",
+            detail: "Crisp text and fine linework even at small point sizes.",
+          },
+          {
+            label: "Stock choice",
+            detail: "A range of paper weights to suit the document.",
+          },
+          {
+            label: "Usually same day",
+            detail: "Send the file, collect the copies.",
+          },
+        ],
         tags: ["High resolution", "Various paper stocks"],
         image: "/digital-copy.webp",
       },
@@ -641,6 +1225,20 @@ export const categories: Category[] = [
         longDescription: [
           "Architects, surveyors and engineers regularly need drawings and plans printed at full scale, and our large-format digital output handles sizes standard copiers simply can't. We print from CAD files and PDFs onto plain paper, tracing paper or heavier stock depending on how the drawing will be used on site.",
           "Folding to a standard document size is available for filing or posting, and because these are printed digitally, single copies and small runs are both cost-effective.",
+        ],
+        highlights: [
+          {
+            label: "Full-scale plans",
+            detail: "Sizes standard copiers simply can't handle.",
+          },
+          {
+            label: "CAD and PDF",
+            detail: "Printed onto plain paper, tracing paper or heavier stock.",
+          },
+          {
+            label: "Folded to file",
+            detail: "Folding to a standard document size is available.",
+          },
         ],
         tags: ["Large format", "Fast turnaround"],
         image: "/plan-printing.webp",
@@ -653,6 +1251,21 @@ export const categories: Category[] = [
           "Carbonless sets let you write once and keep a copy for the customer, your files and dispatch, without a single sheet of carbon paper in sight. We print two and three-part sets with sequential numbering for tracking, collated and glued into pads that tear off cleanly.",
           "Popular with tradespeople for job sheets, delivery notes and receipt books, these are made to your exact layout, so the fields match what you actually need to record.",
         ],
+        highlights: [
+          {
+            label: "2 or 3-part sets",
+            detail:
+              "Write once and keep copies for customer, file and dispatch.",
+          },
+          {
+            label: "Sequential numbering",
+            detail: "For tracking job sheets, delivery notes and receipts.",
+          },
+          {
+            label: "Your layout",
+            detail: "Fields matched to what you actually need to record.",
+          },
+        ],
         tags: ["2–3 part sets", "Sequential numbering"],
         image: "/carbonless.webp",
       },
@@ -663,6 +1276,21 @@ export const categories: Category[] = [
         longDescription: [
           "As well as printing, we sell the paper itself — everyday white copier paper by the ream or box, heavier card for covers and craft work, plus coloured, recycled and speciality stocks that are hard to find on the high street. It saves a trip across town when you just need a box of A4 before Monday morning.",
           "Trade and bulk pricing is available if you're getting through paper regularly, and because we're local you can collect the same day or have it dropped in with your next print delivery. Not sure which weight you need? Tell us what you're printing and we'll point you at the right stock.",
+        ],
+        highlights: [
+          {
+            label: "Ream or box",
+            detail: "Everyday copier paper through to heavier card.",
+          },
+          {
+            label: "Speciality stocks",
+            detail:
+              "Coloured, recycled and finishes the high street won't have.",
+          },
+          {
+            label: "Trade pricing",
+            detail: "Available if you're getting through paper regularly.",
+          },
         ],
         tags: ["By the ream or box", "Trade pricing"],
         image: "/paper-supplies.webp",
@@ -716,6 +1344,20 @@ export const categories: Category[] = [
           "A tent calendar folds flat for posting and pops up into a self-supporting triangle the moment it's creased, which makes it a cheap, cheerful way to get twelve months of branding onto a customer's counter or a client's desk without the cost of a wire-bound pad. We print full colour on both visible faces so the branding shows whichever way it's turned.",
           "Because there's no binding involved, these are quick and inexpensive to produce in bulk, which suits trade show giveaways and mass client mailings where a full desktop calendar wouldn't be cost-effective.",
         ],
+        highlights: [
+          {
+            label: "No stand needed",
+            detail: "Creases into a self-supporting triangle on any counter.",
+          },
+          {
+            label: "Printed both faces",
+            detail: "Branding shows whichever way it's turned.",
+          },
+          {
+            label: "Cheap in bulk",
+            detail: "No binding, so trade show quantities stay affordable.",
+          },
+        ],
         tags: ["Free-standing card", "Bulk-friendly pricing"],
         image: "/tent-calendars.webp",
       },
@@ -728,7 +1370,21 @@ export const categories: Category[] = [
           "A wire-bound wall calendar suits the office wall as easily as it suits a corporate gift box, branded with your logo and personalised with up to 13 of your own photos across the cover and each month.",
           "Available in A3, A4 or A5, landscape or portrait, wire-bound so the pages turn cleanly month after month without the spine cracking the way a stapled pad eventually does.",
           "One thing to watch when supplying images: for a landscape calendar, the cover photo should be landscape and each of the 12 monthly photos portrait; for a portrait calendar, it's the other way round — portrait cover, landscape monthly images.",
-          "Please note: once your artwork's print-ready, we'll email a PDF proof for sign-off, which can take up to 48 hours. Your chosen delivery option runs from when you approve that proof, not from checkout.",
+        ],
+        note: "Please note: once your artwork's print-ready, we'll email a PDF proof for sign-off, which can take up to 48 hours. Your chosen delivery option runs from when you approve that proof, not from checkout.",
+        highlights: [
+          {
+            label: "Sizes and orientation",
+            detail: "A3, A4 or A5, in landscape or portrait.",
+          },
+          {
+            label: "Turns a full 360",
+            detail: "A wire spine that won't crack the way a stapled pad does.",
+          },
+          {
+            label: "Up to 13 photos",
+            detail: "A cover image plus one for every month.",
+          },
         ],
         tags: ["Wire-bound", "Photo page per month"],
         image: "/calendar2.webp",
@@ -739,6 +1395,21 @@ export const categories: Category[] = [
           "A simpler stapled bind for wall calendars, keeping cost down on larger giveaway quantities.",
         longDescription: [
           "Transform your company's photography, artwork or portfolio into a year-long showcase with custom Stapled Wall Calendars. These classic, professional-looking calendars offer a budget-friendly way to display your brand imagery while helping clients keep track of important dates. It's the perfect promotional giveaway to ensure your business remains top-of-mind on office and home walls, month after month.",
+        ],
+        highlights: [
+          {
+            label: "Budget binding",
+            detail: "A simpler staple that keeps the unit cost down.",
+          },
+          {
+            label: "Volume giveaways",
+            detail: "Suits large promotional quantities.",
+          },
+          {
+            label: "Your imagery",
+            detail:
+              "Turns company photography or artwork into a year-long showcase.",
+          },
         ],
         tags: ["Stapled binding", "Cost-effective at volume"],
         image: "/stapled-wall-calendars.webp",
@@ -765,6 +1436,20 @@ export const categories: Category[] = [
           "Boost your audience's productivity while keeping your brand front and centre. Whether they need a daily to-do list to tear away, or a reliable tool for long-term organisation, these pads provide the perfect canvas. With generous space for notes, sketches and doodles, your custom branding sits on prime desktop real estate all year round.",
           "Note: our planners are glued at the bottom edge to completely eliminate page curling and corner damage.",
         ],
+        highlights: [
+          {
+            label: "Weekly or monthly",
+            detail: "A grid laid out to suit how you plan.",
+          },
+          {
+            label: "Glued bottom edge",
+            detail: "Eliminates page curling and corner damage.",
+          },
+          {
+            label: "Room to write",
+            detail: "Generous space for notes and sketches beside the grid.",
+          },
+        ],
         tags: ["Weekly or monthly grid", "Tear-off pages"],
         image: "/desk-planners.webp",
       },
@@ -774,6 +1459,20 @@ export const categories: Category[] = [
           "A single-sheet, full-year wall planner with a grid layout for tracking holidays, shifts or project deadlines at a glance.",
         longDescription: [
           "Keep your team organised and your brand visible with a custom Wall Planner. Designed for seamless year-at-a-glance scheduling, it makes it easy for individuals and teams to track projects, coordinate timelines and completely avoid scheduling conflicts. Use it internally to boost workplace productivity, or gift it to clients as a high-value promotional tool that keeps your branding on display in homes and offices all year long.",
+        ],
+        highlights: [
+          {
+            label: "Year at a glance",
+            detail: "One sheet covering the full twelve months.",
+          },
+          {
+            label: "Large format",
+            detail: "Sized to read across an office from a distance.",
+          },
+          {
+            label: "Branded for gifting",
+            detail: "Keeps your branding on the wall all year.",
+          },
         ],
         tags: ["Full-year grid", "Large format"],
         image: "/wall-planners.webp",
@@ -800,6 +1499,21 @@ export const categories: Category[] = [
           "A prospectus is often a parent's first real impression of a school, so it needs to read as polished as the education on offer. We print full colour on quality gloss or matte stock, saddle-stitched for a slim, open-day-ready booklet or perfect bound with a squared spine for a fuller admissions pack, and can carry your school's photography, crest and house colours throughout. Every layout is proofed with you before it goes anywhere near a press.",
           "We work with primary and secondary schools each year ahead of open evenings and application deadlines, when a fast turnaround matters most. Updates for a new intake are quick once your layout is on file, and we can print matching open day signage and feeder-school mailers from the same artwork so everything a visiting parent sees looks joined-up.",
         ],
+        highlights: [
+          {
+            label: "Two bindings",
+            detail:
+              "Saddle-stitch for open day, perfect bound for an admissions pack.",
+          },
+          {
+            label: "Your school's identity",
+            detail: "Photography, crest and house colours throughout.",
+          },
+          {
+            label: "Matching materials",
+            detail: "Open day signage and mailers from the same artwork.",
+          },
+        ],
         tags: [
           "A4 or A5 formats",
           "Saddle-stitch or perfect bound",
@@ -815,6 +1529,20 @@ export const categories: Category[] = [
           "A yearbook is one of the few things a pupil keeps for decades, so it needs to hold up to that. We print full colour throughout on quality stock, in softback or hardback with a squared, perfect-bound spine, handling photo-heavy layouts — class photos, leavers' pages, house and club sections — without the colour or detail dropping off.",
           "These are proofed carefully given how many individual photos are usually involved, and we work to end-of-term deadlines so copies are ready before the summer holidays. Bulk pricing applies per year group, and we can hold your cover artwork on file for next year's edition.",
         ],
+        highlights: [
+          {
+            label: "Softback or hardback",
+            detail: "Perfect bound with a squared spine.",
+          },
+          {
+            label: "Photo-heavy layouts",
+            detail: "Class and leavers' pages without the colour dropping off.",
+          },
+          {
+            label: "Term deadlines",
+            detail: "Printed and bound ready before the summer holidays.",
+          },
+        ],
         tags: [
           "Softback or hardback",
           "Full-colour photo pages",
@@ -829,6 +1557,20 @@ export const categories: Category[] = [
         longDescription: [
           "Visitors need clear direction from the car park to the hall, so we print weatherproof board signage for outdoor routes and pull-up banners for reception and welcome desks, matched to the branding and photography used in your prospectus.",
           "Turnaround is kept fast ahead of a fixed open evening date that can't move, and banner graphics can be swapped out on the same stand if your messaging changes before the next event.",
+        ],
+        highlights: [
+          {
+            label: "Indoors and out",
+            detail: "Weatherproof boards for routes, pull-ups for reception.",
+          },
+          {
+            label: "Brand matched",
+            detail: "Matches the photography and branding in your prospectus.",
+          },
+          {
+            label: "Reusable stands",
+            detail: "Swap the graphics for the next event.",
+          },
         ],
         tags: [
           "Indoor & outdoor options",
@@ -859,6 +1601,21 @@ export const categories: Category[] = [
           "We understand these are printed at short notice and under difficult circumstances, so we prioritise a fast, sensitive turnaround without cutting corners on quality. Orders of service can include favourite photographs, readings, hymns and the order of the day, laid out and proofed with you before printing.",
           "Folded booklet formats in a range of page counts are available to suit shorter or longer services, and we're happy to talk changes through over the phone if it's easier than email at a time like this.",
         ],
+        highlights: [
+          {
+            label: "Fast and sensitive",
+            detail:
+              "Prioritised turnaround without cutting corners on quality.",
+          },
+          {
+            label: "Personal touches",
+            detail: "Photographs, readings, hymns and the order of the day.",
+          },
+          {
+            label: "Any length",
+            detail: "Folded booklet formats in a range of page counts.",
+          },
+        ],
         tags: ["Sensitive turnaround", "Custom photos"],
         image: "/order.webp",
       },
@@ -869,6 +1626,21 @@ export const categories: Category[] = [
         longDescription: [
           "Memorial cards are often kept for years, so we print them on premium card stock with a photograph and personalised wording chosen by the family, finished to a standard that reflects how much care has gone into it. Turnaround is kept fast to fit around funeral timescales.",
           "We're happy to talk through wording and layout over the phone if that's easier, and rounded corners with a soft matte finish are popular choices for a gentler, more considered feel.",
+        ],
+        highlights: [
+          {
+            label: "Premium card stock",
+            detail: "Finished to a standard worth keeping for years.",
+          },
+          {
+            label: "Softer finishes",
+            detail: "Rounded corners and a soft matte are popular choices.",
+          },
+          {
+            label: "Talk it through",
+            detail:
+              "We'll go over wording and layout by phone if that's easier.",
+          },
         ],
         tags: ["Premium card stock", "Personalised wording"],
         image: "/mem.webp",
@@ -881,6 +1653,20 @@ export const categories: Category[] = [
         longDescription: [
           "A large-format photo tribute gives mourners something to gather around at a service or wake, printed to a high quality that does justice to treasured photographs. We can work from a single image or a collage of photos supplied by the family, mounted or printed as a standalone board ready to display.",
           "A fast turnaround is standard, given how little notice these are usually ordered with, and we'll guide you through image selection if you're not sure which photos will print best at a larger size.",
+        ],
+        highlights: [
+          {
+            label: "Large format",
+            detail: "Printed at a size mourners can gather around.",
+          },
+          {
+            label: "One photo or many",
+            detail: "A single image or a collage supplied by the family.",
+          },
+          {
+            label: "Help choosing",
+            detail: "We'll advise which photographs print best at scale.",
+          },
         ],
         tags: ["Large format", "High quality printing"],
         image: "/photo-tribute.webp",

@@ -12,12 +12,12 @@ export default function ShippingPage() {
   return (
     <InfoPage
       title="Shipping & Collection"
-      intro={`Most standard jobs are ready within ${site.turnaround}. Collect from our ${site.address.addressLocality} press, or we'll deliver — here's exactly how it works.`}
+      intro={`Most standard jobs are ready within ${site.turnaround} of us receiving print-ready artwork. Collect from our ${site.address.addressLocality} press, or we'll deliver — here's exactly how it works.`}
       sections={[
         {
           heading: "Collection",
           body: [
-            `Collection from our premises at ${site.address.full} is always free. Most standard digital print jobs are ready within ${site.turnaround} of your job being confirmed — larger litho runs and bespoke large-format work take longer, so we'll agree a collection date with you when you confirm the job rather than promise a blanket timescale.`,
+            `Collection from our premises at ${site.address.full} is always free. Most standard digital print jobs are ready within ${site.turnaround} of us receiving print-ready artwork — that's when production starts, not the day you place the order, so if the files come later the finish date moves with them. Larger litho runs and bespoke large-format work take longer, so we'll agree a collection date with you when you confirm the job rather than promise a blanket timescale.`,
             `We're open Monday to Friday, and we'll call or email as soon as your order's ready, so there's no need to guess and turn up early. If you need directions, get in touch and we'll point you the right way.`,
           ],
         },
@@ -39,9 +39,10 @@ export default function ShippingPage() {
           ],
         },
         {
-          heading: "Rush jobs",
+          heading: "Express & rush jobs",
           body: [
-            `Need it faster than ${site.turnaround}? Same-day turnaround is often possible on smaller digital jobs — mention it when you call ${site.phone} for a quote, and we'll confirm whether it's doable around what's already on press.`,
+            `Need it faster than ${site.turnaround} from artwork? We can usually do it — that's one of the advantages of printing in-house rather than sending your job to a queue somewhere. Express and same-day work is a separate service, priced accordingly, because it means moving your job ahead of what's already on press.`,
+            `Tell us the deadline and when your artwork will be ready when you request a quote, and we'll price the tier that actually fits — standard, express or same-day — up front, so you know what it costs before you commit. Ring ${site.phone} if the deadline is tight and we'll tell you straight away whether it's possible.`,
           ],
         },
       ]}

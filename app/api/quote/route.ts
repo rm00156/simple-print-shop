@@ -1,6 +1,13 @@
 import { Resend } from "resend";
 import { getCategory, getCategoryItem } from "@/content/categories";
 import { getService } from "@/content/services";
+import {
+  classifyLeadTime,
+  formatDisplayDate,
+  resolveArtworkDate,
+  toIsoDate,
+  workingDaysBetween,
+} from "@/lib/lead-time";
 import { quoteSchema } from "@/lib/quote-schema";
 import { verifyTurnstileToken } from "@/lib/verify-turnstile";
 
@@ -29,6 +36,12 @@ function isRateLimited(ip: string) {
   entry.count += 1;
   return entry.count > RATE_LIMIT;
 }
+
+const ARTWORK_LABELS: Record<string, string> = {
+  ready: "Print-ready now",
+  design: "Needs designing by us",
+  unsure: "Not sure yet",
+};
 
 function escapeHtml(value: string) {
   return value
@@ -93,6 +106,29 @@ export async function POST(request: Request) {
     ? getCategoryItem(values.need, values.product)?.item.name
     : undefined;
 
+  // The gap between "artwork ready" and "needed by" is the whole point of asking both:
+  // it's what decides whether this is a standard job or a rush, and it wants to be
+  // legible in the inbox before anyone picks up the phone to quote it.
+  const today = toIsoDate(new Date());
+  const artworkDate = resolveArtworkDate(values.artworkReady, values.artworkReadyDate, today);
+  const workingDays =
+    values.neededBy && artworkDate ? workingDaysBetween(artworkDate, values.neededBy) : null;
+  const tier = workingDays === null ? null : classifyLeadTime(workingDays);
+
+  const artworkSummary =
+    values.artworkReady === "date" && values.artworkReadyDate
+      ? formatDisplayDate(values.artworkReadyDate)
+      : values.artworkReady
+        ? ARTWORK_LABELS[values.artworkReady]
+        : undefined;
+
+  const leadTimeSummary =
+    workingDays === null || tier === null
+      ? undefined
+      : `${workingDays} working day${workingDays === 1 ? "" : "s"} — ${tier.toUpperCase()}`;
+
+  const subjectFlag = tier === "emergency" || tier === "express" ? `[${tier.toUpperCase()}] ` : "";
+
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.QUOTE_TO_EMAIL ?? process.env.CONTACT_TO_EMAIL;
   const from = process.env.QUOTE_FROM_EMAIL ?? process.env.CONTACT_FROM_EMAIL;
@@ -114,6 +150,9 @@ export async function POST(request: Request) {
     values.sides ? `Sides: ${values.sides === "double" ? "Double sided" : "Single sided"}` : null,
     `Quantity: ${values.quantity}`,
     `Size: ${values.size}`,
+    values.neededBy ? `Needed by: ${formatDisplayDate(values.neededBy)}` : null,
+    artworkSummary ? `Artwork ready: ${artworkSummary}` : null,
+    leadTimeSummary ? `Lead time: ${leadTimeSummary}` : null,
     values.details ? `Details: ${values.details}` : null,
   ].filter(Boolean);
 
@@ -127,6 +166,9 @@ export async function POST(request: Request) {
     values.sides ? ["Sides", values.sides === "double" ? "Double sided" : "Single sided"] : null,
     ["Quantity", String(values.quantity)],
     ["Size", values.size],
+    values.neededBy ? ["Needed by", formatDisplayDate(values.neededBy)] : null,
+    artworkSummary ? ["Artwork ready", artworkSummary] : null,
+    leadTimeSummary ? ["Lead time", leadTimeSummary] : null,
     values.details ? ["Details", values.details] : null,
   ].filter((row): row is [string, string] => row !== null);
 
@@ -135,7 +177,7 @@ export async function POST(request: Request) {
       from,
       to,
       replyTo: values.email,
-      subject: `Quote request — ${sanitizeHeaderValue(values.name)} — ${productName ?? categoryName}`,
+      subject: `${subjectFlag}Quote request — ${sanitizeHeaderValue(values.name)} — ${productName ?? categoryName}`,
       text: textLines.join("\n"),
       html: `<table>${htmlRows
         .map(([label, value]) => `<tr><td><strong>${escapeHtml(label)}</strong></td><td>${escapeHtml(value)}</td></tr>`)

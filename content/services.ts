@@ -92,7 +92,7 @@ export const services: Service[] = [
       "24-48hr standard turnaround",
       "Cost-effective on short and medium runs",
       "Vivid full colour on a range of stocks",
-      "Same-day options when you're up against it",
+      "Express and same-day options when you're up against it",
     ],
     useCases: [
       "Business cards",
@@ -105,7 +105,17 @@ export const services: Service[] = [
       {
         question: "What's the turnaround?",
         answer:
-          "Most standard digital jobs are ready in 24-48 hours. Same-day is often possible on smaller runs — call us if you're up against a deadline.",
+          "Most standard digital jobs are ready in 24-48 hours from the point we receive print-ready artwork. That's when the clock starts, not the day you order — so if the files arrive later than planned, the finish date moves with them.",
+      },
+      {
+        question: "What if I need it faster than 24-48 hours?",
+        answer:
+          "We can usually do it. Express and same-day work is a separate service and is priced as one, because it means moving your job ahead of what's already on press. Tell us your deadline and when your artwork will be ready when you ask for a quote, and we'll price the right tier up front rather than surprising you later.",
+      },
+      {
+        question: "My artwork isn't ready yet — can I still book the job in?",
+        answer:
+          "Yes, and it's worth doing. Tell us the deadline and roughly when the artwork will land and we'll reserve press time and quote against that. The later the files arrive against a fixed deadline, the fewer working days the job has, which is what moves it into express pricing.",
       },
       {
         question: "Digital or litho — which do I need?",

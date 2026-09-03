@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { categories, slugifyItemName } from "@/content/categories";
 import { services } from "@/content/services";
+import { isIsoDate } from "@/lib/lead-time";
 
 const slugs = [
   ...categories.map((c) => c.slug),
@@ -46,6 +47,20 @@ export const quoteSchema = z
       .min(1, "Enter a quantity of at least 1")
       .max(1_000_000, "Enter a realistic quantity"),
     size: z.string().trim().min(1, "Enter a size").max(60, "Keep the size under 60 characters"),
+    // Timings. Both are optional — a deadline question that blocks the form would cost
+    // more enquiries than the answer is worth — but together they give us the one thing
+    // a quote needs and never used to capture: how many working days the job actually has.
+    neededBy: z
+      .string()
+      .trim()
+      .refine((v) => v === "" || isIsoDate(v), "Enter a valid date")
+      .optional(),
+    artworkReady: z.enum(["ready", "date", "design", "unsure"]).optional(),
+    artworkReadyDate: z
+      .string()
+      .trim()
+      .refine((v) => v === "" || isIsoDate(v), "Enter a valid date")
+      .optional(),
     details: z.string().trim().max(500).optional().or(z.literal("")),
     // Honeypot — real users leave this blank. Left as an unconstrained string so bots that
     // fill it in still pass schema validation and reach the route's own fake-success handling.
@@ -59,6 +74,13 @@ export const quoteSchema = z
       if (!validProducts?.includes(data.product)) {
         ctx.addIssue({ code: "custom", path: ["product"], message: "Choose a valid product" });
       }
+    }
+    if (data.artworkReady === "date" && !data.artworkReadyDate) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["artworkReadyDate"],
+        message: "Tell us when your artwork will be ready",
+      });
     }
     if (needsSidesField(data.need, data.product) && !data.sides) {
       ctx.addIssue({
