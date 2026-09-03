@@ -43,6 +43,8 @@ export function SiteHeader() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
+  const weekdayHours = site.openingHours.display[0];
+
   return (
     <header>
       <div className="border-b border-line bg-surface-2 px-4 sm:px-6">
@@ -135,12 +137,26 @@ export function SiteHeader() {
                   <Search size={20} aria-hidden="true" />
                 )}
               </button>
+              {/* Below lg there's no room for the stacked block, so calling
+                  collapses to a one-tap icon rather than hiding in the menu. */}
               <a
                 href={site.phoneHref}
-                className="hidden items-center gap-1.5 text-sm font-semibold whitespace-nowrap text-ink hover:text-primary lg:flex"
+                aria-label={`Call us on ${site.phone}`}
+                className="inline-flex size-9 items-center justify-center rounded-token text-ink lg:hidden"
               >
-                <Phone size={15} aria-hidden="true" />
-                {site.phone}
+                <Phone size={20} aria-hidden="true" />
+              </a>
+              <a
+                href={site.phoneHref}
+                className="hidden flex-col items-center whitespace-nowrap lg:flex"
+              >
+                <span className="text-xs text-ink-2">Call us on</span>
+                <span className="text-lg leading-tight font-extrabold text-primary hover:text-primary-hover">
+                  {site.phone}
+                </span>
+                <span className="text-[11px] text-ink-3">
+                  ({weekdayHours.days}: {weekdayHours.hours})
+                </span>
               </a>
               <span className="hidden sm:inline-flex">
                 <Button href="/quote" size="sm">
@@ -272,10 +288,16 @@ export function SiteHeader() {
           )}
           <a
             href={site.phoneHref}
-            className="flex min-h-11 items-center gap-2 border-t border-line text-sm font-medium text-ink"
+            className="flex flex-col border-t border-line py-3"
           >
-            <Phone size={15} aria-hidden="true" />
-            {site.phone}
+            <span className="text-xs text-ink-2">Call us on</span>
+            <span className="flex items-center gap-2 text-lg leading-tight font-extrabold text-primary">
+              <Phone size={17} aria-hidden="true" />
+              {site.phone}
+            </span>
+            <span className="text-[11px] text-ink-3">
+              ({weekdayHours.days}: {weekdayHours.hours})
+            </span>
           </a>
         </nav>
       </div>
