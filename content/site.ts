@@ -138,19 +138,21 @@ export const navLinks: NavLink[] = [
   { href: "/contact", label: "Contact" },
 ];
 
+// The footer lists a short, hand-picked set of categories rather than all of them —
+// the full list makes the stacked mobile footer roughly two screens tall. Everything
+// else stays one tap away behind "View all products" and the header menu.
+const footerCategorySlugs = [
+  "business-stationery",
+  "flyers-leaflets-and-invites",
+  "booklets-catalogues-and-brochures",
+  "marketing-and-promo",
+  "site-and-display-boards",
+  "funeral-stationery",
+] as const;
+
+// Ordered shortest / highest-intent first, so a phone user scrolling to the footer
+// hits Contact and Quote before the long product and service lists.
 export const footerColumns = [
-  {
-    title: "About",
-    links: [{ href: "/about", label: "About Us" }],
-  },
-  {
-    title: "Products",
-    links: categories.map((c) => ({ href: `/products/${c.slug}`, label: c.name })),
-  },
-  {
-    title: "Services",
-    links: services.map((s) => ({ href: `/services/${s.slug}`, label: s.name })),
-  },
   {
     title: "Help & Support",
     links: [
@@ -158,6 +160,25 @@ export const footerColumns = [
       { href: "/contact", label: "Contact Us" },
       { href: "/shipping", label: "Shipping Info" },
       { href: "/faq", label: "FAQ" },
+    ],
+  },
+  {
+    title: "About",
+    links: [{ href: "/about", label: "About Us" }],
+  },
+  {
+    title: "Services",
+    links: services.map((s) => ({ href: `/services/${s.slug}`, label: s.name })),
+  },
+  {
+    title: "Products",
+    links: [
+      ...footerCategorySlugs.map((slug) => {
+        const category = categories.find((c) => c.slug === slug);
+        if (!category) throw new Error(`Unknown footer category slug: ${slug}`);
+        return { href: `/products/${category.slug}`, label: category.name };
+      }),
+      { href: "/products", label: "View all products" },
     ],
   },
   {

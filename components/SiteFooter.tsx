@@ -54,7 +54,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:flex sm:gap-x-10 lg:gap-x-16">
+        <div className="grid grid-cols-1 gap-y-8 sm:flex sm:gap-x-10 lg:gap-x-16">
           {footerColumns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
               <p className="mb-3 text-sm font-bold text-ink">{col.title}</p>
