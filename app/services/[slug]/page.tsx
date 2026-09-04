@@ -16,6 +16,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { QuoteForm } from "@/components/QuoteForm";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Button } from "@/components/Button";
 import { getService, services } from "@/content/services";
 import { site } from "@/content/site";
@@ -137,18 +138,13 @@ export default async function ServiceDetailPage({ params }: Props) {
 
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-4 text-white sm:px-6">
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-5 flex flex-wrap items-center gap-1.5 text-xs font-medium text-white/70"
-            >
-              <Link href="/services" className="hover:text-white">
-                Services
-              </Link>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page" className="text-white">
-                {service.name}
-              </span>
-            </nav>
+            <Breadcrumbs
+              className="mb-5"
+              items={[
+                { name: "Services", href: "/services" },
+                { name: service.name },
+              ]}
+            />
             <h1 className="font-display max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl md:leading-[1.05]">
               {service.name}
             </h1>

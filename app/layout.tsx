@@ -3,7 +3,7 @@ import { Quicksand } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { site } from "@/content/site";
+import { site, siteUrl } from "@/content/site";
 import "./globals.css";
 
 // Quicksand is a variable font (300–700), so no explicit weight list is needed.
@@ -12,8 +12,6 @@ const quicksand = Quicksand({
   variable: "--font-quicksand",
   subsets: ["latin"],
 });
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 // Both place names the unit is findable under, kept under ~60 characters so search
 // results don't truncate it. Used for the document, OG and Twitter titles alike.

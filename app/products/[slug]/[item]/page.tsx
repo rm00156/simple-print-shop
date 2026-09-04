@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Button } from "@/components/Button";
 import { ProductCard } from "@/components/ProductCard";
 import { QuoteForm } from "@/components/QuoteForm";
@@ -118,25 +119,14 @@ export default async function ProductPage({ params }: Props) {
 
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-4 text-white sm:px-6">
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-5 flex flex-wrap items-center gap-1.5 text-xs font-medium text-white/70"
-            >
-              <Link href="/products" className="hover:text-white">
-                Products
-              </Link>
-              <span aria-hidden="true">/</span>
-              <Link
-                href={`/products/${category.slug}`}
-                className="hover:text-white"
-              >
-                {category.name}
-              </Link>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page" className="text-white">
-                {item.name}
-              </span>
-            </nav>
+            <Breadcrumbs
+              className="mb-5"
+              items={[
+                { name: "Products", href: "/products" },
+                { name: category.name, href: `/products/${category.slug}` },
+                { name: item.name },
+              ]}
+            />
             {item.badge && (
               <span className="mb-4 inline-flex rounded-full bg-gold px-3 py-1 text-xs font-bold text-primary-900">
                 {item.badge}
