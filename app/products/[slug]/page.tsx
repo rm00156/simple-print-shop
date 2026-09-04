@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { ArrowRight, CheckCircle2, ExternalLink, Phone } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Button } from "@/components/Button";
 import { ProductCard } from "@/components/ProductCard";
 import { categories, getCategory, slugifyItemName } from "@/content/categories";
@@ -86,18 +86,13 @@ export default async function ServicePage({ params }: Props) {
 
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-4 text-white sm:px-6">
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-5 flex items-center gap-1.5 text-xs font-medium text-white/70"
-            >
-              <Link href="/products" className="hover:text-white">
-                Products
-              </Link>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page" className="text-white">
-                {category.name}
-              </span>
-            </nav>
+            <Breadcrumbs
+              className="mb-5"
+              items={[
+                { name: "Products", href: "/products" },
+                { name: category.name },
+              ]}
+            />
             <h1 className="font-display max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl md:leading-[1.05]">
               {category.name}
             </h1>

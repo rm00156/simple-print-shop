@@ -2,6 +2,11 @@ import { FileCheck, MapPin, Paintbrush, type LucideIcon } from "lucide-react";
 import { categories } from "./categories";
 import { services } from "./services";
 
+// Absolute origin, no trailing slash. Needed wherever a URL has to be absolute rather
+// than root-relative: metadataBase in the root layout, and the BreadcrumbList JSON-LD,
+// which schema.org requires be absolute. NEXT_PUBLIC_ so client components can read it too.
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const site = {
   name: "Bluwave",
   tagline: "South east London's local print shop, since 2004",
