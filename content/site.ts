@@ -1,6 +1,7 @@
 import { FileCheck, MapPin, Paintbrush, type LucideIcon } from "lucide-react";
 import { categories } from "./categories";
 import { services } from "./services";
+import { tradePageIsPublishable } from "./trade";
 
 // Absolute origin, no trailing slash. Needed wherever a URL has to be absolute rather
 // than root-relative: metadataBase in the root layout, and the BreadcrumbList JSON-LD,
@@ -175,6 +176,21 @@ export const footerColumns = [
     title: "About",
     links: [{ href: "/about", label: "About Us" }],
   },
+  // Trade lanes get their own column rather than being filed under About — a
+  // funeral director scanning a footer is looking for a word that means them.
+  // The whole column disappears while the page is unfinished, on the same flag
+  // that noindexes it and holds it out of the sitemap, so there's never a
+  // footer link to a page that can't answer the questions it's there to answer.
+  ...(tradePageIsPublishable
+    ? [
+        {
+          title: "Trade",
+          links: [
+            { href: "/for-funeral-directors", label: "For funeral directors" },
+          ],
+        },
+      ]
+    : []),
   {
     title: "Services",
     links: services.map((s) => ({ href: `/services/${s.slug}`, label: s.name })),

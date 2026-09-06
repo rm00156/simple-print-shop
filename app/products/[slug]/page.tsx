@@ -7,6 +7,7 @@ import { Button } from "@/components/Button";
 import { ProductCard } from "@/components/ProductCard";
 import { categories, getCategory, slugifyItemName } from "@/content/categories";
 import { site, yearsTrading } from "@/content/site";
+import { tradePageIsPublishable } from "@/content/trade";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -45,6 +46,14 @@ export default async function ServicePage({ params }: Props) {
     : site.funeralSiteUrl;
   const funeralHandoff =
     category.slug === "funeral-stationery" ? funeralSiteUrl : null;
+
+  // The same page serves two readers with opposite needs. Families go to the
+  // dedicated funeral service; funeral directors go to the trade page, which
+  // only exists as a destination once it has real commitments on it.
+  const tradeHandoff =
+    category.slug === "funeral-stationery" && tradePageIsPublishable
+      ? "/for-funeral-directors"
+      : null;
 
   const WatermarkIcon = category.icon;
 
@@ -140,17 +149,27 @@ export default async function ServicePage({ params }: Props) {
         {funeralHandoff && (
           <div className="mt-8 flex flex-col items-start justify-between gap-3 rounded-2xl bg-primary/5 px-5 py-4 sm:flex-row sm:items-center">
             <p className="font-medium text-ink-2">
-              We look after funeral stationery through our dedicated service.
+              {tradeHandoff
+                ? "Families are looked after by our dedicated funeral service. Funeral directors, we print trade."
+                : "We look after funeral stationery through our dedicated service."}
             </p>
-            <Button
-              href={funeralHandoff}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="ghost"
-            >
-              Visit our funeral site
-              <ExternalLink size={16} aria-hidden="true" />
-            </Button>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button
+                href={funeralHandoff}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="ghost"
+              >
+                Visit our funeral site
+                <ExternalLink size={16} aria-hidden="true" />
+              </Button>
+              {tradeHandoff && (
+                <Button href={tradeHandoff} variant="ghost">
+                  For funeral directors
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Button>
+              )}
+            </div>
           </div>
         )}
       </div>

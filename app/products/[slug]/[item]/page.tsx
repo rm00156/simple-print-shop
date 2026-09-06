@@ -25,6 +25,7 @@ import {
 } from "@/content/categories";
 import { getFromPrice } from "@/content/pricing";
 import { site } from "@/content/site";
+import { tradePageIsPublishable } from "@/content/trade";
 
 type Props = {
   params: Promise<{ slug: string; item: string }>;
@@ -69,6 +70,14 @@ export default async function ProductPage({ params }: Props) {
     : site.funeralSiteUrl;
   const funeralHandoff =
     category.slug === "funeral-stationery" ? funeralSiteUrl : null;
+
+  // The same page serves two readers with opposite needs. Families go to the
+  // dedicated funeral service; funeral directors go to the trade page, which
+  // only exists as a destination once it has real commitments on it.
+  const tradeHandoff =
+    category.slug === "funeral-stationery" && tradePageIsPublishable
+      ? "/for-funeral-directors"
+      : null;
 
   const WatermarkIcon = item.icon ?? category.icon;
   const heroImage = item.image ?? category.image;
@@ -267,6 +276,27 @@ export default async function ProductPage({ params }: Props) {
                 <Phone size={16} aria-hidden="true" />
                 Prefer to talk? Call {site.phone}
               </a>
+
+              {tradeHandoff && (
+                <div className="mt-5 border-t border-line pt-4">
+                  <p className="text-sm font-bold text-ink">
+                    Are you a funeral director?
+                  </p>
+                  <p className="mt-1 text-sm text-ink-2">
+                    Trade work is handled differently — turnaround, delivery and
+                    accounts are set out on their own page.
+                  </p>
+                  <Button
+                    href={tradeHandoff}
+                    variant="outline"
+                    size="sm"
+                    className="mt-3 w-full"
+                  >
+                    For funeral directors
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="rounded-2xl bg-surface-2 p-6 shadow-card sm:p-8">

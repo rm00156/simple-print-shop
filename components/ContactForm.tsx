@@ -7,7 +7,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
 import { site } from "@/content/site";
-import { contactSchema, contactSubjects, type ContactFormValues } from "@/lib/contact-schema";
+import {
+  contactSchema,
+  contactSubjects,
+  type ContactFormValues,
+  type ContactSubject,
+} from "@/lib/contact-schema";
 import { Button } from "./Button";
 
 type Status = "idle" | "success" | "error" | "rate_limited" | "captcha_failed";
@@ -22,7 +27,20 @@ const inputClasses =
 const labelClasses = "mb-1.5 block text-sm font-semibold text-ink";
 const errorClasses = "mt-1 text-xs text-red-600";
 
-export function ContactForm() {
+export function ContactForm({
+  subject,
+  messageLabel,
+  messagePlaceholder,
+}: {
+  /**
+   * Fixes the subject instead of asking for it. A page that already establishes who
+   * it's addressed to shouldn't make the visitor classify themselves again — and it
+   * keeps the trade enquiries arriving under one consistent subject line.
+   */
+  subject?: ContactSubject;
+  messageLabel?: string;
+  messagePlaceholder?: string;
+} = {}) {
   const [status, setStatus] = useState<Status>("idle");
   const [mountedAt] = useState(() => Date.now());
   const [hasTurnstileToken, setHasTurnstileToken] = useState(false);
@@ -40,7 +58,8 @@ export function ContactForm() {
       email: "",
       phone: "",
       // Empty until the user picks — kept invalid so "Subject" stays required.
-      subject: "" as ContactFormValues["subject"],
+      // Unless the page fixed it, in which case there is nothing to pick.
+      subject: subject ?? ("" as ContactFormValues["subject"]),
       message: "",
       company: "",
       ts: mountedAt,
@@ -190,42 +209,46 @@ export function ContactForm() {
         )}
       </div>
 
-      <div className="mt-4">
-        <label htmlFor="subject" className={labelClasses}>
-          Subject <span className="text-red-500">*</span>
-        </label>
-        <select
-          id="subject"
-          defaultValue=""
-          className={inputClasses}
-          aria-invalid={!!errors.subject}
-          aria-describedby={errors.subject ? "subject-error" : undefined}
-          {...register("subject")}
-        >
-          <option value="" disabled>
-            Select a subject…
-          </option>
-          {contactSubjects.map((subject) => (
-            <option key={subject} value={subject}>
-              {subject}
+      {subject ? (
+        <input type="hidden" {...register("subject")} />
+      ) : (
+        <div className="mt-4">
+          <label htmlFor="subject" className={labelClasses}>
+            Subject <span className="text-red-500">*</span>
+          </label>
+          <select
+            id="subject"
+            defaultValue=""
+            className={inputClasses}
+            aria-invalid={!!errors.subject}
+            aria-describedby={errors.subject ? "subject-error" : undefined}
+            {...register("subject")}
+          >
+            <option value="" disabled>
+              Select a subject…
             </option>
-          ))}
-        </select>
-        {errors.subject && (
-          <p id="subject-error" className={errorClasses}>
-            {errors.subject.message}
-          </p>
-        )}
-      </div>
+            {contactSubjects.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          {errors.subject && (
+            <p id="subject-error" className={errorClasses}>
+              {errors.subject.message}
+            </p>
+          )}
+        </div>
+      )}
 
       <div className="mt-4">
         <label htmlFor="message" className={labelClasses}>
-          Message <span className="text-red-500">*</span>
+          {messageLabel ?? "Message"} <span className="text-red-500">*</span>
         </label>
         <textarea
           id="message"
           rows={6}
-          placeholder="How can we help you?"
+          placeholder={messagePlaceholder ?? "How can we help you?"}
           className={clsx(inputClasses, "h-auto resize-none py-2.5")}
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "message-error" : undefined}

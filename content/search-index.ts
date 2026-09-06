@@ -1,5 +1,6 @@
 import { categories, slugifyItemName } from "./categories";
 import { services } from "./services";
+import { tradePageIsPublishable } from "./trade";
 
 export type SearchKind = "product" | "category" | "service" | "page";
 
@@ -160,6 +161,33 @@ const pageDocs: SearchDoc[] = [
     href: "/cookies",
     keywords: ["cookies", "tracking", "consent"],
   },
+  // Held back until the trade page has its answers — same flag as the noindex,
+  // the sitemap and the footer column. Keywords cover both what a funeral
+  // director calls themselves and what they'd search for wanting a supplier.
+  ...(tradePageIsPublishable
+    ? [
+        {
+          id: "page:/for-funeral-directors",
+          kind: "page" as const,
+          title: "For funeral directors",
+          subtitle:
+            "Trade printing for independent funeral directors — orders of service, memorial cards and photo tributes.",
+          href: "/for-funeral-directors",
+          keywords: [
+            "funeral director",
+            "funeral directors",
+            "trade",
+            "trade printing",
+            "trade account",
+            "account",
+            "credit terms",
+            "wholesale",
+            "undertaker",
+            "orders of service trade",
+          ],
+        },
+      ]
+    : []),
 ];
 
 /*
