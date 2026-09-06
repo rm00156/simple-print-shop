@@ -6,6 +6,11 @@ export const contactSubjects = [
   "Request a quote",
   "Existing order",
   "Artwork & design",
+  // Set automatically by the /for-funeral-directors form, and offered here so a
+  // director who lands on /contact instead can still route themselves to trade.
+  // It reaches the inbox in the email subject line, so trade enquiries are
+  // distinguishable from family ones at a glance.
+  "Funeral director — trade enquiry",
   "Something else",
 ] as const;
 

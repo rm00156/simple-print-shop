@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { categories, slugifyItemName } from "@/content/categories";
 import { services } from "@/content/services";
+import { tradePageIsPublishable } from "@/content/trade";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -19,6 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
     "/cookies",
     "/shipping",
+    // Held back until every trade commitment in content/trade.ts is a real answer;
+    // the page is noindexed over the same condition.
+    ...(tradePageIsPublishable ? ["/for-funeral-directors"] : []),
   ].map((path) => ({
     url: `${siteUrl}${path}`,
     lastModified,
