@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Quicksand } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { site, siteUrl } from "@/content/site";
@@ -7,9 +7,17 @@ import "./globals.css";
 
 // Quicksand is a variable font (300–700), so no explicit weight list is needed.
 // It drives both body and display type, per the Stitch "Azure Horizon" mockup.
-const quicksand = Quicksand({
+//
+// Self-hosted rather than fetched via next/font/google: that helper downloads from
+// fonts.googleapis.com at build time and hard-errors if the request fails, which
+// would let a Google outage break a deploy. This is the latin subset Next was
+// already emitting and preloading, so glyph coverage is unchanged.
+const quicksand = localFont({
+  src: "./fonts/quicksand-latin-variable.woff2",
   variable: "--font-quicksand",
-  subsets: ["latin"],
+  weight: "300 700",
+  style: "normal",
+  display: "swap",
 });
 
 // Both place names the unit is findable under, kept under ~60 characters so search
