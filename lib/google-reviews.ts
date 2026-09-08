@@ -40,7 +40,10 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData | null> {
         "X-Goog-FieldMask":
           "rating,userRatingCount,reviews.rating,reviews.text,reviews.authorAttribution,reviews.relativePublishTimeDescription",
       },
-      next: { revalidate: 60 * 60 * 24 }, // 24h — reviews change infrequently
+      // Reviews change infrequently. On a server this revalidates daily; under the
+      // static export this whole call happens once at build time and the option is
+      // inert, so a deploy is what refreshes them.
+      next: { revalidate: 60 * 60 * 24 },
     });
 
     if (!res.ok) {
