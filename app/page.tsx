@@ -56,7 +56,7 @@ export default async function Home() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           className="absolute inset-0 -z-20 size-full object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-primary-900/65" />

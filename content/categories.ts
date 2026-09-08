@@ -183,7 +183,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Custom sizes", "Fast turnaround"],
-        image: "/compliment.png",
+        image: "/compliment.webp",
       },
       {
         name: "Personal stationery",
@@ -210,7 +210,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Premium paper", "Personalised"],
-        image: "/personal.png",
+        image: "/personal.webp",
       },
       {
         name: "Labels",
@@ -357,7 +357,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Folded options", "Bulk pricing"],
-        image: "/leaflet.png",
+        image: "/leaflet.webp",
       },
       {
         name: "Invitations",
@@ -382,7 +382,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Custom wording", "Premium card"],
-        image: "/invitation.png",
+        image: "/invitation.webp",
       },
       {
         name: "Save the dates",
@@ -407,7 +407,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Postcard format", "Fast turnaround"],
-        image: "/save.jpg",
+        image: "/save.webp",
       },
       {
         name: "RSVP cards",
@@ -432,7 +432,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Matching sets", "Custom sizes"],
-        image: "/rsvp.png",
+        image: "/rsvp.webp",
       },
       {
         name: "Postcards",
@@ -553,7 +553,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Full colour", "Multiple page counts"],
-        image: "/catalogue.png",
+        image: "/catalogue.webp",
       },
       {
         name: "Brochures",
@@ -579,7 +579,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Tri-fold or bi-fold", "Gloss finish"],
-        image: "/brochure.png",
+        image: "/brochure.webp",
       },
       {
         name: "Manuals",
@@ -604,7 +604,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Spiral or comb bound", "Durable covers"],
-        image: "/manual.png",
+        image: "/manual.webp",
       },
       {
         name: "Reports",
@@ -629,7 +629,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Professional finish", "Colour or mono"],
-        image: "/report.png",
+        image: "/report.webp",
       },
       {
         name: "Programmes",
@@ -654,7 +654,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Event-ready", "Fast turnaround"],
-        image: "/programme.png",
+        image: "/programme.webp",
       },
       {
         name: "Folded leaflets",
@@ -679,7 +679,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Custom folds", "Bulk runs"],
-        image: "/leaflet.png",
+        image: "/leaflet.webp",
       },
       {
         name: "Presentation packs",
@@ -704,7 +704,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Branded folders", "Custom inserts"],
-        image: "/presentation.png",
+        image: "/presentation.webp",
       },
     ],
     cta: { label: "Request a quote", href: "/quote" },
@@ -826,7 +826,7 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Laminated options", "Custom sizes"],
-        image: "/menu.png",
+        image: "/menu.webp",
       },
       {
         name: "Stickers",
