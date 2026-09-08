@@ -1,0 +1,48 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bluwave",
+  "main": "worker/index.ts",
+
+  // >= 2025-04-01 enables nodejs_compat_populate_process_env, which is what lets the
+  // shared handlers in lib/ keep reading process.env exactly as they do on Vercel.
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+
+    // Matches Next's default trailing-slash behaviour and therefore the URL shape
+    // already indexed from Vercel: /about serves about.html, /about/ redirects to
+    // /about. Do not change this without re-checking every indexed URL.
+    "html_handling": "auto-trailing-slash",
+
+    // Serves out/404.html (from app/not-found.tsx) with a real 404 status, entirely
+    // in the asset layer. The long tail of bot scans therefore costs no Worker
+    // invocations at all.
+    "not_found_handling": "404-page",
+
+    // MANDATORY. Assets are matched before the Worker by default, so without this
+    // not_found_handling would answer /api/* with 404.html and the forms would fail
+    // with a generic error before this script ever ran.
+    //
+    // Never set this to `true`. That would route every page view through the Worker
+    // and bill them against the 100k/day free limit, instead of being served as
+    // unmetered static assets. The whole cost model of this setup depends on it
+    // staying scoped to the two API paths.
+    "run_worker_first": ["/api/*"]
+  },
+
+  "observability": { "enabled": true },
+
+  // Replaces the in-process Map the route handlers used on Vercel. Worker isolates
+  // are ephemeral and per-location, so a Map there would look like protection while
+  // providing almost none. `period` accepts only 10 or 60.
+  "ratelimits": [
+    {
+      "name": "FORM_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 3, "period": 60 }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+# Legacy URLs from the pre-Next static site.
+#
+# These were `redirects()` in next.config.ts, which static export ignores. Cloudflare
+# applies redirects ahead of asset matching, so these win over the built-in .html
+# handling and return a proper 301 rather than its 307.
+#
+# The old config also had a `/:path*.html` catch-all sending everything else to `/`.
+# That CANNOT be expressed here: a splat may only appear at the end of the source
+# path. Do not try `/:page.html /` as a substitute — Cloudflare splits the source on
+# `/` and reads a leading `:` as a whole-segment placeholder, so that rule would match
+# `/about` and 301 it to the homepage.
+#
+# Unmatched legacy .html URLs now return a genuine 404, which Google treats better
+# than a blanket redirect to the homepage (it classifies those as soft 404s anyway).
+#
+# TODO: add any remaining legacy URLs still receiving traffic. Source them from
+# Search Console's Pages report, the old host's access logs, or:
+#   web.archive.org/cdx/search/cdx?url=<domain>/*&output=text&fl=original&collapse=urlkey
+# There is room for 2,000 static rules, so enumerate generously.
+
+/contact.html          /contact   301
+/free_quotation.html   /quote     301
+/prices_delivery.html  /shipping  301
+/about.html            /about     301
+/services.html         /services  301
+/index.html            /          301

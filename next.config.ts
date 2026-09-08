@@ -17,44 +17,24 @@ if (
 }
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    return [
-      // Legacy static-site pages with a clear equivalent on the new site.
-      {
-        source: "/contact.html",
-        destination: "/contact",
-        permanent: true,
-      },
-      {
-        source: "/free_quotation.html",
-        destination: "/quote",
-        permanent: true,
-      },
-      {
-        source: "/prices_delivery.html",
-        destination: "/shipping",
-        permanent: true,
-      },
-      {
-        source: "/about.html",
-        destination: "/about",
-        permanent: true,
-      },
-      {
-        source: "/services.html",
-        destination: "/services",
-        permanent: true,
-      },
-      {
-        // Catch-all for remaining legacy pages (e.g. /artwork_specs.html)
-        // that have no equivalent on the new site — send them home.
-        source: "/:path*.html",
-        destination: "/",
-        permanent: true,
-      },
-    ];
-  },
+  // Build to plain HTML in out/, served by Cloudflare's static assets. Page views
+  // then cost nothing and never invoke the Worker, which is what keeps this on the
+  // free tier no matter how much traffic the site gets.
+  output: "export",
+
+  // Trailing-slash behaviour is deliberately left at the default. Cloudflare's
+  // auto-trailing-slash asset handling matches it exactly (/about serves about.html,
+  // /about/ redirects to /about), so every URL already indexed from Vercel keeps
+  // working. Turning this on would change all of them.
+
   images: {
+    // Cloudflare has no image optimiser, and paying for one defeats the point of the
+    // move. next/image now emits a plain img tag, so what is in public/ is what the
+    // visitor downloads — which is why those files were resized and re-encoded first.
+    unoptimized: true,
+
+    // Inert under `unoptimized`, but harmless, and still documents where the Google
+    // review avatars come from.
     remotePatterns: [
       {
         protocol: "https",
