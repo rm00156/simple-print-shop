@@ -52,6 +52,13 @@ export function SearchBox({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // `autoFocus` can flip from false to true after mount: the search page only knows
+  // whether to take focus once it has read ?q= from the URL on the client. React's
+  // autoFocus attribute only applies on the initial render, so focus imperatively.
+  useEffect(() => {
+    if (autoFocus) inputRef.current?.focus();
+  }, [autoFocus]);
   const listboxId = useId();
   const optionId = (index: number) => `${listboxId}-option-${index}`;
 

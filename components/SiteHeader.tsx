@@ -19,6 +19,11 @@ export function SiteHeader() {
   // toggle that reveals a full-width row underneath.
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
+
+  // The search page has its own large, autofocused input. A second box in the header
+  // is redundant there, and worse: submitting it changes the URL without remounting
+  // the results, which under static export would leave the query silently ignored.
+  const onSearchPage = pathname === "/search";
   const [prevPathname, setPrevPathname] = useState(pathname);
   const panelId = useId();
   const searchRowId = useId();
@@ -115,13 +120,16 @@ export function SiteHeader() {
           <div className="flex min-w-0 flex-1 items-center justify-end gap-4">
             {/* Inline from md up, where there's room; min-w-0 lets it shrink
               before anything else in the bar wraps. */}
-            <div className="hidden min-w-0 flex-1 justify-end md:flex">
-              <SearchBox className="w-full max-w-[14rem] xl:max-w-[16rem]" />
-            </div>
+            {!onSearchPage && (
+              <div className="hidden min-w-0 flex-1 justify-end md:flex">
+                <SearchBox className="w-full max-w-[14rem] xl:max-w-[16rem]" />
+              </div>
+            )}
 
             <div className="flex items-center gap-3 sm:gap-4">
               <button
                 type="button"
+                hidden={onSearchPage}
                 aria-expanded={searchOpen}
                 aria-controls={searchRowId}
                 aria-label={searchOpen ? "Close search" : "Open search"}
@@ -193,7 +201,7 @@ export function SiteHeader() {
 
       {/* Rendered on demand rather than height-animated, so autoFocus fires
           and the keyboard opens on the tap that revealed it. */}
-      {searchOpen && (
+      {searchOpen && !onSearchPage && (
         <div
           id={searchRowId}
           className="border-b border-line bg-surface-2 px-4 pb-3 sm:px-6 md:hidden"
@@ -212,9 +220,11 @@ export function SiteHeader() {
       >
         <nav className="flex flex-col px-4 py-2 sm:px-5">
           {/* Only below md — from md up the bar already has an inline input. */}
-          <div className="border-b border-line py-3 md:hidden">
-            <SearchBox onNavigate={() => setOpen(false)} />
-          </div>
+          {!onSearchPage && (
+            <div className="border-b border-line py-3 md:hidden">
+              <SearchBox onNavigate={() => setOpen(false)} />
+            </div>
+          )}
 
           {navLinks.map((link) =>
             link.children ? (
