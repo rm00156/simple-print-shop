@@ -1,6 +1,7 @@
 import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { CurrentYear } from "@/components/CurrentYear";
 import { site, footerColumns } from "@/content/site";
 
 function FacebookIcon({ className }: { className?: string }) {
@@ -74,7 +75,7 @@ export function SiteFooter() {
 
       <div className="mt-10 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-ink-3">
-          &copy; {new Date().getFullYear()} {site.name} Ltd. All rights reserved. Built by Thintent.
+          &copy; <CurrentYear fallback={new Date().getFullYear()} /> {site.name} Ltd. All rights reserved. Built by Thintent.
         </p>
 
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-ink-2">

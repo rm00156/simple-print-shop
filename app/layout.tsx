@@ -17,12 +17,6 @@ const quicksand = Quicksand({
 // results don't truncate it. Used for the document, OG and Twitter titles alike.
 const siteTitle = "Bluwave — print shop in Lower Sydenham & Beckenham";
 
-// Without this, fully static routes (no dynamic data) prerender once at build time and
-// SiteFooter's `new Date().getFullYear()` would freeze at that year until the next deploy.
-// Must be a literal number, not an expression — this Next.js version's static config
-// extractor only evaluates numeric literals for segment config exports.
-export const revalidate = 86400;
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
