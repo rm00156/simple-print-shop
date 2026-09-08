@@ -12,7 +12,7 @@ const logos: {
   },
   {
     name: "Macmillan Cancer Support",
-    image: { src: "/macmillan.png", width: 1000, height: 564 },
+    image: { src: "/macmillan.webp", width: 1000, height: 564 },
   },
   {
     name: "Marie Curie",

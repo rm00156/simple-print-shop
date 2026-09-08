@@ -35,7 +35,7 @@ export const services: Service[] = [
     description:
       "Free design quotations and artwork checks, so your job is print-ready first time.",
     icon: Palette,
-    image: "/design.jpg",
+    image: "/design.webp",
     intro:
       "Free design quotations and artwork checks, so your job is print-ready first time. Our in-house designers can take you from a rough idea to finished artwork, or simply check and tidy the files you already have.",
     overview: [
@@ -81,7 +81,7 @@ export const services: Service[] = [
     description:
       "Full-colour digital printing with a fast 24-48hr turnaround as standard.",
     icon: Printer,
-    image: "/digital.jpg",
+    image: "/digital.webp",
     intro:
       "Full-colour digital printing with a fast 24-48hr turnaround as standard. Ideal for short and medium runs, last-minute jobs and anything where you need it right, and you need it quickly.",
     overview: [
@@ -132,7 +132,7 @@ export const services: Service[] = [
     description:
       "Litho printing for larger runs, premium stocks and spot colours.",
     icon: Layers,
-    image: "/litho.jpg",
+    image: "/litho.webp",
     intro:
       "Litho printing for larger runs, premium stocks and spot colours. When quality and consistency across thousands of copies matter, litho gives you the sharpest and most economical result.",
     overview: [
@@ -178,7 +178,7 @@ export const services: Service[] = [
     description:
       "Folding, stapling, perfect binding and other finishing done in-house.",
     icon: Scissors,
-    image: "/finish.jpg",
+    image: "/finish.webp",
     intro:
       "Folding, stapling, perfect binding and other finishing done in-house. These are the final touches that turn printed sheets into a professional, ready-to-use product.",
     overview: [
@@ -257,7 +257,7 @@ export const services: Service[] = [
   {
     slug: "delivery",
     name: "Delivery & Fulfilment",
-    image: "/delivery.png",
+    image: "/delivery.webp",
     description:
       "Free collection from our premises, delivery arranged across south east London and nationwide, plus storage and fulfilment.",
     icon: Truck,

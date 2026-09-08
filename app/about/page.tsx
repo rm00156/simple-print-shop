@@ -32,7 +32,7 @@ const capabilities = [
     title: "Creative Design",
     description:
       "No artwork? Our in-house team works from a brief, a logo or a scribble on a napkin. Send print-ready files instead and we check them free — low-res images, missing fonts, RGB colour — before they cost you a reprint.",
-    image: "/design.jpg",
+    image: "/design.webp",
   },
 ];
 
