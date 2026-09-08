@@ -57,6 +57,18 @@ export async function isRateLimited(
     return !success;
   }
 
+  // An `env` was passed, so we are in the Worker, but the binding is missing. Falling
+  // through to the Map below would be worse than useless: isolates are ephemeral and
+  // per-location, so it would silently allow far more than the configured limit while
+  // looking like it worked. Say so loudly instead — this is the only signal that the
+  // deployed Worker lost its rate-limit binding.
+  if (env) {
+    console.error(
+      "FORM_LIMITER binding missing on the Worker — form rate limiting is NOT active. " +
+        "Check the ratelimits block in wrangler.jsonc reached the deployment.",
+    );
+  }
+
   const now = Date.now();
 
   // Evict expired entries so `hits` doesn't grow unbounded over the process lifetime.
