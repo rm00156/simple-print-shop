@@ -1,3 +1,5 @@
+import { readConfig, type ConfigSource } from "@/lib/runtime-config";
+
 const VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
 type SiteverifyResponse = {
@@ -9,8 +11,12 @@ export type TurnstileVerifyResult =
   | { ok: true }
   | { ok: false; reason: "config_error" | "verify_failed" | "verify_request_failed" };
 
-export async function verifyTurnstileToken(token: string, remoteIp: string): Promise<TurnstileVerifyResult> {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
+export async function verifyTurnstileToken(
+  token: string,
+  remoteIp: string,
+  env?: ConfigSource,
+): Promise<TurnstileVerifyResult> {
+  const secret = readConfig("TURNSTILE_SECRET_KEY", env);
   if (!secret) {
     console.error("Turnstile verification skipped: TURNSTILE_SECRET_KEY is not set");
     return { ok: false, reason: "config_error" };

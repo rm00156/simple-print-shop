@@ -6,6 +6,8 @@ export interface Env {
   ASSETS: Fetcher;
   /** Per-IP form submission limiter. Declared in wrangler.jsonc. */
   FORM_LIMITER: { limit(options: { key: string }): Promise<{ success: boolean }> };
+  /** Vars and secrets arrive on this same object, not reliably on process.env. */
+  [key: string]: unknown;
 }
 
 const API_ROUTES: Record<string, (request: Request, env: Env) => Promise<Response>> = {
@@ -25,12 +27,15 @@ function diagnostics(env: Env): Response {
   ];
   const seen: Record<string, boolean> = {};
   for (const key of expected) seen[key] = Boolean(process.env?.[key]);
+  const seenOnEnv: Record<string, boolean> = {};
+  for (const key of expected) seenOnEnv[key] = typeof env[key] === "string";
 
   return Response.json({
     processEnvExists: typeof process !== "undefined" && Boolean(process.env),
     processEnvKeyCount: process?.env ? Object.keys(process.env).length : 0,
     processEnvKeyNames: process?.env ? Object.keys(process.env).sort() : [],
     secretsVisibleViaProcessEnv: seen,
+    secretsVisibleOnEnvBinding: seenOnEnv,
     formLimiterBindingPresent: Boolean(env.FORM_LIMITER),
     assetsBindingPresent: Boolean(env.ASSETS),
     envKeyNames: Object.keys(env as unknown as Record<string, unknown>).sort(),

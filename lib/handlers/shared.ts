@@ -6,14 +6,17 @@
  * imported by a client component — it would pull `resend` into the browser bundle.
  */
 
+export { readConfig } from "@/lib/runtime-config";
+
 /**
- * Runtime bindings a handler may be given. There are none on Vercel or in
+ * Runtime bindings a handler may be given. Cloudflare puts vars and secrets on the
+ * same object as the bindings, which is why this is widened to any string key. There are none on Vercel or in
  * `next dev`, so the in-process fallbacks below apply. The Cloudflare Worker
  * passes its bindings through and they take over.
  */
 export type HandlerEnv = {
   FORM_LIMITER?: { limit(options: { key: string }): Promise<{ success: boolean }> };
-};
+} & Record<string, unknown>;
 
 export const MIN_FILL_TIME_MS = 3000;
 
