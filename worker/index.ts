@@ -18,6 +18,20 @@ const API_ROUTES: Record<string, (request: Request, env: Env) => Promise<Respons
 // TEMPORARY — remove before the custom domain is live. Reports which bindings and
 // environment keys the deployed Worker can actually see. Returns booleans only:
 // never a value, and the key names themselves are already public in .env.example.
+// TEMPORARY — remove with the rest of the diagnostics. Calls the rate limiter
+// several times under one key and reports what it returns, which is the only way to
+// tell "binding absent" from "binding present but not enforcing".
+async function probeRateLimiter(env: Env, request: Request) {
+  if (!env.FORM_LIMITER) return { present: false as const };
+  const key = `probe:${request.headers.get("cf-connecting-ip") ?? "unknown"}`;
+  const results: boolean[] = [];
+  for (let i = 0; i < 6; i++) {
+    const { success } = await env.FORM_LIMITER.limit({ key });
+    results.push(success);
+  }
+  return { present: true as const, key, successPerCall: results };
+}
+
 function diagnostics(env: Env): Response {
   const expected = [
     "RESEND_API_KEY",
@@ -47,6 +61,12 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/_diag") return diagnostics(env);
+    if (url.pathname === "/api/_diag/ratelimit") {
+      return Response.json({
+        clientIpHeaderPresent: Boolean(request.headers.get("cf-connecting-ip")),
+        ...(await probeRateLimiter(env, request)),
+      });
+    }
 
     const handler = API_ROUTES[url.pathname];
 
