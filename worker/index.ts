@@ -13,9 +13,36 @@ const API_ROUTES: Record<string, (request: Request, env: Env) => Promise<Respons
   "/api/contact": handleContact,
 };
 
+// TEMPORARY — remove before the custom domain is live. Reports which bindings and
+// environment keys the deployed Worker can actually see. Returns booleans only:
+// never a value, and the key names themselves are already public in .env.example.
+function diagnostics(env: Env): Response {
+  const expected = [
+    "RESEND_API_KEY",
+    "TURNSTILE_SECRET_KEY",
+    "QUOTE_TO_EMAIL",
+    "QUOTE_FROM_EMAIL",
+  ];
+  const seen: Record<string, boolean> = {};
+  for (const key of expected) seen[key] = Boolean(process.env?.[key]);
+
+  return Response.json({
+    processEnvExists: typeof process !== "undefined" && Boolean(process.env),
+    processEnvKeyCount: process?.env ? Object.keys(process.env).length : 0,
+    processEnvKeyNames: process?.env ? Object.keys(process.env).sort() : [],
+    secretsVisibleViaProcessEnv: seen,
+    formLimiterBindingPresent: Boolean(env.FORM_LIMITER),
+    assetsBindingPresent: Boolean(env.ASSETS),
+    envKeyNames: Object.keys(env as unknown as Record<string, unknown>).sort(),
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname === "/api/_diag") return diagnostics(env);
+
     const handler = API_ROUTES[url.pathname];
 
     if (handler) {
