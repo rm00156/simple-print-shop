@@ -44,9 +44,18 @@ export function clientIp(request: Request): string {
  * the separate per-route Maps this replaced.
  *
  * The in-process Map is a fallback for environments with no rate-limit binding.
- * It is per-process and therefore best-effort by nature. In the Worker the
- * FORM_LIMITER binding does the real work, because isolates are ephemeral and
- * per-location so a Map there would protect almost nothing.
+ * It is per-process and therefore best-effort by nature.
+ *
+ * The Worker's FORM_LIMITER binding is better but still not a hard limit. Measured
+ * on the deployed Worker: within one invocation it counts accurately, but across
+ * separate requests the counter propagates with enough lag that a small burst gets
+ * through, and it only catches up under sustained load. Cloudflare documents it as
+ * "permissive, eventually consistent, and intentionally designed to not be used as
+ * an accurate accounting system", which matches what we saw.
+ *
+ * So treat this as defence in depth, not the control. Turnstile, the honeypot and
+ * the time trap are what actually stop bots, and a WAF rate-limiting rule on
+ * /api/* is the enforcement layer for volumetric abuse.
  */
 export async function isRateLimited(
   bucket: string,
