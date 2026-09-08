@@ -1,5 +1,21 @@
 import type { NextConfig } from "next";
 
+// content/site.ts, app/robots.ts and app/sitemap.ts all fall back to localhost when
+// this is unset. That fallback is invisible in the page itself but poisons every
+// canonical, every OG image URL, the sitemap link in robots.txt and all ~84 sitemap
+// entries. Failing the build is much cheaper than finding it in Search Console.
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+if (
+  process.env.NODE_ENV === "production" &&
+  (!configuredSiteUrl || configuredSiteUrl.includes("localhost"))
+) {
+  throw new Error(
+    `NEXT_PUBLIC_SITE_URL must be the production origin for a production build (got: ${
+      configuredSiteUrl ?? "unset"
+    })`,
+  );
+}
+
 const nextConfig: NextConfig = {
   async redirects() {
     return [

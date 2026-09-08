@@ -32,23 +32,33 @@ const POPULAR = [
 ];
 
 type Props = {
-  initialQuery: string;
   categoryLinks: { href: string; label: string }[];
 };
 
-export function SearchResults({ initialQuery, categoryLinks }: Props) {
-  const [query, setQuery] = useState(initialQuery);
+export function SearchResults({ categoryLinks }: Props) {
+  const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
 
-  // Adopt a query pushed in from the URL, e.g. on back/forward navigation.
-  const [prevInitialQuery, setPrevInitialQuery] = useState(initialQuery);
-  if (initialQuery !== prevInitialQuery) {
-    setPrevInitialQuery(initialQuery);
-    setQuery(initialQuery);
-  }
+  // `null` until the URL has been read on the client. The prerendered HTML and the
+  // first client render both see `null`, so there is no hydration mismatch, and the
+  // branches below that would otherwise flash the wrong state stay gated on it.
+  const [urlQuery, setUrlQuery] = useState<string | null>(null);
 
-  // Matching is synchronous, so the server render already contains the
-  // results for ?q= — they're in the initial HTML, not added on hydration.
+  // Read ?q= on mount, and again on back/forward. popstate is the only way the URL
+  // can change under us: the replaceState below deliberately does not fire it, which
+  // is what stops this from feeding back into itself on every keystroke.
+  useEffect(() => {
+    function adopt() {
+      const q = new URLSearchParams(window.location.search).get("q") ?? "";
+      setUrlQuery(q);
+      setQuery(q);
+    }
+    adopt();
+    window.addEventListener("popstate", adopt);
+    return () => window.removeEventListener("popstate", adopt);
+  }, []);
+
+  // Matching is synchronous and runs entirely in the browser.
   const results = useMemo(() => searchDocs(query), [query]);
 
   const tokens = useMemo(() => tokenise(query), [query]);
@@ -81,12 +91,15 @@ export function SearchResults({ initialQuery, categoryLinks }: Props) {
     which would re-render this dynamic route on every character.
   */
   useEffect(() => {
+    // Held back until the URL has been read, or the mount pass would overwrite an
+    // incoming ?q= with the empty initial state before `adopt` has run.
+    if (urlQuery === null) return;
     const trimmed = query.trim();
     const url = trimmed ? `/search?q=${encodeURIComponent(trimmed)}` : "/search";
     if (window.location.pathname + window.location.search !== url) {
       window.history.replaceState(null, "", url);
     }
-  }, [query]);
+  }, [query, urlQuery]);
 
   const hasQuery = query.trim().length > 0;
 
@@ -96,7 +109,7 @@ export function SearchResults({ initialQuery, categoryLinks }: Props) {
         <SearchBox
           variant="page"
           initialQuery={query}
-          autoFocus={!initialQuery}
+          autoFocus={urlQuery === ""}
           onQueryChange={setQuery}
           placeholder="e.g. business cards, roller banners, scanning…"
         />
@@ -179,7 +192,7 @@ export function SearchResults({ initialQuery, categoryLinks }: Props) {
         </div>
       )}
 
-      {!hasQuery && (
+      {urlQuery !== null && !hasQuery && (
         <div className="mx-auto mt-10 max-w-3xl">
           <h2 className="text-sm font-bold uppercase tracking-wide text-ink-3">
             Popular searches

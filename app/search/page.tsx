@@ -11,14 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/search" },
 };
 
-type Props = {
-  searchParams: Promise<{ q?: string | string[] }>;
-};
-
-export default async function SearchPage({ searchParams }: Props) {
-  const { q } = await searchParams;
-  const query = (Array.isArray(q) ? q[0] : q) ?? "";
-
+export default function SearchPage() {
   const categoryLinks = categories.map((category) => ({
     href: `/products/${category.slug}`,
     label: category.name,
@@ -38,9 +31,9 @@ export default async function SearchPage({ searchParams }: Props) {
         </div>
       </section>
 
-      {/* Matched on the server, so results are in the initial HTML rather
-          than appearing only after hydration. */}
-      <SearchResults initialQuery={query} categoryLinks={categoryLinks} />
+      {/* Matched on the client: under `output: "export"` there is no server to
+          read ?q=, so SearchResults reads it from the URL on mount. */}
+      <SearchResults categoryLinks={categoryLinks} />
     </>
   );
 }

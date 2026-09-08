@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Quicksand } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
+import localFont from "next/font/local";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { site, siteUrl } from "@/content/site";
@@ -8,20 +7,22 @@ import "./globals.css";
 
 // Quicksand is a variable font (300–700), so no explicit weight list is needed.
 // It drives both body and display type, per the Stitch "Azure Horizon" mockup.
-const quicksand = Quicksand({
+//
+// Self-hosted rather than fetched via next/font/google: that helper downloads from
+// fonts.googleapis.com at build time and hard-errors if the request fails, which
+// would let a Google outage break a deploy. This is the latin subset Next was
+// already emitting and preloading, so glyph coverage is unchanged.
+const quicksand = localFont({
+  src: "./fonts/quicksand-latin-variable.woff2",
   variable: "--font-quicksand",
-  subsets: ["latin"],
+  weight: "300 700",
+  style: "normal",
+  display: "swap",
 });
 
 // Both place names the unit is findable under, kept under ~60 characters so search
 // results don't truncate it. Used for the document, OG and Twitter titles alike.
 const siteTitle = "Bluwave — print shop in Lower Sydenham & Beckenham";
-
-// Without this, fully static routes (no dynamic data) prerender once at build time and
-// SiteFooter's `new Date().getFullYear()` would freeze at that year until the next deploy.
-// Must be a literal number, not an expression — this Next.js version's static config
-// extractor only evaluates numeric literals for segment config exports.
-export const revalidate = 86400;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -122,7 +123,6 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
-        <Analytics />
       </body>
     </html>
   );
