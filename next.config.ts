@@ -16,6 +16,20 @@ if (
   );
 }
 
+// A Turnstile site key is public and ~24 characters; a secret key is ~35 and must
+// never reach the browser. Pasting the secret into this variable compiles it into
+// the client bundle, serves it publicly, and breaks every form, because the widget
+// then mints tokens the server cannot validate. That happened once during the
+// Cloudflare setup and cost an afternoon, so it fails the build now.
+const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+if (process.env.NODE_ENV === "production" && turnstileSiteKey && turnstileSiteKey.length > 30) {
+  throw new Error(
+    `NEXT_PUBLIC_TURNSTILE_SITE_KEY looks like a Turnstile SECRET key (${turnstileSiteKey.length} chars). ` +
+      "The site key is the short, public one (~24 chars). Putting the secret here would " +
+      "publish it in the browser bundle and make every form submission fail verification.",
+  );
+}
+
 const nextConfig: NextConfig = {
   // Build to plain HTML in out/, served by Cloudflare's static assets. Page views
   // then cost nothing and never invoke the Worker, which is what keeps this on the
