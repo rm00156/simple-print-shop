@@ -42,6 +42,10 @@ const subscribeToToday = () => () => {};
 const getTodaySnapshot = () => toIsoDate(new Date());
 const getServerToday = () => null;
 
+// Axes that exist only because a product prices on them — unlike sides and size,
+// which the form asks about whether or not there's a pricing matrix behind them.
+const PRICING_ONLY_AXES = ["stock", "pages"] as const;
+
 const ARTWORK_OPTIONS: { value: "unsure" | "ready" | "date" | "design"; label: string }[] = [
   { value: "unsure", label: "Not sure yet" },
   { value: "ready", label: "It\u2019s print-ready now" },
@@ -189,9 +193,23 @@ export function QuoteForm({
     if (resetForProductRef.current === productSlug) return;
     resetForProductRef.current = productSlug;
     const newPricing = pricingCatalog[productSlug];
+    // Stock and page count only exist as fields while a product prices on them, so
+    // drop the outgoing product's answers rather than carrying e.g. a flyer stock
+    // into a poster enquiry.
+    for (const field of PRICING_ONLY_AXES) {
+      setValue(field, undefined, { shouldValidate: false });
+    }
     if (newPricing) {
       const axisDefaults = defaultAxisValues(newPricing);
       for (const axis of newPricing.axes) {
+        // Cleared before it's set, which is load-bearing rather than belt-and-braces:
+        // `setValue` only tells `useWatch` about a value that actually changed, and a
+        // <select> mounting for an axis the previous product didn't have has already
+        // had its first option silently adopted into form state by `register`. Writing
+        // that same option back would be a no-op, leaving the watched copy stuck at
+        // undefined — which makes every price row miss on that axis, so the product
+        // shows no quantities to pick from and the field blanks out.
+        setValue(axis.field, undefined as never, { shouldValidate: false });
         setValue(axis.field, axisDefaults[axis.field] as never, { shouldValidate: false });
       }
       if (newPricing.fixedSize) {
@@ -215,14 +233,21 @@ export function QuoteForm({
   // as axes change; the exact figure the customer wants goes in "Tell us more".
   useEffect(() => {
     if (!pricing) return;
+    const qtys = getAvailableQuantities(pricing, { sides, size, stock, pages });
+    // Nothing priced at all for these axes doesn't mean "this quantity is
+    // unavailable" — it means the axis values aren't this product's yet, because a
+    // product switch has landed here before the effect above applied the new
+    // product's defaults. Waiting for that leaves the quantity to the effect that
+    // actually knows it; clamping on this pass would write the NaN that "no
+    // quantities" implies and blank the field for a render.
+    if (qtys.length === 0) return;
     if (customQuantity) {
-      const max = getMaxQuantity(pricing, { sides, size, stock, pages });
+      const max = qtys[qtys.length - 1];
       if (quantity !== max) setValue("quantity", max, { shouldValidate: false });
       return;
     }
-    const qtys = getAvailableQuantities(pricing, { sides, size, stock, pages });
     if (!qtys.includes(quantity)) {
-      setValue("quantity", qtys[0] ?? NaN, { shouldValidate: false });
+      setValue("quantity", qtys[0], { shouldValidate: false });
     }
   }, [pricing, customQuantity, sides, size, stock, pages, quantity, setValue]);
 
