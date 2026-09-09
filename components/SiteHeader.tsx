@@ -15,6 +15,10 @@ export function SiteHeader() {
   const [openMobileSection, setOpenMobileSection] = useState<string | null>(
     null,
   );
+  // Hover-driven, but held in state rather than :hover so navigating away can
+  // close it — otherwise the cursor is still over the panel after a click and
+  // CSS keeps it open on top of the new page.
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   // Below md the bar has no room for an input, so search collapses to a
   // toggle that reveals a full-width row underneath.
   const [searchOpen, setSearchOpen] = useState(false);
@@ -33,20 +37,23 @@ export function SiteHeader() {
     setPrevPathname(pathname);
     setOpen(false);
     setOpenMobileSection(null);
+    setOpenMenu(null);
     setSearchOpen(false);
   }
 
   useEffect(() => {
-    if (!open) return;
+    if (!open && !openMenu) return;
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") {
+      if (e.key !== "Escape") return;
+      setOpenMenu(null);
+      if (open) {
         setOpen(false);
         triggerRef.current?.focus();
       }
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, openMenu]);
 
   const weekdayHours = site.openingHours.display[0];
 
@@ -69,7 +76,18 @@ export function SiteHeader() {
             <nav className="hidden items-center gap-6 text-sm font-semibold whitespace-nowrap xl:flex">
               {navLinks.map((link) =>
                 link.children ? (
-                  <div key={link.href} className="group relative">
+                  <div
+                    key={link.href}
+                    className="relative"
+                    onMouseEnter={() => setOpenMenu(link.href)}
+                    onMouseLeave={() => setOpenMenu(null)}
+                    onFocus={() => setOpenMenu(link.href)}
+                    onBlur={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget)) {
+                        setOpenMenu(null);
+                      }
+                    }}
+                  >
                     <Link
                       href={link.href}
                       className={clsx(
@@ -83,10 +101,20 @@ export function SiteHeader() {
                       <ChevronDown
                         size={14}
                         aria-hidden="true"
-                        className="transition-transform group-hover:rotate-180"
+                        className={clsx(
+                          "transition-transform",
+                          openMenu === link.href && "rotate-180",
+                        )}
                       />
                     </Link>
-                    <div className="invisible absolute left-0 top-full z-20 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                    <div
+                      className={clsx(
+                        "absolute left-0 top-full z-20 pt-2 transition-all",
+                        openMenu === link.href
+                          ? "visible opacity-100"
+                          : "invisible opacity-0",
+                      )}
+                    >
                       <div className="min-w-56 rounded-2xl border border-line bg-surface-1 p-2 shadow-lg">
                         {link.children.map((child) => (
                           <Link
