@@ -55,7 +55,9 @@ export function clientIp(request: Request): string {
  *
  * So treat this as defence in depth, not the control. Turnstile, the honeypot and
  * the time trap are what actually stop bots, and a WAF rate-limiting rule on
- * /api/* is the enforcement layer for volumetric abuse.
+ * /api/* is the enforcement layer for volumetric abuse. That rule is defined in
+ * set-waf-ratelimit.sh at the repo root; it runs in a security phase, ahead of the
+ * Worker, so what it blocks never reaches this function at all.
  */
 export async function isRateLimited(
   bucket: string,

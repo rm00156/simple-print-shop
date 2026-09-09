@@ -1,5 +1,3 @@
-import { createHash } from "node:crypto";
-
 import type { NextConfig } from "next";
 
 // content/site.ts, app/robots.ts and app/sitemap.ts all fall back to localhost when
@@ -18,30 +16,13 @@ if (
   );
 }
 
-// A Turnstile site key is public and ~24 characters; a secret key is ~35 and must
-// never reach the browser. Pasting the secret into this variable compiles it into
-// the client bundle, serves it publicly, and breaks every form, because the widget
-// then mints tokens the server cannot validate. That happened once during the
-// Cloudflare setup and cost an afternoon, so it fails the build now.
-const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-if (process.env.NODE_ENV === "production" && turnstileSiteKey && turnstileSiteKey.length > 30) {
-  // Identify the offending value without printing it: a hash prefix is enough to tell
-  // which key it is when compared locally, and listing the Turnstile-ish variable names
-  // present reveals a duplicate defined somewhere other than the obvious settings page.
-  const digest = createHash("sha256").update(turnstileSiteKey).digest("hex").slice(0, 12);
-  const related = Object.keys(process.env)
-    .filter((k) => k.toUpperCase().includes("TURNSTILE"))
-    .map((k) => `${k}(${(process.env[k] ?? "").length})`)
-    .sort()
-    .join(", ");
-  throw new Error(
-    `NEXT_PUBLIC_TURNSTILE_SITE_KEY looks like a Turnstile SECRET key (${turnstileSiteKey.length} chars). ` +
-      "The site key is the short, public one (~24 chars). Putting the secret here would " +
-      "publish it in the browser bundle and make every form submission fail verification.\n" +
-      `  value fingerprint: ${digest}\n` +
-      `  turnstile-ish vars visible to this build: ${related}`,
-  );
-}
+// The Turnstile site key guard that used to live here has moved to lib/turnstile.ts,
+// along with the key itself. It was guarding NEXT_PUBLIC_TURNSTILE_SITE_KEY, a build
+// variable in the Cloudflare dashboard that kept being filled in with the secret key
+// and failing every build. The key is public and never changes, so it is now a constant
+// in the repo and the build variable is gone entirely — there is no longer a field to
+// get wrong. The length check went with it, so it now validates the value the forms
+// actually use.
 
 const nextConfig: NextConfig = {
   // Build to plain HTML in out/, served by Cloudflare's static assets. Page views

@@ -26,14 +26,10 @@ import {
   workingDaysBetween,
 } from "@/lib/lead-time";
 import { needsSidesField, quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
+import { TURNSTILE_SITE_KEY } from "@/lib/turnstile";
 import { Button } from "./Button";
 
 type Status = "idle" | "success" | "error" | "rate_limited" | "captcha_failed";
-
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
-if (!TURNSTILE_SITE_KEY && process.env.NODE_ENV !== "production") {
-  console.error("NEXT_PUBLIC_TURNSTILE_SITE_KEY is not set — the quote form's captcha will not work.");
-}
 
 const inputClasses =
   "h-11 w-full rounded-token border border-line bg-surface-2 px-3 text-base text-ink transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25 md:h-10 md:text-sm";

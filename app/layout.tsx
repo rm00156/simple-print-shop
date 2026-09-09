@@ -20,6 +20,32 @@ const quicksand = localFont({
   display: "swap",
 });
 
+// Cloudflare Web Analytics. This has to be the manual beacon: the dashboard's
+// automatic JS injection does not work on this site and cannot be made to.
+//
+// Measured after enabling automatic injection and purging the zone cache: every HTML
+// page still came back with zero beacon tags and `cf-cache-status: HIT`, including
+// deep pages that had never been requested by anyone. That HIT comes from the Workers
+// Static Assets layer, which is served ahead of the proxy stage that rewrites HTML, so
+// there is nothing for the injector to modify and a cache purge does not change it.
+// It follows from run_worker_first being scoped to /api/* in wrangler.jsonc — every
+// page is deliberately served straight off the asset layer, which is what keeps page
+// views free, and the same property rules out edge injection.
+//
+// The dashboard is misleading about this. Visits and page views still populate, because
+// those come from edge measurement and need no beacon; only Core Web Vitals depend on
+// it. The tell was 35 visits against an LCP sample count of 1.
+//
+// The token identifies the site and grants nothing — it is public by design, and is
+// served in the HTML of every page regardless. It is inlined here rather than read from
+// a build variable on purpose: a variable has to be set again in every environment that
+// ever builds this site, and forgetting it fails silently, which is the same class of
+// bug as the injection problem above. Inline, it cannot be lost.
+//
+// Gated to production so `next dev` never reports. A local `npm run build` will emit it,
+// which is correct — that output is only ever seen by visitors once it is deployed.
+const CF_BEACON_TOKEN = "e67558a00c8e4203a45a015e4b9c0031";
+
 // Both place names the unit is findable under, kept under ~60 characters so search
 // results don't truncate it. Used for the document, OG and Twitter titles alike.
 const siteTitle = "Bluwave — print shop in Lower Sydenham & Beckenham";
@@ -123,6 +149,17 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        {process.env.NODE_ENV === "production" ? (
+          // type="module" matches the snippet Cloudflare hands out. Module scripts are
+          // deferred by definition, so `defer` changes nothing at runtime — it is here
+          // because @next/next/no-sync-scripts does not know that and fails the build.
+          <script
+            type="module"
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN })}
+          />
+        ) : null}
       </body>
     </html>
   );
