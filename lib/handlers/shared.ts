@@ -6,14 +6,17 @@
  * imported by a client component — it would pull `resend` into the browser bundle.
  */
 
+export { readConfig } from "@/lib/runtime-config";
+
 /**
- * Runtime bindings a handler may be given. There are none on Vercel or in
+ * Runtime bindings a handler may be given. Cloudflare puts vars and secrets on the
+ * same object as the bindings, which is why this is widened to any string key. There are none on Vercel or in
  * `next dev`, so the in-process fallbacks below apply. The Cloudflare Worker
  * passes its bindings through and they take over.
  */
 export type HandlerEnv = {
   FORM_LIMITER?: { limit(options: { key: string }): Promise<{ success: boolean }> };
-};
+} & Record<string, unknown>;
 
 export const MIN_FILL_TIME_MS = 3000;
 
@@ -41,9 +44,18 @@ export function clientIp(request: Request): string {
  * the separate per-route Maps this replaced.
  *
  * The in-process Map is a fallback for environments with no rate-limit binding.
- * It is per-process and therefore best-effort by nature. In the Worker the
- * FORM_LIMITER binding does the real work, because isolates are ephemeral and
- * per-location so a Map there would protect almost nothing.
+ * It is per-process and therefore best-effort by nature.
+ *
+ * The Worker's FORM_LIMITER binding is better but still not a hard limit. Measured
+ * on the deployed Worker: within one invocation it counts accurately, but across
+ * separate requests the counter propagates with enough lag that a small burst gets
+ * through, and it only catches up under sustained load. Cloudflare documents it as
+ * "permissive, eventually consistent, and intentionally designed to not be used as
+ * an accurate accounting system", which matches what we saw.
+ *
+ * So treat this as defence in depth, not the control. Turnstile, the honeypot and
+ * the time trap are what actually stop bots, and a WAF rate-limiting rule on
+ * /api/* is the enforcement layer for volumetric abuse.
  */
 export async function isRateLimited(
   bucket: string,
@@ -55,6 +67,18 @@ export async function isRateLimited(
   if (env?.FORM_LIMITER) {
     const { success } = await env.FORM_LIMITER.limit({ key });
     return !success;
+  }
+
+  // An `env` was passed, so we are in the Worker, but the binding is missing. Falling
+  // through to the Map below would be worse than useless: isolates are ephemeral and
+  // per-location, so it would silently allow far more than the configured limit while
+  // looking like it worked. Say so loudly instead — this is the only signal that the
+  // deployed Worker lost its rate-limit binding.
+  if (env) {
+    console.error(
+      "FORM_LIMITER binding missing on the Worker — form rate limiting is NOT active. " +
+        "Check the ratelimits block in wrangler.jsonc reached the deployment.",
+    );
   }
 
   const now = Date.now();

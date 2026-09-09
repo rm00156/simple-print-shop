@@ -5,6 +5,7 @@ import {
   clientIp,
   isRateLimited,
   MIN_FILL_TIME_MS,
+  readConfig,
   renderEmailHtml,
   sanitizeHeaderValue,
   type HandlerEnv,
@@ -58,7 +59,7 @@ export async function handleQuote(request: Request, env?: HandlerEnv): Promise<R
     return Response.json({ ok: true });
   }
 
-  const turnstileResult = await verifyTurnstileToken(values.turnstileToken, ip);
+  const turnstileResult = await verifyTurnstileToken(values.turnstileToken, ip, env);
   if (!turnstileResult.ok) {
     if (turnstileResult.reason === "config_error") {
       console.error("Quote route missing Turnstile configuration (TURNSTILE_SECRET_KEY)");
@@ -97,11 +98,11 @@ export async function handleQuote(request: Request, env?: HandlerEnv): Promise<R
 
   const subjectFlag = tier === "emergency" || tier === "express" ? `[${tier.toUpperCase()}] ` : "";
 
-  // Read at request time, not module scope: Workers does not reliably populate
-  // process.env during top-level module evaluation.
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.QUOTE_TO_EMAIL ?? process.env.CONTACT_TO_EMAIL;
-  const from = process.env.QUOTE_FROM_EMAIL ?? process.env.CONTACT_FROM_EMAIL;
+  // Read at request time, not module scope, and via readConfig so this works whether
+  // the host supplies configuration as process.env or as Worker bindings.
+  const apiKey = readConfig("RESEND_API_KEY", env);
+  const to = readConfig("QUOTE_TO_EMAIL", env) ?? readConfig("CONTACT_TO_EMAIL", env);
+  const from = readConfig("QUOTE_FROM_EMAIL", env) ?? readConfig("CONTACT_FROM_EMAIL", env);
 
   if (!apiKey || !to || !from) {
     console.error(

@@ -36,6 +36,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# cloudflare
+# .dev.vars holds real Worker secrets for `wrangler dev` — the .env* rule above does
+# NOT match it, so it must be listed explicitly or secrets get committed.
+.dev.vars
+.dev.vars.*
+.wrangler/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

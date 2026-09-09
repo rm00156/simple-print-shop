@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Wrangler's build output — bundled third-party JS, not ours to lint.
+    ".wrangler/**",
   ]),
 ]);
 

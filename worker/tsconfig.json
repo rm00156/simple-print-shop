@@ -1,0 +1,20 @@
+{
+  // The Worker runs on workerd, not in a browser or Node. It needs Cloudflare's
+  // globals and must NOT inherit the app's DOM lib, whose Request/Response types
+  // differ from the runtime's. Excluded from the root tsconfig for the same reason.
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "types": ["@cloudflare/workers-types"],
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "incremental": false,
+    "plugins": [],
+    "paths": { "@/*": ["../*"] }
+  },
+  // Only the Worker entrypoint. TypeScript follows its imports from there, which
+  // reaches lib/handlers and their dependencies but not app-only modules like
+  // lib/google-reviews.ts, whose Next-specific fetch options are not valid here.
+  "include": ["./**/*.ts"],
+  "exclude": []
+}

@@ -1,0 +1,52 @@
+# Legacy URLs from the pre-Next static site.
+#
+# These were `redirects()` in next.config.ts, which static export ignores. Cloudflare
+# applies redirects ahead of asset matching, so these win over the built-in .html
+# handling and return a proper 301 rather than its 307.
+#
+# The old config also had a `/:path*.html` catch-all sending everything else to `/`.
+# That CANNOT be expressed here: a splat may only appear at the end of the source
+# path. Do not try `/:page.html /` as a substitute — Cloudflare splits the source on
+# `/` and reads a leading `:` as a whole-segment placeholder, so that rule would match
+# `/about` and 301 it to the homepage.
+#
+# Unmatched legacy .html URLs now return a genuine 404, which Google treats better
+# than a blanket redirect to the homepage (it classifies those as soft 404s anyway).
+#
+# The full list below came from the Wayback Machine's index of the old site
+# (web.archive.org/cdx/search/cdx?url=thebluwavegroup.com*&output=text&fl=original),
+# which found 14 legacy pages. Every one that has a sensible destination is mapped.
+#
+# Deliberately NOT mapped, because they were never real pages and have no equivalent:
+#   /tooltip_crossbrowser/quote_me.html   a JS tooltip fragment
+#   /home_header.htm, /home_main.htm      frameset fragments
+# These return a genuine 404, which is the correct answer for a URL that was never
+# a destination in the first place.
+
+# Direct equivalents.
+/index.html                 /                          301
+/about.html                 /about                     301
+/contact.html               /contact                   301
+/services.html              /services                  301
+/free_quotation.html        /quote                     301
+/prices_delivery.html       /shipping                  301
+
+# Renamed rather than removed: "creative services" is the design and artwork
+# service, and artwork specs are covered in the same place.
+/creative_services.html     /services/design-artwork   301
+/artwork_specs.html         /services/design-artwork   301
+
+# Reviews and testimonials moved onto the about page.
+/customer_comments.html     /about                     301
+
+# The old callback request is now part of the quote form, which offers a call back.
+/callback.html              /quote                     301
+
+# The old site had a file-upload page; the new one takes artwork by email off the
+# back of an enquiry, so the contact form is the closest real destination.
+/sendfiles.html             /contact                   301
+/upload.html                /contact                   301
+
+# There is no offers page any more. Products is the nearest useful landing point
+# for someone who followed a link about a deal.
+/specials.html              /products                  301

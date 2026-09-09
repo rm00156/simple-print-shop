@@ -1,0 +1,21 @@
+# Cloudflare's default for static assets is `public, max-age=0, must-revalidate`,
+# which would revalidate every JS and CSS chunk on every navigation. Vercel set these
+# immutable automatically; without this the move would be a measurable regression.
+
+# Content-hashed by the build — the filename changes whenever the bytes do, so these
+# can never go stale. (Turbopack emits CSS under chunks/ too, and the splat crosses /.)
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Deliberately NOT set here:
+#   - A long cache on public/ images. Those filenames are not content-hashed, so a
+#     long max-age would make replacing an image invisible for a week.
+#   - A Content-Security-Policy. Turnstile needs frame-src and script-src for
+#     challenges.cloudflare.com, and Cloudflare Web Analytics needs
+#     static.cloudflareinsights.com. Getting it wrong silently kills both forms.
+#   - Strict-Transport-Security. Add it only once cutover is confirmed on HTTPS.
