@@ -13,14 +13,10 @@ import {
   type ContactFormValues,
   type ContactSubject,
 } from "@/lib/contact-schema";
+import { TURNSTILE_SITE_KEY } from "@/lib/turnstile";
 import { Button } from "./Button";
 
 type Status = "idle" | "success" | "error" | "rate_limited" | "captcha_failed";
-
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
-if (!TURNSTILE_SITE_KEY && process.env.NODE_ENV !== "production") {
-  console.error("NEXT_PUBLIC_TURNSTILE_SITE_KEY is not set — the contact form's captcha will not work.");
-}
 
 const inputClasses =
   "h-12 w-full rounded-token border border-line bg-surface-2 px-3.5 text-base text-ink transition-colors placeholder:text-ink-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25";
