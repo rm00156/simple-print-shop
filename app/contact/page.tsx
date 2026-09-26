@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Navigation, Phone } from "lucide-react";
 import { Button } from "@/components/Button";
 import { ContactForm } from "@/components/ContactForm";
+import { MapEmbed } from "@/components/MapEmbed";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -109,13 +110,7 @@ export default function ContactPage() {
               </div>
 
               <div className="overflow-hidden rounded-2xl bg-surface-2 shadow-card">
-                <iframe
-                  src={site.mapEmbedUrl}
-                  title={`${site.name} location on Google Maps`}
-                  className="block h-[260px] w-full"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+                <MapEmbed />
                 <a
                   href={site.mapLinkUrl}
                   target="_blank"
