@@ -13,12 +13,14 @@ export type Crumb = {
 // the same `items` array here so a renamed category can't leave the two disagreeing,
 // which Google treats as worse than no markup at all.
 export function Breadcrumbs({
-  items,
+  items: trail,
   className,
 }: {
   items: Crumb[];
   className?: string;
 }) {
+  // Every trail starts at Home, so callers only pass the levels below it.
+  const items: Crumb[] = [{ name: "Home", href: "/" }, ...trail];
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
