@@ -118,6 +118,11 @@ const jsonLd = {
   name: site.name,
   telephone: site.phoneHref.replace(/^tel:/, ""),
   url: siteUrl,
+  // Real photos of the premises, not logos or product shots — Google reads this as
+  // "what the place looks like". All three are 4:3, the ratio it recommends.
+  image: ["/shopfront.webp", "/press-floor.webp", "/finishing.webp"].map(
+    (path) => `${siteUrl}${path}`,
+  ),
   ...(address ? { address } : {}),
   areaServed: [
     "Lower Sydenham",
