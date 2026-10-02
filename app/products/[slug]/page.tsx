@@ -7,7 +7,7 @@ import { Button } from "@/components/Button";
 import { ProductCard } from "@/components/ProductCard";
 import { categories, getCategory, slugifyItemName } from "@/content/categories";
 import { site, yearsTrading } from "@/content/site";
-import { tradePageIsPublishable } from "@/content/trade";
+import { showTradeLinks } from "@/content/trade";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -51,9 +51,13 @@ export default async function ServicePage({ params }: Props) {
   // dedicated funeral service; funeral directors go to the trade page, which
   // only exists as a destination once it has real commitments on it.
   const tradeHandoff =
-    category.slug === "funeral-stationery" && tradePageIsPublishable
+    category.slug === "funeral-stationery" && showTradeLinks
       ? "/for-funeral-directors"
       : null;
+
+  // Every other category gets the general trade signpost, for the designer or
+  // printer who has landed on a retail page with a client's job to place.
+  const showGeneralTrade = showTradeLinks && category.slug !== "funeral-stationery";
 
   const WatermarkIcon = category.icon;
 
@@ -170,6 +174,19 @@ export default async function ServicePage({ params }: Props) {
                 </Button>
               )}
             </div>
+          </div>
+        )}
+
+        {showGeneralTrade && (
+          <div className="mt-8 flex flex-col items-start justify-between gap-3 rounded-2xl bg-primary/5 px-5 py-4 sm:flex-row sm:items-center">
+            <p className="font-medium text-ink-2">
+              Printing this for a client? Anyone ordering on someone else&apos;s
+              behalf can send it through as trade work.
+            </p>
+            <Button href="/trade" variant="ghost" className="shrink-0">
+              Trade printing
+              <ArrowRight size={16} aria-hidden="true" />
+            </Button>
           </div>
         )}
       </div>

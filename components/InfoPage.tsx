@@ -46,10 +46,13 @@ export function InfoPage({
   title,
   intro,
   sections,
+  navLabel = "In this policy",
 }: {
   title: string;
   intro: string;
   sections?: InfoPageSection[];
+  /** Heading over the in-page contents list. */
+  navLabel?: string;
 }) {
   return (
     <>
@@ -72,7 +75,7 @@ export function InfoPage({
                 <div className="space-y-6 lg:sticky lg:top-6">
                   <nav aria-label="On this page">
                     <p className="mb-4 text-xs font-semibold tracking-widest text-ink-3 uppercase">
-                      In this policy
+                      {navLabel}
                     </p>
                     <ul className="flex flex-col border-l-2 border-line">
                       {sections.map((section) => (

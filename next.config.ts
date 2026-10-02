@@ -30,6 +30,11 @@ const nextConfig: NextConfig = {
   // free tier no matter how much traffic the site gets.
   output: "export",
 
+  // Lets the dev server be previewed through a Cloudflare quick tunnel
+  // (`cloudflared tunnel --url`), whose hostname is random on every run. Only
+  // affects `next dev`; the static export ignores it.
+  allowedDevOrigins: ["*.trycloudflare.com"],
+
   // Trailing-slash behaviour is deliberately left at the default. Cloudflare's
   // auto-trailing-slash asset handling matches it exactly (/about serves about.html,
   // /about/ redirects to /about), so every URL already indexed from Vercel keeps

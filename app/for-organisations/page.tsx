@@ -1,0 +1,279 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CalendarClock,
+  FileCheck,
+  FolderOpen,
+  MapPin,
+  Phone,
+  ReceiptText,
+} from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Button } from "@/components/Button";
+import { ContactForm } from "@/components/ContactForm";
+import { PhotoFigure, premisesPhotos } from "@/components/PhotoFigure";
+import { ProductCard } from "@/components/ProductCard";
+import { TrustBar } from "@/components/TrustBar";
+import { getCategoryItem } from "@/content/categories";
+import { site, yearsTrading } from "@/content/site";
+import { showTradeLinks } from "@/content/trade";
+
+export const metadata: Metadata = {
+  title: "For organisations",
+  description: `Print on account for councils, NHS teams, charities and schools — proofed, booked against your date, printed in ${site.address.addressLocality} and delivered anywhere in the UK.`,
+  alternates: { canonical: "/for-organisations" },
+};
+
+/*
+  For organisations buying print for themselves — councils, NHS teams, charities,
+  schools. They're Bluwave's biggest named customers (the logos in TrustBar are
+  real, and most of the named accounts in Sage are this kind of buyer), but they
+  aren't trade: they don't resell the work, so they don't belong on /trade.
+
+  Every claim here is one the site already makes elsewhere — credit accounts from
+  the terms (app/terms), booking against a date from the digital printing FAQ,
+  free collection from /shipping. Purchase orders, payment terms and supplier
+  registration are deliberately absent until confirmed; they're asked in
+  notes/campaign/04-ask-for-dad.md, section 5.
+*/
+const offers = [
+  {
+    icon: ReceiptText,
+    title: "An account for regular work",
+    detail:
+      "Open an account and be invoiced instead of paying job by job. We may ask for a reference when we set it up.",
+  },
+  {
+    icon: CalendarClock,
+    title: "Booked against your date",
+    detail:
+      "Tell us the date and when the artwork will land, and we reserve press time for it.",
+  },
+  {
+    icon: FileCheck,
+    title: "A proof before anything runs",
+    detail: "Whoever signs it off sees exactly what will be printed.",
+  },
+  {
+    icon: FolderOpen,
+    title: "Artwork kept for the next run",
+    detail: "Forms, letterheads and regular leaflets stay on file, so a reprint is one email.",
+  },
+  {
+    icon: MapPin,
+    title: "Delivered anywhere in the UK",
+    detail: `Cost quoted up front, or collect free from ${site.address.addressLocality}.`,
+  },
+];
+
+// What organisations most often order, as real products with their photos —
+// office forms and stationery, reports, and print for open days and events.
+// [category slug, item slug]; a renamed product fails the build rather than
+// leaving a dead card.
+const organisationProducts = [
+  ["schools", "open-day-signage-banners"],
+  ["schools", "prospectuses-open-day-brochures"],
+  ["booklets-catalogues-and-brochures", "reports"],
+  ["copying-and-business-forms", "carbonless-forms"],
+  ["business-stationery", "letterheads"],
+  ["booklets-catalogues-and-brochures", "programmes"],
+] as const;
+
+export default function ForOrganisationsPage() {
+  const years = yearsTrading();
+  const products = organisationProducts.map(([categorySlug, itemSlug]) => {
+    const found = getCategoryItem(categorySlug, itemSlug);
+    if (!found) throw new Error(`Unknown product: ${categorySlug}/${itemSlug}`);
+    return { ...found, href: `/products/${categorySlug}/${itemSlug}` };
+  });
+
+  return (
+    <>
+      <section className="c-blue px-4 pt-8 pb-20 sm:px-6 sm:pb-24">
+        <div className="mx-auto w-full max-w-6xl">
+          <Breadcrumbs items={[{ name: "For organisations" }]} />
+
+          <div className="mt-6 grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:items-center">
+            <div>
+              <p className="text-sm font-semibold tracking-wide text-accent uppercase">
+                Councils, NHS, charities and schools
+              </p>
+              <h1 className="mt-3 text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[42px]">
+                Print on account for organisations
+              </h1>
+              <p className="ts mt-4 max-w-lg text-base leading-[1.7]">
+                Printing for organisations since {site.foundedYear} — {years}{" "}
+                years — from our own unit in {site.address.addressLocality},
+                delivered anywhere in the UK. Forms, reports, newsletters and
+                event print, proofed before it runs and booked against the date
+                you actually need it.
+              </p>
+
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <Button href={site.phoneHref} variant="onAccent">
+                  <Phone size={16} aria-hidden="true" />
+                  {site.phone}
+                </Button>
+                <Button href="#enquiry" variant="ghost" className="text-white">
+                  Ask about an account
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Button>
+              </div>
+
+              <p className="ts mt-5 text-sm">
+                Just one job? You don&apos;t need an account.{" "}
+                <Link href="/quote" className="font-semibold text-white underline underline-offset-4">
+                  Request a quote
+                </Link>
+              </p>
+            </div>
+
+            <PhotoFigure
+              {...premisesPhotos.pressFloor}
+              sizes="(min-width: 768px) 40vw, 100vw"
+              priority
+              className="ring-1 ring-white/10"
+            />
+          </div>
+        </div>
+      </section>
+
+      <TrustBar />
+
+      <section className="px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mx-auto w-full max-w-6xl">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+            What working with us looks like
+          </h2>
+          <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {offers.map((offer) => (
+              <div key={offer.title} className="flex gap-4">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent/15 text-teal">
+                  <offer.icon size={20} aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-bold text-ink">
+                    {offer.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-[1.7] text-ink-2">
+                    {offer.detail}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-surface-2 px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mx-auto w-full max-w-6xl">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+            <div>
+              <h2 className="font-display text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+                What organisations order
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-[1.7] text-ink-2 sm:text-base">
+                Office forms and stationery, reports, and print for open days
+                and events.
+              </p>
+            </div>
+            <Link
+              href="/products"
+              className="flex items-center gap-1 text-sm font-semibold text-teal transition-all hover:gap-2 hover:text-primary"
+            >
+              View all products
+              <ArrowUpRight size={15} aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {products.map(({ category, item, href }) => (
+              <ProductCard
+                key={href}
+                item={item}
+                href={href}
+                fallbackIcon={category.icon}
+              />
+            ))}
+          </div>
+
+          {showTradeLinks && (
+            <p className="mt-8 text-sm text-ink-2">
+              Ordering print for a client rather than your own organisation?{" "}
+              <Link
+                href="/trade"
+                className="font-semibold text-teal hover:text-primary"
+              >
+                See trade printing
+              </Link>
+            </p>
+          )}
+        </div>
+      </section>
+
+      <section id="enquiry" className="c-teal scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
+          <div className="c-paper rounded-3xl bg-surface-2 p-6 shadow-xl sm:p-8">
+            <h2 className="font-display text-2xl font-bold tracking-tight text-primary">
+              Ask about an account
+            </h2>
+            <p className="mt-2 text-sm leading-[1.7] text-ink-2">
+              Tell us about your organisation and what you print, and we&apos;ll
+              come back to you. No obligation, and no drip of marketing
+              afterwards.
+            </p>
+            <div className="mt-6">
+              <ContactForm
+                subject="Organisation — account enquiry"
+                messageLabel="About your organisation"
+                messagePlaceholder="Your organisation and team, what you print and roughly how often, and anything your finance team needs from a supplier."
+              />
+            </div>
+          </div>
+
+          <aside className="flex flex-col gap-6">
+            <div className="rounded-3xl bg-card p-6 sm:p-8">
+              <p className="text-lg font-bold text-white">Rather just ring?</p>
+              <p className="ts mt-2 text-sm leading-[1.7]">
+                You&apos;ll get someone who can answer on the spot, not a form
+                to fill in.
+              </p>
+              <a
+                href={site.phoneHref}
+                className="mt-4 flex items-center gap-2 text-base font-bold text-white"
+              >
+                <Phone size={18} aria-hidden="true" />
+                {site.phone}
+              </a>
+            </div>
+
+            <div className="rounded-3xl bg-card p-6 sm:p-8">
+              <p className="text-lg font-bold text-white">Sending files</p>
+              <p className="ts mt-2 text-sm leading-[1.7]">
+                Whether it&apos;s from your comms team or a Word document, here
+                is what helps a job run first time.
+              </p>
+              <Button
+                href="/artwork-guidelines"
+                variant="ghost"
+                size="sm"
+                className="mt-4 text-white"
+              >
+                Artwork guidelines
+              </Button>
+            </div>
+
+            <div className="rounded-3xl bg-card p-6 sm:p-8">
+              <p className="text-lg font-bold text-white">Where we are</p>
+              <p className="ts mt-2 text-sm leading-[1.7]">
+                {site.address.full}
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </>
+  );
+}

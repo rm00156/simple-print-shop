@@ -1,4 +1,6 @@
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Real client logos, all supplied as image files in /public.
 const logos: {
@@ -32,7 +34,12 @@ const logos: {
   },
 ];
 
-export function TrustBar() {
+export function TrustBar({
+  showAccountsLink = false,
+}: {
+  /** Adds a link to /for-organisations under the logos — off on that page itself. */
+  showAccountsLink?: boolean;
+} = {}) {
   return (
     <section className="border-b border-line bg-surface-2 px-4 py-12 sm:px-6">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8">
@@ -52,6 +59,15 @@ export function TrustBar() {
             </li>
           ))}
         </ul>
+        {showAccountsLink && (
+          <Link
+            href="/for-organisations"
+            className="flex items-center gap-1 text-sm font-semibold text-teal transition-all hover:gap-2 hover:text-primary"
+          >
+            Print on account for your organisation
+            <ArrowRight size={15} aria-hidden="true" />
+          </Link>
+        )}
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import { categories, slugifyItemName } from "./categories";
 import { services } from "./services";
-import { tradePageIsPublishable } from "./trade";
+import { showTradeLinks } from "./trade";
 
 export type SearchKind = "product" | "category" | "service" | "page";
 
@@ -161,11 +161,85 @@ const pageDocs: SearchDoc[] = [
     href: "/cookies",
     keywords: ["cookies", "tracking", "consent"],
   },
-  // Held back until the trade page has its answers — same flag as the noindex,
-  // the sitemap and the footer column. Keywords cover both what a funeral
-  // director calls themselves and what they'd search for wanting a supplier.
-  ...(tradePageIsPublishable
+  {
+    id: "page:/artwork-guidelines",
+    kind: "page",
+    title: "Artwork guidelines",
+    subtitle: "File formats, bleed, resolution, colour and fonts for print-ready files.",
+    href: "/artwork-guidelines",
+    keywords: [
+      "artwork",
+      "print ready",
+      "print-ready",
+      "bleed",
+      "trim",
+      "crop marks",
+      "resolution",
+      "dpi",
+      "cmyk",
+      "rgb",
+      "fonts",
+      "pdf",
+      "file format",
+      "file setup",
+      "upload",
+      "send files",
+    ],
+  },
+  {
+    id: "page:/for-organisations",
+    kind: "page",
+    title: "For organisations",
+    subtitle: "Print on account for councils, NHS teams, charities and schools.",
+    href: "/for-organisations",
+    keywords: [
+      "account",
+      "credit account",
+      "invoice",
+      "business account",
+      "council",
+      "nhs",
+      "hospital",
+      "charity",
+      "school",
+      "organisation",
+      "organization",
+      "public sector",
+      "supplier",
+    ],
+  },
+  // Held back in production until the trade pages have their answers — same
+  // flag as the nav link and the footer column. Keywords cover both what a
+  // trade buyer calls themselves and what they'd search for wanting a supplier.
+  ...(showTradeLinks
     ? [
+        {
+          id: "page:/trade",
+          kind: "page" as const,
+          title: "Trade printing",
+          subtitle:
+            "Trade printing for designers, agencies and printers — checked before it runs, delivered anywhere in the UK.",
+          href: "/trade",
+          keywords: [
+            "trade",
+            "trade printing",
+            "trade printer",
+            "trade account",
+            "account",
+            "credit terms",
+            "wholesale",
+            "reseller",
+            "white label",
+            "unbranded",
+            "designer",
+            "agency",
+            "print broker",
+            "printer",
+            "overflow",
+            "event planner",
+            "wedding planner",
+          ],
+        },
         {
           id: "page:/for-funeral-directors",
           kind: "page" as const,

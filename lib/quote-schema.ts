@@ -25,6 +25,22 @@ export function needsSidesField(need: string, product?: string) {
   );
 }
 
+// Who the job is for. Optional, like the timings — but a "client" answer is a
+// trade enquiry arriving through the retail form, and it's flagged in the email
+// subject so it can be told apart in the inbox before anyone opens it.
+export const ORDERING_FOR_OPTIONS = [
+  { value: "self", label: "Myself" },
+  { value: "business", label: "My own business" },
+  { value: "client", label: "A client (trade)" },
+] as const;
+
+export type OrderingFor = (typeof ORDERING_FOR_OPTIONS)[number]["value"];
+
+const orderingForValues = ORDERING_FOR_OPTIONS.map((o) => o.value) as [
+  OrderingFor,
+  ...OrderingFor[],
+];
+
 export const quoteSchema = z
   .object({
     name: z.string().trim().min(2, "Enter your name").max(80),
@@ -61,6 +77,7 @@ export const quoteSchema = z
       .trim()
       .refine((v) => v === "" || isIsoDate(v), "Enter a valid date")
       .optional(),
+    orderingFor: z.enum(orderingForValues).optional().or(z.literal("")),
     details: z.string().trim().max(500).optional().or(z.literal("")),
     // Honeypot — real users leave this blank. Left as an unconstrained string so bots that
     // fill it in still pass schema validation and reach the route's own fake-success handling.
