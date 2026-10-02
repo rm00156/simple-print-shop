@@ -11,6 +11,12 @@ export const contactSubjects = [
   // It reaches the inbox in the email subject line, so trade enquiries are
   // distinguishable from family ones at a glance.
   "Funeral director — trade enquiry",
+  // The general counterpart, set by the /trade form — designers, agencies and
+  // printers ordering on behalf of a client.
+  "Trade enquiry",
+  // Set by the /for-organisations form — councils, NHS teams, charities and
+  // schools asking about an account for their own print.
+  "Organisation — account enquiry",
   "Something else",
 ] as const;
 

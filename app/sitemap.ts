@@ -25,7 +25,9 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
-    "",
+    // "/" rather than "": Google records the homepage with its trailing slash, and
+    // Search Console reported "No referring sitemaps detected" against the bare origin.
+    "/",
     "/products",
     "/services",
     "/about",
@@ -36,9 +38,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
     "/cookies",
     "/shipping",
+    "/artwork-guidelines",
+    "/for-organisations",
     // Held back until every trade commitment in content/trade.ts is a real answer;
-    // the page is noindexed over the same condition.
-    ...(tradePageIsPublishable ? ["/for-funeral-directors"] : []),
+    // both pages are noindexed over the same condition.
+    ...(tradePageIsPublishable ? ["/trade", "/for-funeral-directors"] : []),
   ].map((path) => ({ url: `${siteUrl}${path}` }));
 
   const categoryRoutes = categories.map((c) => ({

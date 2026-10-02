@@ -110,6 +110,23 @@ h3 {
   color: #b8e3e9;
 }
 
+/*
+  Paper scope: hands a white card inside .c-blue or .c-teal back its light-page
+  tokens. Without it, a form sat on the teal band inherits white ink and white
+  borders on a white card — labels and inputs vanish. Values mirror @theme.
+*/
+.c-paper {
+  color: #0f172a;
+  --color-surface-1: #f7f9fb;
+  --color-surface-2: #ffffff;
+  --color-card: #ffffff;
+  --color-ink: #0f172a;
+  --color-ink-2: #43474e;
+  --color-ink-3: #74777f;
+  --color-line: #e3e7ed;
+  --color-placeholder: #e9edf2;
+}
+
 /* Footer scope: ink-black treatment, independent of the light surface tokens above. */
 .c-footer {
   background: #0f172a;

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lsof -i :3001 -sTCP:LISTEN -t)",
+      "Bash(node /private/tmp/claude-501/-Users-rmill-DEV-workspace-simple-print/4e2f7d15-1623-4e7d-94e0-e89d5f12a86e/scratchpad/verify-mobile-menu.mjs)",
+      "Bash(NODE_PATH=/Users/rmill/DEV/workspace/simple-print/node_modules node /private/tmp/claude-501/-Users-rmill-DEV-workspace-simple-print/4e2f7d15-1623-4e7d-94e0-e89d5f12a86e/scratchpad/verify-mobile-menu.mjs)",
+      "Bash(node /Users/rmill/DEV/workspace/simple-print/.verify-mobile-menu.mjs.tmp)",
+      "Bash(node /Users/rmill/DEV/workspace/simple-print/.verify-mobile-menu.mjs)",
+      "Bash(node /Users/rmill/.npm/_npx/e41f203b7505f1fb/verify-mobile-menu.mjs)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/products/business-stationery/business-cards)",
+      "Bash(curl -s http://localhost:3000/products/business-stationery/business-cards)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"npm run dev\")",
+      "WebFetch(domain:www.funeralguide.co.uk)",
+      "Bash(npx --yes wrangler@latest dev -c wrangler.spike.jsonc --port 8788)"
+    ]
+  }
+}

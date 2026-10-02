@@ -17,7 +17,7 @@ import {
   toIsoDate,
   workingDaysBetween,
 } from "@/lib/lead-time";
-import { quoteSchema } from "@/lib/quote-schema";
+import { ORDERING_FOR_OPTIONS, quoteSchema } from "@/lib/quote-schema";
 import { verifyTurnstileToken } from "@/lib/verify-turnstile";
 
 const ARTWORK_LABELS: Record<string, string> = {
@@ -96,7 +96,12 @@ export async function handleQuote(request: Request, env?: HandlerEnv): Promise<R
       ? undefined
       : `${workingDays} working day${workingDays === 1 ? "" : "s"} — ${tier.toUpperCase()}`;
 
-  const subjectFlag = tier === "emergency" || tier === "express" ? `[${tier.toUpperCase()}] ` : "";
+  const orderingForLabel = ORDERING_FOR_OPTIONS.find((o) => o.value === values.orderingFor)?.label;
+
+  const subjectFlag = [
+    tier === "emergency" || tier === "express" ? `[${tier.toUpperCase()}] ` : "",
+    values.orderingFor === "client" ? "[TRADE] " : "",
+  ].join("");
 
   // Read at request time, not module scope, and via readConfig so this works whether
   // the host supplies configuration as process.env or as Worker bindings.
@@ -117,6 +122,7 @@ export async function handleQuote(request: Request, env?: HandlerEnv): Promise<R
     `Name: ${values.name}`,
     `Email: ${values.email}`,
     `Phone: ${values.phone}`,
+    orderingForLabel ? `For: ${orderingForLabel}` : null,
     productName ? `Product: ${productName}` : null,
     values.stock ? `Stock: ${values.stock}` : null,
     values.pages ? `Pages: ${values.pages}pp` : null,
@@ -133,6 +139,7 @@ export async function handleQuote(request: Request, env?: HandlerEnv): Promise<R
     ["Name", values.name],
     ["Email", values.email],
     ["Phone", values.phone],
+    orderingForLabel ? ["For", orderingForLabel] : null,
     productName ? ["Product", productName] : null,
     values.stock ? ["Stock", values.stock] : null,
     values.pages ? ["Pages", `${values.pages}pp`] : null,

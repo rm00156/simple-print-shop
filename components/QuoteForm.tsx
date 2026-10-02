@@ -25,7 +25,12 @@ import {
   toIsoDate,
   workingDaysBetween,
 } from "@/lib/lead-time";
-import { needsSidesField, quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
+import {
+  needsSidesField,
+  ORDERING_FOR_OPTIONS,
+  quoteSchema,
+  type QuoteFormValues,
+} from "@/lib/quote-schema";
 import { TURNSTILE_SITE_KEY } from "@/lib/turnstile";
 import { Button } from "./Button";
 
@@ -112,6 +117,7 @@ export function QuoteForm({
       neededBy: "",
       artworkReady: "unsure",
       artworkReadyDate: "",
+      orderingFor: "",
       details: initialDetails,
       company: "",
       ts: mountedAt,
@@ -474,6 +480,20 @@ export function QuoteForm({
             </p>
           )}
         </div>
+      </div>
+
+      <div className="mb-2.5">
+        <label htmlFor="orderingFor" className={labelClasses}>
+          Who&apos;s it for?
+        </label>
+        <select id="orderingFor" className={inputClasses} {...register("orderingFor")}>
+          <option value="">Choose one (optional)</option>
+          {ORDERING_FOR_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       {lockProduct && <input type="hidden" {...register("product")} />}

@@ -25,7 +25,7 @@ import {
 } from "@/content/categories";
 import { getFromPrice } from "@/content/pricing";
 import { site } from "@/content/site";
-import { tradePageIsPublishable } from "@/content/trade";
+import { showTradeLinks } from "@/content/trade";
 
 type Props = {
   params: Promise<{ slug: string; item: string }>;
@@ -75,13 +75,29 @@ export default async function ProductPage({ params }: Props) {
   // dedicated funeral service; funeral directors go to the trade page, which
   // only exists as a destination once it has real commitments on it.
   const tradeHandoff =
-    category.slug === "funeral-stationery" && tradePageIsPublishable
+    category.slug === "funeral-stationery" && showTradeLinks
       ? "/for-funeral-directors"
       : null;
+
+  // Every other category gets the general trade signpost, for the designer or
+  // printer who has landed on a retail page with a client's job to place.
+  const showGeneralTrade = showTradeLinks && category.slug !== "funeral-stationery";
 
   const WatermarkIcon = item.icon ?? category.icon;
   const heroImage = item.image ?? category.image;
   const otherItems = category.items.filter((i) => i.name !== item.name);
+
+  // The items after this one, wrapping round to the start. This used to be the first
+  // three of otherItems, which meant every page in a category linked to the same three
+  // siblings and the rest had no inbound links beyond the category page and /products.
+  // In Oct 2026 Search Console had 52 sitemap URLs stuck in "Discovered - currently
+  // not indexed", and those two-link product pages were the weakest-linked URLs on
+  // the site. Rotating gives every item an equal share of the sibling links.
+  const itemIndex = category.items.findIndex((i) => i.name === item.name);
+  const crossSellItems = [
+    ...category.items.slice(itemIndex + 1),
+    ...category.items.slice(0, itemIndex),
+  ].slice(0, 3);
   const fromPrice = getFromPrice(itemSlug);
 
   // Two images for the quality band: this product plus a sibling (falls back to
@@ -345,6 +361,17 @@ export default async function ProductPage({ params }: Props) {
                   defaultDetails={`I'm interested in: ${item.name}. `}
                 />
               </div>
+              {showGeneralTrade && (
+                <p className="mt-5 border-t border-line pt-4 text-sm text-ink-2">
+                  Printing this for a client?{" "}
+                  <Link
+                    href="/trade"
+                    className="font-semibold text-primary hover:text-primary-hover"
+                  >
+                    See trade printing
+                  </Link>
+                </p>
+              )}
             </div>
           )}
         </aside>
@@ -403,14 +430,14 @@ export default async function ProductPage({ params }: Props) {
       </section>
 
       {/* Cross-sell */}
-      {otherItems.length > 0 && (
+      {crossSellItems.length > 0 && (
         <section className="px-4 py-14 sm:px-6">
           <div className="mx-auto w-full max-w-6xl">
             <h2 className="font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">
               More from {category.name}
             </h2>
             <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {otherItems.slice(0, 3).map((sibling) => (
+              {crossSellItems.map((sibling) => (
                 <ProductCard
                   key={sibling.name}
                   item={sibling}

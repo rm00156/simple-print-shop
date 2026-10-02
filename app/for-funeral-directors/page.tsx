@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { ArrowRight, Phone } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, ExternalLink, Phone, RefreshCw } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Button } from "@/components/Button";
 import { ContactForm } from "@/components/ContactForm";
+import { PhotoFigure } from "@/components/PhotoFigure";
 import { site, yearsTrading } from "@/content/site";
 import {
   answeredCommitments,
   tradeCommitments,
   tradeProducts,
   tradePageIsPublishable,
+  tradeReprintNote,
 } from "@/content/trade";
 
 export const metadata: Metadata = {
@@ -52,7 +55,7 @@ export default function ForFuneralDirectorsPage() {
       <section className="c-blue px-4 pt-8 pb-20 sm:px-6 sm:pb-24">
         <div className="mx-auto w-full max-w-6xl">
           <Breadcrumbs
-            items={[{ name: "Home", href: "/" }, { name: "For funeral directors" }]}
+            items={[{ name: "For funeral directors" }]}
           />
 
           <div className="mt-6 grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:items-center">
@@ -82,28 +85,31 @@ export default function ForFuneralDirectorsPage() {
                   <ArrowRight size={16} aria-hidden="true" />
                 </Button>
               </div>
+
+              {/* This page is for the trade. A family who lands here is pointed,
+                  gently and once, to the service built for them. */}
+              <p className="ts mt-5 max-w-lg text-sm leading-[1.7]">
+                Arranging a funeral for someone you&apos;ve lost?{" "}
+                <a
+                  href={site.funeralSiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-semibold text-white underline underline-offset-4"
+                >
+                  Our family service will walk you through it
+                  <ExternalLink size={13} aria-hidden="true" />
+                </a>
+              </p>
             </div>
 
-            <div className="rounded-2xl bg-card p-6 backdrop-blur-sm sm:p-8">
-              <p className="text-lg font-bold text-white">
-                Not a family ordering for one funeral
-              </p>
-              <p className="ts mt-2 text-sm leading-[1.7]">
-                This page is for the trade. If you&apos;re arranging a funeral for
-                someone you&apos;ve lost, our family service is the right place to
-                start — everything is set up there to walk you through it.
-              </p>
-              <Button
-                href={site.funeralSiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="ghost"
-                size="sm"
-                className="mt-4 text-white"
-              >
-                Our service for families
-              </Button>
-            </div>
+            <PhotoFigure
+              src="/fun.webp"
+              alt="Funeral stationery laid out on a table: an order of service, memorial cards, thank-you cards and envelopes"
+              caption="Orders of service, memorial cards and tributes"
+              sizes="(min-width: 768px) 40vw, 100vw"
+              priority
+              className="ring-1 ring-white/10"
+            />
           </div>
         </div>
       </section>
@@ -132,8 +138,8 @@ export default function ForFuneralDirectorsPage() {
               The answers you actually need
             </h2>
             <p className="mt-3 max-w-2xl text-base leading-[1.7] text-ink-2">
-              Every printer says fast. Here is what that means here, in days and
-              times you can hold us to.
+              Every printer says fast. These are straight answers to the
+              questions trade customers ask us first.
             </p>
 
             <dl className="mt-8 flex flex-col gap-6">
@@ -147,7 +153,7 @@ export default function ForFuneralDirectorsPage() {
                   </div>
                   <div>
                     <dt className="font-display text-lg font-bold text-ink">
-                      {commitment.question}
+                      {commitment.funeralQuestion ?? commitment.question}
                     </dt>
                     <dd className="mt-1 text-sm leading-[1.7] text-ink-2">
                       {commitment.answer}
@@ -165,27 +171,52 @@ export default function ForFuneralDirectorsPage() {
           <h2 className="font-display text-2xl font-bold tracking-tight text-primary sm:text-3xl">
             What we print for you
           </h2>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {tradeProducts.map((product) => (
               <div
                 key={product.name}
-                className="rounded-2xl bg-surface-2 p-6 shadow-card"
+                className="overflow-hidden rounded-2xl bg-surface-2 shadow-card"
               >
-                <p className="font-display text-lg font-bold text-ink">
-                  {product.name}
-                </p>
-                <p className="mt-2 text-sm leading-[1.7] text-ink-2">
-                  {product.detail}
-                </p>
+                <div className="relative aspect-[16/9] bg-surface-1">
+                  <Image
+                    src={product.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="font-display text-lg font-bold text-ink">
+                    {product.name}
+                  </p>
+                  <p className="mt-2 text-sm leading-[1.7] text-ink-2">
+                    {product.detail}
+                  </p>
+                </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-6 flex items-start gap-4 rounded-2xl bg-primary/5 px-5 py-4">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-teal">
+              <RefreshCw size={18} aria-hidden="true" />
+            </div>
+            <div>
+              <p className="font-display font-bold text-ink">
+                {tradeReprintNote.title}
+              </p>
+              <p className="mt-1 text-sm leading-[1.7] text-ink-2">
+                {tradeReprintNote.detail}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="enquiry" className="c-teal scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
-          <div className="rounded-3xl bg-surface-2 p-6 shadow-xl sm:p-8">
+          <div className="c-paper rounded-3xl bg-surface-2 p-6 shadow-xl sm:p-8">
             <h2 className="font-display text-2xl font-bold tracking-tight text-primary">
               Open a trade enquiry
             </h2>
@@ -247,7 +278,7 @@ export default function ForFuneralDirectorsPage() {
               {tradeCommitments
                 .filter((c) => !answeredCommitments.includes(c))
                 .map((c) => (
-                  <li key={c.question}>{c.question}</li>
+                  <li key={c.question}>{c.funeralQuestion ?? c.question}</li>
                 ))}
             </ul>
           </div>

@@ -9,6 +9,7 @@ import { TrustBar } from "@/components/TrustBar";
 import { getCategory } from "@/content/categories";
 import { getService } from "@/content/services";
 import { features, site, testimonials, yearsTrading } from "@/content/site";
+import { showTradeLinks } from "@/content/trade";
 import { getGoogleReviews } from "@/lib/google-reviews";
 
 // Per-card icon-badge tints for the floating feature cards, matching the Stitch home mockup.
@@ -40,6 +41,14 @@ const featuredServices: {
   { slug: "digital-printing", bg: "bg-teal", tone: "dark" },
   { slug: "litho-printing", bg: "bg-primary-300", tone: "light" },
   { slug: "delivery", bg: "bg-primary-900", tone: "dark" },
+];
+
+// The short "what happens next" list beside the homepage quote form — a
+// condensed HowItWorks, so the claims have to stay in step with that component.
+const quoteSteps = [
+  "Send us your brief using the form, or give us a call",
+  "We come back the same day with a price and a PDF proof",
+  "Approve it and we print, ready to collect or delivered UK\u2011wide",
 ];
 
 export default async function Home() {
@@ -127,7 +136,31 @@ export default async function Home() {
       </section>
 
       {/* Trusted by leading brands */}
-      <TrustBar />
+      <TrustBar showAccountsLink />
+
+      {/* Trade signpost. Everything above reads as retail, so the businesses
+          printing on behalf of a client get one line saying the door is open to
+          them too. Hidden in production until /trade can answer its questions. */}
+      {showTradeLinks && (
+        <section className="mx-auto w-full max-w-6xl px-4 pt-10 sm:px-6">
+          <div className="flex flex-col items-start justify-between gap-4 rounded-2xl bg-primary/5 px-5 py-5 sm:flex-row sm:items-center sm:px-7">
+            <div>
+              <p className="font-display text-lg font-bold text-ink">
+                Ordering print for your clients? We print trade.
+              </p>
+              <p className="mt-1 text-sm text-ink-2">
+                For designers, agencies, printers and planners. Printed in our
+                own {site.address.addressLocality} unit, files checked before
+                they run, and delivered anywhere in the UK.
+              </p>
+            </div>
+            <Button href="/trade" variant="outline" className="shrink-0">
+              Trade printing
+              <ArrowRight size={16} aria-hidden="true" />
+            </Button>
+          </div>
+        </section>
+      )}
 
       {/* Featured products */}
       <section className="mx-auto w-full max-w-6xl px-4 pt-16 sm:px-6 sm:pt-20">
@@ -286,50 +319,85 @@ export default async function Home() {
 
       {/* Embedded quote form + contact details */}
       <section className="px-4 py-16 sm:px-6 sm:py-20">
-        <div className="mx-auto grid w-full max-w-6xl gap-10 rounded-[2rem] bg-surface-2 p-6 shadow-card sm:p-10 lg:grid-cols-2 lg:gap-16 lg:p-14">
-          <div className="flex flex-col justify-center">
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              Need something printed fast?
-            </h2>
-            <p className="mt-4 max-w-md text-base leading-[1.7] text-ink-2">
-              Free design quotations and a {site.turnaround} turnaround on
-              standard jobs. Our team is ready to help you with any scale of
-              project.
-            </p>
-            <div className="mt-8 space-y-5">
-              <a href={site.phoneHref} className="flex items-center gap-4">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary text-on-primary">
-                  <Phone size={20} aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="block text-xs font-semibold tracking-wide text-ink-3 uppercase">
-                    Call us now
+        <div className="mx-auto grid w-full max-w-6xl overflow-hidden rounded-[2rem] bg-surface-1 shadow-card lg:grid-cols-[1fr_1.2fr]">
+          {/* Navy panel stretches to the form's height; its content sticks so
+              it stays in view while the visitor works down the form. */}
+          <div className="c-blue p-6 sm:p-10 lg:p-12">
+            <div className="lg:sticky lg:top-8">
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Need something printed fast?
+              </h2>
+              <p className="ts mt-4 max-w-md text-base leading-[1.7]">
+                Free design quotations and a {site.turnaround} turnaround on
+                standard jobs. Our team is ready to help you with any scale of
+                project.
+              </p>
+              <p className="ts mt-4 flex items-center gap-1.5 text-sm">
+                <Star
+                  size={14}
+                  className="fill-yellow-400 text-yellow-400"
+                  aria-hidden="true"
+                />
+                <strong className="font-bold text-white">
+                  {site.reviews.rating}/5
+                </strong>{" "}
+                on Google · {yearsTrading()}+ years trading
+              </p>
+
+              <p className="mt-10 text-xs font-semibold tracking-wide text-ink-3 uppercase">
+                What happens next
+              </p>
+              <ol className="mt-4 space-y-4">
+                {quoteSteps.map((step, i) => (
+                  <li key={step} className="flex items-start gap-3">
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-primary-900">
+                      {i + 1}
+                    </span>
+                    <span className="pt-0.5 text-sm leading-[1.6] text-white">
+                      {step}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="mt-10 space-y-3 border-t border-line pt-8">
+                <a
+                  href={site.phoneHref}
+                  className="flex items-center gap-4 rounded-2xl bg-card p-3 ring-1 ring-white/10 transition-colors hover:bg-white/12"
+                >
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white text-primary">
+                    <Phone size={18} aria-hidden="true" />
                   </span>
-                  <span className="font-display text-lg font-bold text-primary">
-                    {site.phone}
+                  <span>
+                    <span className="block text-xs font-semibold tracking-wide text-ink-3 uppercase">
+                      Call us now
+                    </span>
+                    <span className="font-display text-lg font-bold text-white">
+                      {site.phone}
+                    </span>
                   </span>
-                </span>
-              </a>
-              <a
-                href={`mailto:${site.email}`}
-                className="flex items-center gap-4"
-              >
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary text-on-primary">
-                  <Mail size={20} aria-hidden="true" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-xs font-semibold tracking-wide text-ink-3 uppercase">
-                    Email inquiries
+                </a>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="flex items-center gap-4 rounded-2xl bg-card p-3 ring-1 ring-white/10 transition-colors hover:bg-white/12"
+                >
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white text-primary">
+                    <Mail size={18} aria-hidden="true" />
                   </span>
-                  <span className="font-display text-lg font-bold break-all text-primary">
-                    {site.email}
+                  <span className="min-w-0">
+                    <span className="block text-xs font-semibold tracking-wide text-ink-3 uppercase">
+                      Email inquiries
+                    </span>
+                    <span className="font-display text-base font-bold break-all text-white sm:text-lg">
+                      {site.email}
+                    </span>
                   </span>
-                </span>
-              </a>
+                </a>
+              </div>
             </div>
           </div>
 
-          <div className="rounded-3xl bg-surface-1 p-5 shadow-card sm:p-7">
+          <div className="p-6 sm:p-10 lg:p-12">
             <QuoteForm />
           </div>
         </div>
