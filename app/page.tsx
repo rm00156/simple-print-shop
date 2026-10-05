@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/Button";
 import { GoogleReviews } from "@/components/GoogleReviews";
-import { HowItWorks } from "@/components/HowItWorks";
+import { HowItWorks, howItWorksSteps } from "@/components/HowItWorks";
 import { QuoteForm } from "@/components/QuoteForm";
 import { TrustBar } from "@/components/TrustBar";
 import { getCategory } from "@/content/categories";
@@ -43,13 +43,9 @@ const featuredServices: {
   { slug: "delivery", bg: "bg-primary-900", tone: "dark" },
 ];
 
-// The short "what happens next" list beside the homepage quote form — a
-// condensed HowItWorks, so the claims have to stay in step with that component.
-const quoteSteps = [
-  "Send us your brief using the form, or give us a call",
-  "We come back the same day with a price and a PDF proof",
-  "Approve it and we print, ready to collect or delivered UK\u2011wide",
-];
+// The short "what happens next" list beside the homepage quote form — the
+// condensed HowItWorks steps, taken from that component so the claims match.
+const quoteSteps = howItWorksSteps.map((step) => step.summary);
 
 export default async function Home() {
   const liveReviews = await getGoogleReviews();

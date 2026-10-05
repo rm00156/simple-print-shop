@@ -1,5 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
+import { site } from "@/content/site";
 
 // Real photos of the unit live in public/ (press-floor, finishing, shopfront) and
 // are small phone shots, 765–990px wide. They hold up at half width or in a strip,
@@ -9,18 +10,18 @@ import clsx from "clsx";
 export const premisesPhotos = {
   pressFloor: {
     src: "/press-floor.webp",
-    alt: "The press floor at Bluwave's unit in Beckenham, with a four-unit litho press and stock on pallets",
-    caption: "Our press floor in Beckenham",
+    alt: `The press floor at ${site.name}'s unit in ${site.address.addressLocality}, with a four-unit litho press and stock on pallets`,
+    caption: `Our press floor in ${site.address.addressLocality}`,
   },
   finishing: {
     src: "/finishing.webp",
-    alt: "Bluwave's finishing room, with folding and laminating machines",
+    alt: `${site.name}'s finishing room, with folding and laminating machines`,
     caption: "Folding, laminating and trimming, in-house",
   },
   shopfront: {
     src: "/shopfront.webp",
-    alt: "The front of Bluwave's unit on the Gardner Industrial Estate, Beckenham",
-    caption: "Unit 4, Gardner Industrial Estate",
+    alt: `The front of ${site.name}'s unit at ${site.address.streetAddress}, ${site.address.addressLocality}`,
+    caption: site.address.streetAddress,
   },
 } as const;
 

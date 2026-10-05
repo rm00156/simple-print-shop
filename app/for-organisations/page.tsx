@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ArrowRight,
   ArrowUpRight,
   CalendarClock,
   FileCheck,
   FolderOpen,
   MapPin,
-  Phone,
   ReceiptText,
 } from "lucide-react";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { Button } from "@/components/Button";
-import { ContactForm } from "@/components/ContactForm";
+import { AudienceHero } from "@/components/AudienceHero";
+import { EnquiryBand } from "@/components/EnquiryBand";
 import { PhotoFigure, premisesPhotos } from "@/components/PhotoFigure";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustBar } from "@/components/TrustBar";
@@ -91,54 +88,37 @@ export default function ForOrganisationsPage() {
 
   return (
     <>
-      <section className="c-blue px-4 pt-8 pb-20 sm:px-6 sm:pb-24">
-        <div className="mx-auto w-full max-w-6xl">
-          <Breadcrumbs items={[{ name: "For organisations" }]} />
-
-          <div className="mt-6 grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:items-center">
-            <div>
-              <p className="text-sm font-semibold tracking-wide text-accent uppercase">
-                Councils, NHS, charities and schools
-              </p>
-              <h1 className="mt-3 text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[42px]">
-                Print on account for organisations
-              </h1>
-              <p className="ts mt-4 max-w-lg text-base leading-[1.7]">
-                Printing for organisations since {site.foundedYear} — {years}{" "}
-                years — from our own unit in {site.address.addressLocality},
-                delivered anywhere in the UK. Banners, posters, leaflets and
-                event print, proofed before it runs and booked against the date
-                you actually need it.
-              </p>
-
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Button href={site.phoneHref} variant="onAccent">
-                  <Phone size={16} aria-hidden="true" />
-                  {site.phone}
-                </Button>
-                <Button href="#enquiry" variant="ghost" className="text-white">
-                  Ask about an account
-                  <ArrowRight size={16} aria-hidden="true" />
-                </Button>
-              </div>
-
-              <p className="ts mt-5 text-sm">
-                Just one job? You don&apos;t need an account.{" "}
-                <Link href="/quote" className="font-semibold text-white underline underline-offset-4">
-                  Request a quote
-                </Link>
-              </p>
-            </div>
-
-            <PhotoFigure
-              {...premisesPhotos.pressFloor}
-              sizes="(min-width: 768px) 40vw, 100vw"
-              priority
-              className="ring-1 ring-white/10"
-            />
-          </div>
-        </div>
-      </section>
+      <AudienceHero
+        breadcrumb="For organisations"
+        eyebrow="Councils, NHS, charities and schools"
+        title="Print on account for organisations"
+        intro={
+          <>
+            Printing for organisations since {site.foundedYear} — {years}{" "}
+            years — from our own unit in {site.address.addressLocality},
+            delivered anywhere in the UK. Banners, posters, leaflets and event
+            print, proofed before it runs and booked against the date you
+            actually need it.
+          </>
+        }
+        enquiryLabel="Ask about an account"
+        footnote={
+          <>
+            Just one job? You don&apos;t need an account.{" "}
+            <Link href="/quote" className="font-semibold text-white underline underline-offset-4">
+              Request a quote
+            </Link>
+          </>
+        }
+        photo={
+          <PhotoFigure
+            {...premisesPhotos.pressFloor}
+            sizes="(min-width: 768px) 40vw, 100vw"
+            priority
+            className="ring-1 ring-white/10"
+          />
+        }
+      />
 
       <TrustBar />
 
@@ -212,67 +192,15 @@ export default function ForOrganisationsPage() {
         </div>
       </section>
 
-      <section id="enquiry" className="c-teal scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
-          <div className="c-paper rounded-3xl bg-surface-2 p-6 shadow-xl sm:p-8">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-primary">
-              Ask about an account
-            </h2>
-            <p className="mt-2 text-sm leading-[1.7] text-ink-2">
-              Tell us about your organisation and what you print, and we&apos;ll
-              come back to you. No obligation, and no drip of marketing
-              afterwards.
-            </p>
-            <div className="mt-6">
-              <ContactForm
-                subject="Organisation — account enquiry"
-                messageLabel="About your organisation"
-                messagePlaceholder="Your organisation and team, what you print and roughly how often, and anything your finance team needs from a supplier."
-              />
-            </div>
-          </div>
-
-          <aside className="flex flex-col gap-6">
-            <div className="rounded-3xl bg-card p-6 sm:p-8">
-              <p className="text-lg font-bold text-white">Rather just ring?</p>
-              <p className="ts mt-2 text-sm leading-[1.7]">
-                You&apos;ll get someone who can answer on the spot, not a form
-                to fill in.
-              </p>
-              <a
-                href={site.phoneHref}
-                className="mt-4 flex items-center gap-2 text-base font-bold text-white"
-              >
-                <Phone size={18} aria-hidden="true" />
-                {site.phone}
-              </a>
-            </div>
-
-            <div className="rounded-3xl bg-card p-6 sm:p-8">
-              <p className="text-lg font-bold text-white">Sending files</p>
-              <p className="ts mt-2 text-sm leading-[1.7]">
-                Whether it&apos;s from your comms team or a Word document, here
-                is what helps a job run first time.
-              </p>
-              <Button
-                href="/artwork-guidelines"
-                variant="ghost"
-                size="sm"
-                className="mt-4 text-white"
-              >
-                Artwork guidelines
-              </Button>
-            </div>
-
-            <div className="rounded-3xl bg-card p-6 sm:p-8">
-              <p className="text-lg font-bold text-white">Where we are</p>
-              <p className="ts mt-2 text-sm leading-[1.7]">
-                {site.address.full}
-              </p>
-            </div>
-          </aside>
-        </div>
-      </section>
+      <EnquiryBand
+        heading="Ask about an account"
+        intro="Tell us about your organisation and what you print, and we'll come back to you. No obligation, and no drip of marketing afterwards."
+        subject="Organisation — account enquiry"
+        messageLabel="About your organisation"
+        messagePlaceholder="Your organisation and team, what you print and roughly how often, and anything your finance team needs from a supplier."
+        ringText="You'll get someone who can answer on the spot, not a form to fill in."
+        filesText="Whether it's from your comms team or a Word document, here is what helps a job run first time."
+      />
     </>
   );
 }

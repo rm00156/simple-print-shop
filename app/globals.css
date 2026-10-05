@@ -10,18 +10,18 @@
   Deep Navy anchors, Vibrant Cyan reserved for CTAs, Trust Gold for stars.
 */
 @theme {
-  --color-surface-1: #f7f9fb;
-  --color-surface-2: #ffffff;
+  --color-surface-1: var(--light-surface-1);
+  --color-surface-2: var(--light-surface-2);
 
   /* Card surface: white on light pages, frosted tile inside .c-blue. */
-  --color-card: #ffffff;
+  --color-card: var(--light-card);
 
-  --color-line: #e3e7ed;
+  --color-line: var(--light-line);
   --color-line-strong: #c4c6cf;
 
-  --color-ink: #0f172a;
-  --color-ink-2: #43474e;
-  --color-ink-3: #74777f;
+  --color-ink: var(--light-ink);
+  --color-ink-2: var(--light-ink-2);
+  --color-ink-3: var(--light-ink-3);
 
   --color-primary: #1a365d;
   --color-primary-hover: #142a49;
@@ -47,7 +47,7 @@
 
   --color-gold: #f59e0b;
 
-  --color-placeholder: #e9edf2;
+  --color-placeholder: var(--light-placeholder);
 
   --radius-token: 10px;
 
@@ -60,8 +60,22 @@
   --shadow-card-hover: 0px 12px 28px rgb(0 32 69 / 0.12);
 }
 
+/*
+  The light-page palette, defined once. @theme reads it for the page default and
+  .c-paper reads it to restore a white card inside a coloured band. The scopes
+  below only ever rebind --color-*, never these, so they always hold the light
+  values.
+*/
 :root {
   color-scheme: light;
+  --light-surface-1: #f7f9fb;
+  --light-surface-2: #ffffff;
+  --light-card: #ffffff;
+  --light-line: #e3e7ed;
+  --light-ink: #0f172a;
+  --light-ink-2: #43474e;
+  --light-ink-3: #74777f;
+  --light-placeholder: #e9edf2;
 }
 
 body {
@@ -113,18 +127,18 @@ h3 {
 /*
   Paper scope: hands a white card inside .c-blue or .c-teal back its light-page
   tokens. Without it, a form sat on the teal band inherits white ink and white
-  borders on a white card — labels and inputs vanish. Values mirror @theme.
+  borders on a white card — labels and inputs vanish.
 */
 .c-paper {
-  color: #0f172a;
-  --color-surface-1: #f7f9fb;
-  --color-surface-2: #ffffff;
-  --color-card: #ffffff;
-  --color-ink: #0f172a;
-  --color-ink-2: #43474e;
-  --color-ink-3: #74777f;
-  --color-line: #e3e7ed;
-  --color-placeholder: #e9edf2;
+  color: var(--light-ink);
+  --color-surface-1: var(--light-surface-1);
+  --color-surface-2: var(--light-surface-2);
+  --color-card: var(--light-card);
+  --color-ink: var(--light-ink);
+  --color-ink-2: var(--light-ink-2);
+  --color-ink-3: var(--light-ink-3);
+  --color-line: var(--light-line);
+  --color-placeholder: var(--light-placeholder);
 }
 
 /* Footer scope: ink-black treatment, independent of the light surface tokens above. */

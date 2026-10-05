@@ -1,25 +1,31 @@
-const process = [
+// Each step's `summary` is the one-line version shown beside the homepage quote
+// form, kept here so the two lists can't drift apart.
+export const howItWorksSteps = [
   {
     step: "1",
     title: "Send your brief",
+    summary: "Send us your brief using the form, or give us a call",
     description:
       "Request a quote online or give us a call with what you need — quantity, size, deadline and any artwork.",
   },
   {
     step: "2",
     title: "Free quote & a pdf proof",
+    summary: "We come back the same day with a price and, where needed, a PDF proof",
     description:
       "We'll come back to you the same day with a price and, where needed, a pdf proof for you to approve.",
   },
   {
     step: "3",
     title: "We print & finish",
+    summary: "Approve it and we print and finish it in-house",
     description:
       "Once you're happy, we print and finish your job in-house to our quality standard.",
   },
   {
     step: "4",
     title: "Free collection, or we deliver",
+    summary: "Collect it free, or we deliver it anywhere in the UK",
     description:
       "Pick it up free from our premises, or we'll arrange delivery across the UK — usually within 24-48 hours.",
   },
@@ -48,7 +54,7 @@ export function HowItWorks({
         </p>
       </div>
       <div className="mx-auto mt-12 grid w-full max-w-6xl auto-rows-fr grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-        {process.map((item) => (
+        {howItWorksSteps.map((item) => (
           <div
             key={item.step}
             className="rounded-3xl bg-surface-2 p-7 shadow-card"

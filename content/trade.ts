@@ -136,6 +136,21 @@ export const tradePageIsPublishable =
 export const showTradeLinks =
   tradePageIsPublishable || process.env.NODE_ENV !== "production";
 
+/**
+ * Which trade page a product category signposts, or null while the trade pages
+ * are unlinked (see showTradeLinks). The same product page serves two readers
+ * with opposite needs: families buying funeral stationery go to the dedicated
+ * funeral service, and funeral directors go to their own trade page. Every other
+ * category points the designer or printer who has landed on a retail page with a
+ * client's job to place at the general trade page.
+ */
+export function tradeLinkForCategory(categorySlug: string) {
+  if (!showTradeLinks) return null;
+  return categorySlug === "funeral-stationery"
+    ? ({ kind: "funeral", href: "/for-funeral-directors" } as const)
+    : ({ kind: "general", href: "/trade" } as const);
+}
+
 /** Products, framed for the funeral director rather than the family. */
 export const tradeProducts = [
   {

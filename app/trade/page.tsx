@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Phone } from "lucide-react";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { Button } from "@/components/Button";
-import { ContactForm } from "@/components/ContactForm";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { AudienceHero } from "@/components/AudienceHero";
 import { CategoryLinks } from "@/components/CategoryLinks";
+import { EnquiryBand } from "@/components/EnquiryBand";
 import { PhotoFigure, premisesPhotos } from "@/components/PhotoFigure";
+import { TradeCommitmentList } from "@/components/TradeCommitmentList";
 import { site, yearsTrading } from "@/content/site";
 import {
   answeredCommitments,
@@ -120,53 +120,36 @@ export default function TradePage() {
 
   return (
     <>
-      <section className="c-blue px-4 pt-8 pb-20 sm:px-6 sm:pb-24">
-        <div className="mx-auto w-full max-w-6xl">
-          <Breadcrumbs items={[{ name: "Trade printing" }]} />
-
-          <div className="mt-6 grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:items-center">
-            <div>
-              <p className="text-sm font-semibold tracking-wide text-accent uppercase">
-                Trade printing
-              </p>
-              <h1 className="mt-3 text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[42px]">
-                Trade printing for designers, agencies and printers
-              </h1>
-              <p className="ts mt-4 max-w-lg text-base leading-[1.7]">
-                Printing since {site.foundedYear} — {years} years — from our own
-                unit in {site.address.addressLocality}. You send the files, you
-                deal with the people who run the presses, and we deliver
-                anywhere in the UK.
-              </p>
-
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Button href={site.phoneHref} variant="onAccent">
-                  <Phone size={16} aria-hidden="true" />
-                  {site.phone}
-                </Button>
-                <Button href="#enquiry" variant="ghost" className="text-white">
-                  Open a trade enquiry
-                  <ArrowRight size={16} aria-hidden="true" />
-                </Button>
-              </div>
-
-              <p className="ts mt-5 text-sm">
-                Printing something for yourself?{" "}
-                <Link href="/quote" className="font-semibold text-white underline underline-offset-4">
-                  Request a quote
-                </Link>
-              </p>
-            </div>
-
-            <PhotoFigure
-              {...premisesPhotos.pressFloor}
-              sizes="(min-width: 768px) 40vw, 100vw"
-              priority
-              className="ring-1 ring-white/10"
-            />
-          </div>
-        </div>
-      </section>
+      <AudienceHero
+        breadcrumb="Trade printing"
+        eyebrow="Trade printing"
+        title="Trade printing for designers, agencies and printers"
+        intro={
+          <>
+            Printing since {site.foundedYear} — {years} years — from our own
+            unit in {site.address.addressLocality}. You send the files, you deal
+            with the people who run the presses, and we deliver anywhere in the
+            UK.
+          </>
+        }
+        enquiryLabel="Open a trade enquiry"
+        footnote={
+          <>
+            Printing something for yourself?{" "}
+            <Link href="/quote" className="font-semibold text-white underline underline-offset-4">
+              Request a quote
+            </Link>
+          </>
+        }
+        photo={
+          <PhotoFigure
+            {...premisesPhotos.pressFloor}
+            sizes="(min-width: 768px) 40vw, 100vw"
+            priority
+            className="ring-1 ring-white/10"
+          />
+        }
+      />
 
       <section className="px-4 py-14 sm:px-6 sm:py-20">
         <div className="mx-auto w-full max-w-6xl">
@@ -252,40 +235,7 @@ export default function TradePage() {
         </div>
       </section>
 
-      {answeredCommitments.length > 0 && (
-        <section className="px-4 py-14 sm:px-6 sm:py-20">
-          <div className="mx-auto w-full max-w-4xl">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-primary sm:text-3xl">
-              The answers you actually need
-            </h2>
-            <p className="mt-3 max-w-2xl text-base leading-[1.7] text-ink-2">
-              Every printer says fast. These are straight answers to the
-              questions trade customers ask us first.
-            </p>
-
-            <dl className="mt-8 flex flex-col gap-6">
-              {answeredCommitments.map((commitment) => (
-                <div
-                  key={commitment.question}
-                  className="flex gap-4 border-b border-line pb-6 last:border-0 last:pb-0"
-                >
-                  <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent/15 text-teal">
-                    <commitment.icon size={20} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <dt className="font-display text-lg font-bold text-ink">
-                      {commitment.question}
-                    </dt>
-                    <dd className="mt-1 text-sm leading-[1.7] text-ink-2">
-                      {commitment.answer}
-                    </dd>
-                  </div>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-      )}
+      <TradeCommitmentList audience="trade" />
 
       <section className="px-4 py-14 sm:px-6 sm:py-20">
         <div className="mx-auto w-full max-w-6xl">
@@ -312,67 +262,15 @@ export default function TradePage() {
         </div>
       </section>
 
-      <section id="enquiry" className="c-teal scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
-          <div className="c-paper rounded-3xl bg-surface-2 p-6 shadow-xl sm:p-8">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-primary">
-              Open a trade enquiry
-            </h2>
-            <p className="mt-2 text-sm leading-[1.7] text-ink-2">
-              Tell us about your business and the work you&apos;d send us, and
-              we&apos;ll come back to you. No obligation, and no drip of marketing
-              afterwards.
-            </p>
-            <div className="mt-6">
-              <ContactForm
-                subject="Trade enquiry"
-                messageLabel="About your business"
-                messagePlaceholder="Your business, the kind of work you'd send us, roughly how often, and who prints it for you at the moment."
-              />
-            </div>
-          </div>
-
-          <aside className="flex flex-col gap-6">
-            <div className="rounded-3xl bg-card p-6 sm:p-8">
-              <p className="text-lg font-bold text-white">Rather just ring?</p>
-              <p className="ts mt-2 text-sm leading-[1.7]">
-                Ask about trade work and you&apos;ll get someone who can answer on
-                the spot, not a form to fill in.
-              </p>
-              <a
-                href={site.phoneHref}
-                className="mt-4 flex items-center gap-2 text-base font-bold text-white"
-              >
-                <Phone size={18} aria-hidden="true" />
-                {site.phone}
-              </a>
-            </div>
-
-            <div className="rounded-3xl bg-card p-6 sm:p-8">
-              <p className="text-lg font-bold text-white">Sending files</p>
-              <p className="ts mt-2 text-sm leading-[1.7]">
-                Bleed, resolution, colour and fonts — what we need from your
-                files so the job runs first time.
-              </p>
-              <Button
-                href="/artwork-guidelines"
-                variant="ghost"
-                size="sm"
-                className="mt-4 text-white"
-              >
-                Artwork guidelines
-              </Button>
-            </div>
-
-            <div className="rounded-3xl bg-card p-6 sm:p-8">
-              <p className="text-lg font-bold text-white">Where we are</p>
-              <p className="ts mt-2 text-sm leading-[1.7]">
-                {site.address.full}
-              </p>
-            </div>
-          </aside>
-        </div>
-      </section>
+      <EnquiryBand
+        heading="Open a trade enquiry"
+        intro="Tell us about your business and the work you'd send us, and we'll come back to you. No obligation, and no drip of marketing afterwards."
+        subject="Trade enquiry"
+        messageLabel="About your business"
+        messagePlaceholder="Your business, the kind of work you'd send us, roughly how often, and who prints it for you at the moment."
+        ringText="Ask about trade work and you'll get someone who can answer on the spot, not a form to fill in."
+        filesText="Bleed, resolution, colour and fonts — what we need from your files so the job runs first time."
+      />
 
       {/* Dev-only. Lists what's still unanswered so the gaps are visible while the
           page is being worked on — the answers themselves are chased in

@@ -7,7 +7,7 @@ import { Button } from "@/components/Button";
 import { ProductCard } from "@/components/ProductCard";
 import { categories, getCategory, slugifyItemName } from "@/content/categories";
 import { site, yearsTrading } from "@/content/site";
-import { showTradeLinks } from "@/content/trade";
+import { tradeLinkForCategory } from "@/content/trade";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -47,17 +47,11 @@ export default async function ServicePage({ params }: Props) {
   const funeralHandoff =
     category.slug === "funeral-stationery" ? funeralSiteUrl : null;
 
-  // The same page serves two readers with opposite needs. Families go to the
-  // dedicated funeral service; funeral directors go to the trade page, which
-  // only exists as a destination once it has real commitments on it.
-  const tradeHandoff =
-    category.slug === "funeral-stationery" && showTradeLinks
-      ? "/for-funeral-directors"
-      : null;
-
-  // Every other category gets the general trade signpost, for the designer or
-  // printer who has landed on a retail page with a client's job to place.
-  const showGeneralTrade = showTradeLinks && category.slug !== "funeral-stationery";
+  // Funeral directors get their own trade page; every other category gets the
+  // general trade signpost (see tradeLinkForCategory).
+  const tradeLink = tradeLinkForCategory(category.slug);
+  const tradeHandoff = tradeLink?.kind === "funeral" ? tradeLink.href : null;
+  const showGeneralTrade = tradeLink?.kind === "general";
 
   const WatermarkIcon = category.icon;
 

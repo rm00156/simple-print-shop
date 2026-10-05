@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { getCategory } from "@/content/categories";
 
-// Compact icon-and-tagline tiles linking to product categories. Used by the
-// audience pages (/trade, /for-organisations) to show the work that audience
-// most often sends, as a way into the full product list.
+// Compact icon-and-tagline tiles linking to product categories. Used on /trade
+// to show the kinds of work trade customers most often send, as a way into the
+// full product list. (/for-organisations shows specific products with photos
+// instead, via ProductCard.)
 export function CategoryLinks({ slugs }: { slugs: readonly string[] }) {
   const categories = slugs.map((slug) => {
     const category = getCategory(slug);
