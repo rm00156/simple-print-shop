@@ -60,6 +60,26 @@ const audiences: {
     href: "/for-funeral-directors",
     cta: "For funeral directors",
   },
+  {
+    title: "Sign makers and shopfitters",
+    detail: "Site boards, hoardings, Heras banners and window graphics for the jobs your kit doesn't cover.",
+    image: "/hoarding-boards.webp",
+  },
+  {
+    title: "Photographers",
+    detail: "Canvases and photo prints for your clients, printed to do the original justice.",
+    image: "/stretched-canvas.webp",
+  },
+  {
+    title: "Venues, hotels and caterers",
+    detail: "Menus, table plans and event print for the weddings and functions you host.",
+    image: "/menu.webp",
+  },
+  {
+    title: "Branding and packaging studios",
+    detail: "Swing tags, labels, stickers and printed boxes for the brands you look after.",
+    image: "/swing-tags.webp",
+  },
 ];
 
 // The argument, in a trade buyer's terms. Never price — London costs make that

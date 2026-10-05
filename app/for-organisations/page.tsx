@@ -59,7 +59,7 @@ const offers = [
   {
     icon: FolderOpen,
     title: "Artwork kept for the next run",
-    detail: "Forms, letterheads and regular leaflets stay on file, so a reprint is one email.",
+    detail: "Banners, posters and regular leaflets stay on file, so a reprint is one email.",
   },
   {
     icon: MapPin,
@@ -69,16 +69,16 @@ const offers = [
 ];
 
 // What organisations most often order, as real products with their photos —
-// office forms and stationery, reports, and print for open days and events.
+// banners, posters, leaflets and print for open days and events.
 // [category slug, item slug]; a renamed product fails the build rather than
 // leaving a dead card.
 const organisationProducts = [
   ["schools", "open-day-signage-banners"],
   ["schools", "prospectuses-open-day-brochures"],
-  ["booklets-catalogues-and-brochures", "reports"],
-  ["copying-and-business-forms", "carbonless-forms"],
-  ["business-stationery", "letterheads"],
-  ["booklets-catalogues-and-brochures", "programmes"],
+  ["flyers-leaflets-and-invites", "leaflets"],
+  ["marketing-and-promo", "roller-banners"],
+  ["marketing-and-promo", "vinyl-banners"],
+  ["marketing-and-promo", "posters"],
 ] as const;
 
 export default function ForOrganisationsPage() {
@@ -106,7 +106,7 @@ export default function ForOrganisationsPage() {
               <p className="ts mt-4 max-w-lg text-base leading-[1.7]">
                 Printing for organisations since {site.foundedYear} — {years}{" "}
                 years — from our own unit in {site.address.addressLocality},
-                delivered anywhere in the UK. Forms, reports, newsletters and
+                delivered anywhere in the UK. Banners, posters, leaflets and
                 event print, proofed before it runs and booked against the date
                 you actually need it.
               </p>
@@ -175,8 +175,7 @@ export default function ForOrganisationsPage() {
                 What organisations order
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-[1.7] text-ink-2 sm:text-base">
-                Office forms and stationery, reports, and print for open days
-                and events.
+                Banners, posters, leaflets and print for open days and events.
               </p>
             </div>
             <Link
