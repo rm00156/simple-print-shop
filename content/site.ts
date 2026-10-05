@@ -1,7 +1,7 @@
 import { FileCheck, MapPin, Paintbrush, type LucideIcon } from "lucide-react";
 import { categories } from "./categories";
 import { services } from "./services";
-import { tradePageIsPublishable } from "./trade";
+import { showTradeLinks } from "./trade";
 
 // Absolute origin, no trailing slash. Needed wherever a URL has to be absolute rather
 // than root-relative: metadataBase in the root layout, and the BreadcrumbList JSON-LD,
@@ -144,6 +144,23 @@ export const navLinks: NavLink[] = [
       label: s.name,
     })),
   },
+  // Top level rather than under About: an organisation or a trade buyer scanning
+  // the header is looking for the one word that says we take their work. The
+  // trade pages join the menu only once they can answer their questions (see
+  // showTradeLinks); until then this is a plain link to the organisations page.
+  {
+    href: "/for-organisations",
+    label: "Business",
+    ...(showTradeLinks
+      ? {
+          children: [
+            { href: "/for-organisations", label: "For organisations" },
+            { href: "/trade", label: "Trade printing" },
+            { href: "/for-funeral-directors", label: "For funeral directors" },
+          ],
+        }
+      : {}),
+  },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -169,6 +186,7 @@ export const footerColumns = [
       { href: "/quote", label: "Request a Quote" },
       { href: "/contact", label: "Contact Us" },
       { href: "/shipping", label: "Shipping Info" },
+      { href: "/artwork-guidelines", label: "Artwork Guidelines" },
       { href: "/faq", label: "FAQ" },
     ],
   },
@@ -176,21 +194,23 @@ export const footerColumns = [
     title: "About",
     links: [{ href: "/about", label: "About Us" }],
   },
-  // Trade lanes get their own column rather than being filed under About — a
-  // funeral director scanning a footer is looking for a word that means them.
-  // The whole column disappears while the page is unfinished, on the same flag
-  // that noindexes it and holds it out of the sitemap, so there's never a
-  // footer link to a page that can't answer the questions it's there to answer.
-  ...(tradePageIsPublishable
-    ? [
-        {
-          title: "Trade",
-          links: [
+  // Business lanes get their own column rather than being filed under About —
+  // a council buyer or a designer scanning a footer is looking for a word that
+  // means them. The trade links stay out in production while those pages are
+  // unfinished (see showTradeLinks), so there's never a footer link to a page
+  // that can't answer the questions it's there to answer.
+  {
+    title: "Business",
+    links: [
+      { href: "/for-organisations", label: "For organisations" },
+      ...(showTradeLinks
+        ? [
+            { href: "/trade", label: "Trade printing" },
             { href: "/for-funeral-directors", label: "For funeral directors" },
-          ],
-        },
-      ]
-    : []),
+          ]
+        : []),
+    ],
+  },
   {
     title: "Services",
     links: services.map((s) => ({ href: `/services/${s.slug}`, label: s.name })),

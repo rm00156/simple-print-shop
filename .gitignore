@@ -49,3 +49,7 @@ next-env.d.ts
 
 # local helper, not part of the app
 set-worker-secrets.sh
+
+# private client notes, kept locally only
+/notes/
+*.xlsx
