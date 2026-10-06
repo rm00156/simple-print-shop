@@ -58,9 +58,13 @@ const ARTWORK_OPTIONS: { value: "unsure" | "ready" | "date" | "design"; label: s
   { value: "design", label: "We need you to design it" },
 ];
 
-function getProductName(needSlug: string, productSlug: string): string {
+function getProductItem(needSlug: string, productSlug: string) {
   const category = categories.find((c) => c.slug === needSlug);
-  return category?.items.find((i) => slugifyItemName(i.name) === productSlug)?.name ?? "";
+  return category?.items.find((i) => slugifyItemName(i.name) === productSlug);
+}
+
+function getProductName(needSlug: string, productSlug: string): string {
+  return getProductItem(needSlug, productSlug)?.name ?? "";
 }
 
 export function QuoteForm({
@@ -113,7 +117,11 @@ export function QuoteForm({
       stock: initialAxisValues.stock,
       pages: initialAxisValues.pages,
       quantity: initialQuantity,
-      size: initialPricing?.fixedSize ?? initialAxisValues.size ?? "",
+      size:
+        initialPricing?.fixedSize ??
+        initialAxisValues.size ??
+        getProductItem(initialNeed, initialProduct)?.sizeOptions?.[0] ??
+        "",
       neededBy: "",
       artworkReady: "unsure",
       artworkReadyDate: "",
@@ -150,6 +158,7 @@ export function QuoteForm({
   const maxQuantity = pricing ? getMaxQuantity(pricing, axisValues) : 0;
   const price = pricing && !customQuantity ? getPrice(pricing, { ...axisValues, quantity }) : undefined;
   const sizeAxis = pricing?.axes.find((a) => a.field === "size");
+  const itemSizeOptions = pricing ? undefined : getProductItem(need, productSlug)?.sizeOptions;
   const extraAxes = pricing?.axes.filter((a) => a.field === "stock" || a.field === "pages") ?? [];
 
   // Null during SSR and hydration, the real date thereafter — the server and the
@@ -225,10 +234,14 @@ export function QuoteForm({
         shouldValidate: false,
       });
     } else {
+      // Cleared first for the same reason as the axes above: the incoming <select>
+      // may already have adopted its first option into form state.
       setValue("size", "", { shouldValidate: false });
+      const firstSize = getProductItem(getValues("need"), productSlug)?.sizeOptions?.[0];
+      if (firstSize) setValue("size", firstSize, { shouldValidate: false });
       setValue("quantity", NaN, { shouldValidate: false });
     }
-  }, [productSlug, setValue]);
+  }, [productSlug, setValue, getValues]);
 
   // Changing a non-quantity axis (e.g. poster size, booklet page count) can make
   // the currently selected quantity unavailable — some combinations are only
@@ -652,6 +665,20 @@ export function QuoteForm({
               {sizeAxis.options.map((opt) => (
                 <option key={opt.value} value={opt.value}>
                   {opt.label}
+                </option>
+              ))}
+            </select>
+          ) : itemSizeOptions ? (
+            <select
+              id="size"
+              className={inputClasses}
+              aria-invalid={!!errors.size}
+              aria-describedby={errors.size ? "size-error" : undefined}
+              {...register("size")}
+            >
+              {itemSizeOptions.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
                 </option>
               ))}
             </select>
