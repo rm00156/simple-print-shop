@@ -6,7 +6,7 @@ import { GoogleReviews } from "@/components/GoogleReviews";
 import { HowItWorks, howItWorksSteps } from "@/components/HowItWorks";
 import { QuoteForm } from "@/components/QuoteForm";
 import { TrustBar } from "@/components/TrustBar";
-import { getCategory } from "@/content/categories";
+import { getCategory, getCategoryItem } from "@/content/categories";
 import { getService } from "@/content/services";
 import { features, site, testimonials, yearsTrading } from "@/content/site";
 import { showTradeLinks } from "@/content/trade";
@@ -20,11 +20,12 @@ const featureTints = [
 ];
 
 // The four product tiles surfaced on the homepage, mirroring the mockup's bento row.
-const featuredProducts: string[] = [
-  "business-stationery",
-  "flyers-leaflets-and-invites",
-  "booklets-catalogues-and-brochures",
-  "copying-and-business-forms",
+// A tile with `item` set links to that item instead of its category.
+const featuredProducts: { category: string; item?: string }[] = [
+  { category: "business-stationery" },
+  { category: "flyers-leaflets-and-invites" },
+  { category: "booklets-catalogues-and-brochures" },
+  { category: "copying-and-business-forms", item: "sewing-patterns" },
 ];
 
 // The four services shown in the homepage panel row, matching the mockup's
@@ -179,20 +180,28 @@ export default async function Home() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredProducts.map((slug) => {
-            const category = getCategory(slug);
+          {featuredProducts.map(({ category: categorySlug, item: itemSlug }) => {
+            const category = getCategory(categorySlug);
             if (!category) return null;
+            const found = itemSlug ? getCategoryItem(categorySlug, itemSlug) : undefined;
+            if (itemSlug && !found) return null;
+            const tile = found
+              ? { name: found.item.name, image: found.item.image, text: found.item.description }
+              : { name: category.name, image: category.image, text: category.tagline };
+            const href = itemSlug
+              ? `/products/${categorySlug}/${itemSlug}`
+              : `/products/${categorySlug}`;
             return (
               <Link
-                key={slug}
-                href={`/products/${slug}`}
+                key={href}
+                href={href}
                 className="group flex flex-col rounded-3xl border border-line bg-surface-2 p-4 shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover"
               >
                 <div className="relative mb-4 aspect-square overflow-hidden rounded-2xl bg-surface-1">
-                  {category.image && (
+                  {tile.image && (
                     <Image
-                      src={category.image}
-                      alt={`${category.name} - quality printing services by Bluwave`}
+                      src={tile.image}
+                      alt={`${tile.name} - quality printing services by Bluwave`}
                       fill
                       sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -200,10 +209,10 @@ export default async function Home() {
                   )}
                 </div>
                 <h3 className="font-display text-lg font-bold text-ink">
-                  {category.name}
+                  {tile.name}
                 </h3>
                 <p className="mt-1 mb-4 line-clamp-2 flex-1 text-sm text-ink-2">
-                  {category.tagline}
+                  {tile.text}
                 </p>
                 <span className="mt-auto inline-flex items-center justify-center rounded-xl bg-surface-1 py-3 text-sm font-bold text-ink-2 transition-colors group-hover:bg-primary group-hover:text-on-primary">
                   Explore

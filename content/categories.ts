@@ -1146,7 +1146,7 @@ export const categories: Category[] = [
     intro:
       "Black and white and colour copying, plus business forms for the office.",
     icon: Copy,
-    image: "/sewing-patterns.webp",
+    image: "/copying-and-business-forms.webp",
     items: [
       {
         name: "Black and white copies",
