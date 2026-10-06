@@ -16,6 +16,7 @@ import {
   Megaphone,
   Mail,
   Package,
+  ScissorsLineDashed,
   type LucideIcon,
 } from "lucide-react";
 
@@ -42,6 +43,10 @@ export type CategoryItem = {
   highlights?: { label: string; detail: string }[];
   // A closing note (e.g. proofing/delivery caveat) shown after highlights.
   note?: string;
+  // Sizes offered on the quote form for an item with no pricing matrix (priced
+  // items take theirs from the size axis in content/pricing.ts). Without this
+  // the form asks for the size as free text.
+  sizeOptions?: string[];
   tags?: string[];
   badge?: string;
   icon?: LucideIcon;
@@ -1141,7 +1146,7 @@ export const categories: Category[] = [
     intro:
       "Black and white and colour copying, plus business forms for the office.",
     icon: Copy,
-    image: "/forms.webp",
+    image: "/sewing-patterns.webp",
     items: [
       {
         name: "Black and white copies",
@@ -1242,6 +1247,34 @@ export const categories: Category[] = [
         ],
         tags: ["Large format", "Fast turnaround"],
         image: "/plan-printing.webp",
+      },
+      {
+        name: "Sewing patterns",
+        description:
+          "PDF sewing patterns printed true to scale in A0, A1, A2, A3 or A4, and bigger if needed — ready to cut, with no taping sheets together.",
+        longDescription: [
+          "We print sewing patterns in A0, A1, A2, A3 and A4, and bigger than A0 if your pattern needs it. Most PDF patterns come with an A0 or \"copyshop\" file alongside the tiled A4 version, and that's usually the one to send us: we print it at 100% scale on our large-format printers, so the pattern pieces come off in one sheet rather than as a stack of pages to trim and tape together on the floor. Check the test square on the first page and it'll measure exactly as the designer intended.",
+          "We print in black and white for straightforward patterns, or in colour when the designer uses coloured lines to tell sizes apart. Home sewers can order a single pattern, and pattern designers and sewing teachers can order bulk runs for kits and classes. Collect from us or have them delivered anywhere in the UK.",
+        ],
+        highlights: [
+          {
+            label: "True to scale",
+            detail: "Printed at 100% so the test square measures correctly.",
+          },
+          {
+            label: "A0 to A4, and bigger",
+            detail: "A0, A1, A2, A3 or A4, with larger sizes on request.",
+          },
+          {
+            label: "Mono or colour",
+            detail: "Colour when the pattern uses coloured lines for sizes.",
+          },
+        ],
+        note: "Only send patterns you've bought or have permission to print: most designers allow copyshop printing for personal use.",
+        sizeOptions: ["A0", "A1", "A2", "A3", "A4", "Bigger than A0"],
+        tags: ["A0 to A4", "Larger on request"],
+        image: "/sewing-patterns.webp",
+        icon: ScissorsLineDashed,
       },
       {
         name: "Carbonless forms",

@@ -20,11 +20,11 @@ const featureTints = [
 ];
 
 // The four product tiles surfaced on the homepage, mirroring the mockup's bento row.
-const featuredProducts: { slug: string; badge?: string }[] = [
-  { slug: "business-stationery", badge: "Popular" },
-  { slug: "flyers-leaflets-and-invites" },
-  { slug: "booklets-catalogues-and-brochures" },
-  { slug: "copying-and-business-forms", badge: "Essential" },
+const featuredProducts: string[] = [
+  "business-stationery",
+  "flyers-leaflets-and-invites",
+  "booklets-catalogues-and-brochures",
+  "copying-and-business-forms",
 ];
 
 // The four services shown in the homepage panel row, matching the mockup's
@@ -179,7 +179,7 @@ export default async function Home() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredProducts.map(({ slug, badge }) => {
+          {featuredProducts.map((slug) => {
             const category = getCategory(slug);
             if (!category) return null;
             return (
@@ -197,11 +197,6 @@ export default async function Home() {
                       sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                  )}
-                  {badge && (
-                    <span className="absolute top-3 left-3 rounded-full bg-gold px-2.5 py-1 text-[11px] font-bold tracking-wide text-primary-900 uppercase">
-                      {badge}
-                    </span>
                   )}
                 </div>
                 <h3 className="font-display text-lg font-bold text-ink">
