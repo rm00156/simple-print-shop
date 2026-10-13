@@ -8,7 +8,14 @@ import { QuoteForm } from "@/components/QuoteForm";
 import { TrustBar } from "@/components/TrustBar";
 import { getCategory, getCategoryItem } from "@/content/categories";
 import { getService } from "@/content/services";
-import { features, site, testimonials, yearsTrading } from "@/content/site";
+import {
+  businessId,
+  features,
+  site,
+  siteUrl,
+  testimonials,
+  yearsTrading,
+} from "@/content/site";
 import { showTradeLinks } from "@/content/trade";
 import { getGoogleReviews } from "@/lib/google-reviews";
 
@@ -48,11 +55,30 @@ const featuredServices: {
 // condensed HowItWorks steps, taken from that component so the claims match.
 const quoteSteps = howItWorksSteps.map((step) => step.summary);
 
+// Google's site-name source, which it reads from the homepage only. Without it,
+// Google picks the name it shows above the result itself, and may show the domain.
+// The alternate names are the other ways people refer to the business: the
+// domain name and the name of its Google listing.
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: site.name,
+  alternateName: ["The Bluwave Group", "Bluwave Printers"],
+  url: `${siteUrl}/`,
+  publisher: { "@id": businessId },
+};
+
 export default async function Home() {
   const liveReviews = await getGoogleReviews();
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+
       {/* Hero */}
       <section className="c-blue relative isolate overflow-hidden px-4 pt-24 pb-16 sm:px-6 md:pt-32 md:pb-20">
         <video

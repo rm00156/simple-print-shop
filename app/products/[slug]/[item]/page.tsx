@@ -16,6 +16,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Button } from "@/components/Button";
+import { PriceTable } from "@/components/PriceTable";
 import { ProductCard } from "@/components/ProductCard";
 import { QuoteForm } from "@/components/QuoteForm";
 import {
@@ -23,9 +24,10 @@ import {
   getCategoryItem,
   slugifyItemName,
 } from "@/content/categories";
-import { getFromPrice } from "@/content/pricing";
-import { site } from "@/content/site";
+import { getFromPrice, pricingCatalog } from "@/content/pricing";
+import { businessId, site, siteUrl } from "@/content/site";
 import { tradeLinkForCategory } from "@/content/trade";
+import { openGraph } from "@/lib/metadata";
 
 type Props = {
   params: Promise<{ slug: string; item: string }>;
@@ -55,6 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: found.item.name,
     description: found.item.description,
     alternates: { canonical: `/products/${slug}/${itemSlug}` },
+    openGraph: openGraph(found.item.image ?? found.category.image, found.item.name),
   };
 }
 
@@ -93,6 +96,7 @@ export default async function ProductPage({ params }: Props) {
     ...category.items.slice(0, itemIndex),
   ].slice(0, 3);
   const fromPrice = getFromPrice(itemSlug);
+  const pricing = pricingCatalog[itemSlug];
 
   // Two images for the quality band: this product plus a sibling (falls back to
   // the category shot) so the pair never repeats the same picture.
@@ -102,6 +106,32 @@ export default async function ProductPage({ params }: Props) {
       category.image,
   ].filter(Boolean) as string[];
 
+  // Product markup for the product snippet in search results, which can show "From £x"
+  // under the listing. It's only emitted when there is a price: Search Console flags a
+  // Product node that has no offers, review or rating. The price is the same ex-VAT
+  // figure shown in the hero, and Google requires the two to match. No rating here: the
+  // Google reviews are reviews of the business, not of this product.
+  const productJsonLd =
+    fromPrice != null && pricing
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: item.name,
+          description: item.description,
+          url: `${siteUrl}/products/${category.slug}/${itemSlug}`,
+          ...(heroImage ? { image: `${siteUrl}${heroImage}` } : {}),
+          brand: { "@type": "Brand", name: site.name },
+          offers: {
+            "@type": "AggregateOffer",
+            lowPrice: fromPrice.toFixed(2),
+            highPrice: Math.max(...pricing.rows.map((r) => r.price)).toFixed(2),
+            offerCount: pricing.rows.length,
+            priceCurrency: "GBP",
+            seller: { "@id": businessId },
+          },
+        }
+      : null;
+
   // Star row for the trust badge — full stars, then a half for the remainder.
   const rating = site.reviews.rating;
   const fullStars = Math.floor(rating);
@@ -109,6 +139,13 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
+      {productJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        />
+      )}
+
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="relative h-[400px] w-full sm:h-[500px] md:h-[560px]">
@@ -236,10 +273,62 @@ export default async function ProductPage({ params }: Props) {
             </p>
           )}
 
-          <p className="mt-8 max-w-2xl text-base font-medium leading-[1.7] text-ink-2">
-            Made to your spec — choose your size, sheet count and paper stock.
-            Tell us what you need below and we&apos;ll quote it exactly.
-          </p>
+          {item.specs && item.specs.length > 0 && (
+            <div className="mt-10 max-w-2xl">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-primary">
+                Specifications
+              </h2>
+              <dl className="mt-4 divide-y divide-line/60 rounded-2xl bg-surface-2 px-5 shadow-card">
+                {item.specs.map(({ label, value }) => (
+                  <div key={label} className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                    <dt className="text-sm font-bold text-ink">{label}</dt>
+                    <dd className="text-sm leading-[1.6] text-ink-2 sm:col-span-2">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
+
+          {pricing && <PriceTable pricing={pricing} />}
+
+          {item.faqs && item.faqs.length > 0 && (
+            <div className="mt-10 max-w-2xl">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-primary">
+                Common questions
+              </h2>
+              <div className="mt-4 flex flex-col gap-3">
+                {item.faqs.map((faq) => (
+                  <details
+                    key={faq.question}
+                    className="group rounded-2xl bg-surface-2 px-5 py-4 shadow-card"
+                  >
+                    {/* Same "+" marker as the /faq page. */}
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                      {faq.question}
+                      <span
+                        aria-hidden="true"
+                        className="text-ink-2 transition-transform group-open:rotate-45"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <p className="mt-3 text-base leading-[1.7] text-ink-2">{faq.answer}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Funeral items hand off to the sister site instead of showing the quote
+              form, so there's nothing "below" to point at. The wording stays general
+              because it appears on every product: stickers, canvas and boxes have no
+              "sheet count" or "paper stock". */}
+          {!funeralHandoff && (
+            <p className="mt-8 max-w-2xl text-base font-medium leading-[1.7] text-ink-2">
+              Everything is made to order. Tell us the size, quantity and finish
+              you need below and we&apos;ll quote it exactly.
+            </p>
+          )}
 
           <div className="mt-8 flex flex-col items-start justify-between gap-3 rounded-2xl bg-primary/5 px-5 py-4 sm:flex-row sm:items-center">
             <p className="font-medium text-ink-2">

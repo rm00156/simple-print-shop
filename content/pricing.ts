@@ -30,6 +30,11 @@ export type ProductPricing = {
   // the quote form fixes the Size field to this rather than asking for free
   // text on something that was never actually a choice.
   fixedSize?: string;
+  // The stock the prices are for, when the sheet states it but it isn't one of the
+  // axes. Worded as "Prices are for…" because the product copy also offers other
+  // stocks (business cards up to 700gsm, outdoor posters) that are quoted separately.
+  // Shown with the price table on the product page.
+  stockNote?: string;
 };
 
 export type SelectedAxisValues = Partial<Record<AxisField, string>>;
@@ -129,6 +134,7 @@ const businessCards: ProductPricing = {
   ],
   excludedNote: "Excludes matt lamination (quoted on request) and artwork design (from £45).",
   fixedSize: "85x55mm",
+  stockNote: "Prices are for 350gsm matt or 400gsm silk card.",
 };
 
 // Sheet is titled "Leaflets & Flyers" and prices flat sheets only. That
@@ -390,6 +396,7 @@ const posters: ProductPricing = {
   // runs of those sizes fall into the "above max" quantity option naturally,
   // since getAvailableQuantities is filtered per selected size.
   excludedNote: "Single-sided only. Excludes finishing options such as lamination — ask for a quote.",
+  stockNote: "Prices are for 170gsm silk or matt paper.",
 };
 
 const booklets: ProductPricing = {
@@ -433,6 +440,7 @@ const booklets: ProductPricing = {
   // 8pp is only priced up to a quantity of 100 — same "above max" handling
   // as posters, filtered per selected page count.
   excludedNote: "Excludes matt lamination (quoted on request) and artwork design (from £45).",
+  stockNote: "Prices are for a 300gsm cover with 150gsm text pages.",
 };
 
 const rollerBanners: ProductPricing = {

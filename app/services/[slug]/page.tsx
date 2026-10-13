@@ -20,6 +20,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Button } from "@/components/Button";
 import { getService, services } from "@/content/services";
 import { site } from "@/content/site";
+import { openGraph } from "@/lib/metadata";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -70,6 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: service.name,
     description: service.metaDescription,
     alternates: { canonical: `/services/${service.slug}` },
+    openGraph: openGraph(service.image, service.name),
   };
 }
 

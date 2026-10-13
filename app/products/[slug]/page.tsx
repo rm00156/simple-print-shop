@@ -8,6 +8,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { categories, getCategory, slugifyItemName } from "@/content/categories";
 import { site, yearsTrading } from "@/content/site";
 import { tradeLinkForCategory } from "@/content/trade";
+import { openGraph } from "@/lib/metadata";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: category.name,
     description: category.metaDescription,
     alternates: { canonical: `/products/${category.slug}` },
+    openGraph: openGraph(category.image, category.name),
   };
 }
 
