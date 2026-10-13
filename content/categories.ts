@@ -43,6 +43,13 @@ export type CategoryItem = {
   highlights?: { label: string; detail: string }[];
   // A closing note (e.g. proofing/delivery caveat) shown after highlights.
   note?: string;
+  // Hard facts as a table: sizes, materials, finishes, minimum order, turnaround.
+  // Only add values the business has confirmed. A wrong stock weight or size on a
+  // printer's site leads to a wrong quote, which is worse than leaving it blank. The
+  // section is hidden when this is unset.
+  specs?: { label: string; value: string }[];
+  // Questions customers actually ask about this product, from enquiries. Hidden when unset.
+  faqs?: { question: string; answer: string }[];
   // Sizes offered on the quote form for an item with no pricing matrix (priced
   // items take theirs from the size axis in content/pricing.ts). Without this
   // the form asks for the size as free text.
@@ -106,7 +113,6 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Spot UV", "Matte or gloss"],
-        badge: "Bestseller",
         image: "/bcards.webp",
       },
       {
@@ -1366,7 +1372,6 @@ export const categories: Category[] = [
           },
         ],
         tags: ["Wire-bound", "Tent-fold desk format"],
-        badge: "Bestseller",
         image: "/desktop-calendars.webp",
       },
       {

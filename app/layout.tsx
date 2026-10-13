@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { site, siteUrl } from "@/content/site";
+import { businessId, site, siteUrl } from "@/content/site";
+import { openGraph } from "@/lib/metadata";
 import "./globals.css";
 
 // Quicksand is a variable font (300–700), so no explicit weight list is needed.
@@ -47,7 +48,8 @@ const quicksand = localFont({
 const CF_BEACON_TOKEN = "e67558a00c8e4203a45a015e4b9c0031";
 
 // Both place names the unit is findable under, kept under ~60 characters so search
-// results don't truncate it. Used for the document, OG and Twitter titles alike.
+// results don't truncate it. Pages without their own title use it for the document, OG
+// and Twitter titles alike.
 const siteTitle = "Bluwave — print shop in Lower Sydenham & Beckenham";
 
 export const metadata: Metadata = {
@@ -67,27 +69,10 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   manifest: "/site.webmanifest",
-  openGraph: {
-    type: "website",
-    locale: "en_GB",
-    siteName: site.name,
-    title: siteTitle,
-    description: site.description,
-    images: [
-      {
-        url: "/hero1.webp",
-        width: 1536,
-        height: 1024,
-        alt: site.name,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteTitle,
-    description: site.description,
-    images: ["/hero1.webp"],
-  },
+  // Per-page og/twitter titles and descriptions come from each page's own metadata
+  // (see lib/metadata.ts). Twitter has no images of its own so it reuses the og image.
+  openGraph: openGraph(),
+  twitter: { card: "summary_large_image" },
   robots: {
     index: true,
     follow: true,
@@ -115,9 +100,18 @@ const address =
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  // Lets the homepage's WebSite node point at this one as its publisher.
+  "@id": businessId,
   name: site.name,
   telephone: site.phoneHref.replace(/^tel:/, ""),
+  email: site.email,
   url: siteUrl,
+  // The square wave mark rather than /logo.webp. Google wants a logo of at least
+  // 112x112, and the wordmark is only 102px tall.
+  logo: `${siteUrl}/web-app-manifest-512x512.png`,
+  // The profiles Google uses to confirm that this site and those accounts are the same business.
+  sameAs: Object.values(site.social),
+  hasMap: site.mapLinkUrl,
   // Real photos of the premises, not logos or product shots — Google reads this as
   // "what the place looks like". All three are 4:3, the ratio it recommends.
   image: ["/shopfront.webp", "/press-floor.webp", "/finishing.webp"].map(

@@ -8,6 +8,10 @@ import { showTradeLinks } from "./trade";
 // which schema.org requires be absolute. NEXT_PUBLIC_ so client components can read it too.
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+// The JSON-LD @id of the LocalBusiness node in the root layout. Other nodes (WebSite,
+// Product) refer to the business by this id rather than repeating its details.
+export const businessId = `${siteUrl}/#business`;
+
 export const site = {
   name: "Bluwave",
   tagline: "South east London's local print shop, since 2004",
