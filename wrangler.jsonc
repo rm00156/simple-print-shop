@@ -35,6 +35,11 @@
 
   "observability": { "enabled": true },
 
+  // Daily rebuild so the Google rating and review count baked into the static pages
+  // stay current. See scheduled() in worker/index.ts. One invocation a day, so it is
+  // irrelevant to the free-tier request limit. 05:00 UTC is before UK opening hours.
+  "triggers": { "crons": ["0 5 * * *"] },
+
   // Replaces the in-process Map the route handlers used on Vercel. Worker isolates
   // are ephemeral and per-location, so a Map there would look like protection while
   // providing almost none. `period` accepts only 10 or 60.
