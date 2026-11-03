@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { categories, slugifyItemName } from "@/content/categories";
+import { pricingCatalog } from "@/content/pricing";
 import { services } from "@/content/services";
 import { isIsoDate } from "@/lib/lead-time";
 
@@ -23,6 +24,45 @@ export function needsSidesField(need: string, product?: string) {
     SIDES_CATEGORY_SLUGS.has(need) ||
     (need === SIDES_PRODUCT_CATEGORY_SLUG && product === SIDES_PRODUCT_SLUG)
   );
+}
+
+// What the job is printed on.
+export const MATERIAL_OPTIONS = [
+  { value: "matt", label: "Matt" },
+  { value: "silk", label: "Silk" },
+] as const;
+
+export type Material = (typeof MATERIAL_OPTIONS)[number]["value"];
+
+const materialValues = MATERIAL_OPTIONS.map((o) => o.value) as [Material, ...Material[]];
+
+// Things that aren't printed on matt or silk paper, or (for the services) aren't
+// printed at all. Everything else asks, including "Not sure / other".
+const NO_MATERIAL_NEEDS = new Set([
+  "site-and-display-boards",
+  "canvas",
+  "design-artwork",
+  "finishing-binding",
+  "scanning",
+  "delivery",
+]);
+const NO_MATERIAL_PRODUCTS = new Set([
+  "labels",
+  "stickers",
+  "roller-banners",
+  "vinyl-banners",
+  "signage",
+  "window-graphics",
+  "printed-boxes",
+  "carbonless-forms",
+  "open-day-signage-banners",
+]);
+
+// A product with its own Stock field (flyers) already asks about the paper, so it
+// isn't asked a second time.
+export function needsMaterialField(need: string, product?: string) {
+  const asksStock = pricingCatalog[product ?? ""]?.axes.some((a) => a.field === "stock");
+  return !NO_MATERIAL_NEEDS.has(need) && !NO_MATERIAL_PRODUCTS.has(product ?? "") && !asksStock;
 }
 
 // Who the job is for. Optional, like the timings — but a "client" answer is a
@@ -57,6 +97,9 @@ export const quoteSchema = z
     // rendered as a select on QuoteForm when applicable, otherwise left unset.
     stock: z.string().trim().optional(),
     pages: z.string().trim().optional(),
+    // Optional, for the same reason as the timings below: plenty of customers won't
+    // know their paper, and that shouldn't stop them asking for a quote.
+    material: z.enum(materialValues).optional().or(z.literal("")),
     quantity: z
       .number({ message: "Enter a quantity" })
       .int("Enter a whole number")

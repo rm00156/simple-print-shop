@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { Send } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import clsx from "clsx";
 import { site } from "@/content/site";
 import {
@@ -15,6 +15,7 @@ import {
 } from "@/lib/contact-schema";
 import { TURNSTILE_SITE_KEY } from "@/lib/turnstile";
 import { Button } from "./Button";
+import { QuoteForm } from "./QuoteForm";
 
 type Status = "idle" | "success" | "error" | "rate_limited" | "captcha_failed";
 
@@ -44,6 +45,7 @@ export function ContactForm({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     getValues,
     setValue,
@@ -62,6 +64,7 @@ export function ContactForm({
       turnstileToken: "",
     },
   });
+  const chosenSubject = useWatch({ control, name: "subject" });
 
   function resetTurnstile() {
     setValue("turnstileToken", "", { shouldValidate: false });
@@ -112,6 +115,20 @@ export function ContactForm({
           .
         </p>
       </div>
+    );
+  }
+
+  // A quote asked for here gets the quote form itself rather than a free-text message,
+  // so it arrives with the same spec, price and deadline flags as one sent from /quote.
+  if (!subject && chosenSubject === "Request a quote") {
+    const { name, email, phone, message } = getValues();
+    return (
+      <QuoteForm
+        prefill={{ name, email, phone, message }}
+        onSwitchToMessage={() =>
+          setValue("subject", "" as ContactFormValues["subject"], { shouldValidate: false })
+        }
+      />
     );
   }
 

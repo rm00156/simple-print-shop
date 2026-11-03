@@ -26,6 +26,8 @@ import {
   workingDaysBetween,
 } from "@/lib/lead-time";
 import {
+  MATERIAL_OPTIONS,
+  needsMaterialField,
   needsSidesField,
   ORDERING_FOR_OPTIONS,
   quoteSchema,
@@ -40,6 +42,12 @@ const inputClasses =
   "h-11 w-full rounded-token border border-line bg-surface-2 px-3 text-base text-ink transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25 md:h-10 md:text-sm";
 const labelClasses = "mb-1 block text-xs text-ink-2";
 const errorClasses = "mt-1 text-xs text-red-600";
+// Which of these fields exist depends on the product, so they pair up by flow rather
+// than by fixed rows: an odd one out takes the full width, and a row with nothing in
+// it takes no space. Hidden inputs stay outside these grids, as they'd count as cells.
+const pairedFields =
+  "mb-2.5 grid grid-cols-1 gap-2 empty:hidden @md:grid-cols-2 @md:*:last:odd:col-span-2";
+const pairedFieldsAlways = "mb-2.5 grid grid-cols-2 gap-2 empty:hidden *:last:odd:col-span-2";
 
 // Stable module-level callbacks: today's date is read as an external value rather than
 // held in state, so it can differ between server and client without a hydration mismatch.
@@ -71,17 +79,25 @@ export function QuoteForm({
   defaultNeed,
   defaultProduct,
   defaultDetails,
+  prefill,
+  onSwitchToMessage,
 }: {
   defaultNeed?: string;
   defaultProduct?: string;
   defaultDetails?: string;
+  /** What the visitor already typed into the contact form before this replaced it. */
+  prefill?: { name?: string; email?: string; phone?: string; message?: string };
+  /** Offers a way back, for a visitor who arrived here from the contact form. */
+  onSwitchToMessage?: () => void;
 } = {}) {
   const [status, setStatus] = useState<Status>("idle");
   const [mountedAt] = useState(() => Date.now());
   const [hasTurnstileToken, setHasTurnstileToken] = useState(false);
   const [turnstileKey, setTurnstileKey] = useState(0);
   const [customQuantity, setCustomQuantity] = useState(false);
-  const detailsEditedRef = useRef(false);
+  // A message carried over from the contact form is the visitor's own words, so the
+  // auto-description mustn't write over it.
+  const detailsEditedRef = useRef(!!prefill?.message);
 
   const initialNeed = defaultNeed ?? categories[0].slug;
   const initialFirstItem = categories.find((c) => c.slug === initialNeed)?.items[0];
@@ -94,9 +110,10 @@ export function QuoteForm({
     : NaN;
   const initialProductName = getProductName(initialNeed, initialProduct);
   const initialDetails =
-    initialPricing && initialProductName
+    prefill?.message ||
+    (initialPricing && initialProductName
       ? describeSelection(initialPricing, initialAxisValues, initialQuantity, false, initialProductName)
-      : (defaultDetails ?? "");
+      : (defaultDetails ?? ""));
 
   const {
     register,
@@ -108,14 +125,15 @@ export function QuoteForm({
   } = useForm<QuoteFormValues>({
     resolver: zodResolver(quoteSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
+      name: prefill?.name ?? "",
+      email: prefill?.email ?? "",
+      phone: prefill?.phone ?? "",
       need: initialNeed,
       product: initialProduct,
       sides: initialAxisValues.sides as "single" | "double" | undefined,
       stock: initialAxisValues.stock,
       pages: initialAxisValues.pages,
+      material: "",
       quantity: initialQuantity,
       size:
         initialPricing?.fixedSize ??
@@ -147,6 +165,7 @@ export function QuoteForm({
   const productSlug = product ?? "";
   const productOptions = categories.find((c) => c.slug === need)?.items ?? [];
   const showSides = needsSidesField(need, product);
+  const showMaterial = needsMaterialField(need, product);
   // A page that already establishes what it's for (a category or product
   // page) locks the matching field rather than leaving it open to wander to
   // an unrelated category/product while quoting for this one.
@@ -214,6 +233,8 @@ export function QuoteForm({
     for (const field of PRICING_ONLY_AXES) {
       setValue(field, undefined, { shouldValidate: false });
     }
+    // Same for the paper: a material picked for one product may be hidden on the next.
+    setValue("material", "", { shouldValidate: false });
     if (newPricing) {
       const axisDefaults = defaultAxisValues(newPricing);
       for (const axis of newPricing.axes) {
@@ -350,6 +371,18 @@ export function QuoteForm({
       noValidate
       className="@container relative"
     >
+      {onSwitchToMessage && (
+        <p className="mb-4 text-sm text-ink-2">
+          Not after a quote?{" "}
+          <button
+            type="button"
+            onClick={onSwitchToMessage}
+            className="font-semibold text-primary hover:text-primary-hover"
+          >
+            Send us a message instead
+          </button>
+        </p>
+      )}
       {status === "error" && (
         <div role="alert" className="mb-3 rounded-2xl bg-red-50 p-3 text-xs text-red-700">
           Something went wrong sending your request. Please try again, or call
@@ -384,8 +417,10 @@ export function QuoteForm({
         />
       </div>
       <input type="hidden" {...register("ts", { valueAsNumber: true })} />
+      {lockNeed && <input type="hidden" {...register("need")} />}
+      {lockProduct && <input type="hidden" {...register("product")} />}
 
-      <div className={clsx("mb-2.5 grid grid-cols-1 gap-2", !lockNeed && "@md:grid-cols-2")}>
+      <div className={pairedFields}>
         <div>
           <label htmlFor="name" className={labelClasses}>
             Name
@@ -405,50 +440,19 @@ export function QuoteForm({
           )}
         </div>
 
-        {lockNeed ? (
-          <input type="hidden" {...register("need")} />
-        ) : (
-          <div>
-            <label htmlFor="need" className={labelClasses}>
-              What do you need?
-            </label>
-            <select
-              id="need"
-              className={inputClasses}
-              aria-invalid={!!errors.need}
-              aria-describedby={errors.need ? "need-error" : undefined}
-              {...register("need", {
-                onChange: (e) => {
-                  const nextCategory = categories.find((c) => c.slug === e.target.value);
-                  const firstItem = nextCategory?.items[0];
-                  setValue("product", firstItem ? slugifyItemName(firstItem.name) : "", {
-                    shouldValidate: false,
-                  });
-                },
-              })}
-            >
-              <optgroup label="Products">
-                {categories.map((c) => (
-                  <option key={c.slug} value={c.slug}>
-                    {c.name}
-                  </option>
-                ))}
-              </optgroup>
-              <optgroup label="Services">
-                {services.map((s) => (
-                  <option key={s.slug} value={s.slug}>
-                    {s.name}
-                  </option>
-                ))}
-              </optgroup>
-            </select>
-            {errors.need && (
-              <p id="need-error" className={errorClasses}>
-                {errors.need.message}
-              </p>
-            )}
-          </div>
-        )}
+        <div>
+          <label htmlFor="orderingFor" className={labelClasses}>
+            Who&apos;s it for?
+          </label>
+          <select id="orderingFor" className={inputClasses} {...register("orderingFor")}>
+            <option value="">Choose one (optional)</option>
+            {ORDERING_FOR_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div className="mb-2.5 grid grid-cols-2 gap-2">
@@ -495,97 +499,149 @@ export function QuoteForm({
         </div>
       </div>
 
-      <div className="mb-2.5">
-        <label htmlFor="orderingFor" className={labelClasses}>
-          Who&apos;s it for?
-        </label>
-        <select id="orderingFor" className={inputClasses} {...register("orderingFor")}>
-          <option value="">Choose one (optional)</option>
-          {ORDERING_FOR_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {lockProduct && <input type="hidden" {...register("product")} />}
-
-      {productOptions.length > 0 && !lockProduct && (
-        <div className="mb-2.5">
-          <label htmlFor="product" className={labelClasses}>
-            Which product?
-          </label>
-          <select
-            id="product"
-            key={need}
-            className={inputClasses}
-            aria-invalid={!!errors.product}
-            aria-describedby={errors.product ? "product-error" : undefined}
-            {...register("product")}
-          >
-            {productOptions.map((item) => (
-              <option key={item.name} value={slugifyItemName(item.name)}>
-                {item.name}
-              </option>
-            ))}
-            <option value="">Not sure / other</option>
-          </select>
-          {errors.product && (
-            <p id="product-error" className={errorClasses}>
-              {errors.product.message}
-            </p>
-          )}
-        </div>
-      )}
-
-      {extraAxes.map((axis) => {
-        const fieldName = axis.field as "stock" | "pages";
-        return (
-          <div key={axis.field} className="mb-2.5">
-            <label htmlFor={axis.field} className={labelClasses}>
-              {axis.label}
+      <div className={pairedFields}>
+        {!lockNeed && (
+          <div>
+            <label htmlFor="need" className={labelClasses}>
+              What do you need?
             </label>
             <select
-              id={axis.field}
+              id="need"
               className={inputClasses}
-              {...register(fieldName)}
+              aria-invalid={!!errors.need}
+              aria-describedby={errors.need ? "need-error" : undefined}
+              {...register("need", {
+                onChange: (e) => {
+                  const nextCategory = categories.find((c) => c.slug === e.target.value);
+                  const firstItem = nextCategory?.items[0];
+                  setValue("product", firstItem ? slugifyItemName(firstItem.name) : "", {
+                    shouldValidate: false,
+                  });
+                },
+              })}
             >
-              {axis.options.map((opt) => (
+              <optgroup label="Products">
+                {categories.map((c) => (
+                  <option key={c.slug} value={c.slug}>
+                    {c.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="Services">
+                {services.map((s) => (
+                  <option key={s.slug} value={s.slug}>
+                    {s.name}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+            {errors.need && (
+              <p id="need-error" className={errorClasses}>
+                {errors.need.message}
+              </p>
+            )}
+          </div>
+        )}
+
+        {productOptions.length > 0 && !lockProduct && (
+          <div>
+            <label htmlFor="product" className={labelClasses}>
+              Which product?
+            </label>
+            <select
+              id="product"
+              key={need}
+              className={inputClasses}
+              aria-invalid={!!errors.product}
+              aria-describedby={errors.product ? "product-error" : undefined}
+              {...register("product")}
+            >
+              {productOptions.map((item) => (
+                <option key={item.name} value={slugifyItemName(item.name)}>
+                  {item.name}
+                </option>
+              ))}
+              <option value="">Not sure / other</option>
+            </select>
+            {errors.product && (
+              <p id="product-error" className={errorClasses}>
+                {errors.product.message}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Stock labels are too long for half a phone screen; the rest fit. */}
+      <div className={extraAxes.some((a) => a.field === "stock") ? pairedFields : pairedFieldsAlways}>
+        {extraAxes.map((axis) => {
+          const fieldName = axis.field as "stock" | "pages";
+          return (
+            <div key={axis.field}>
+              <label htmlFor={axis.field} className={labelClasses}>
+                {axis.label}
+              </label>
+              <select
+                id={axis.field}
+                className={inputClasses}
+                {...register(fieldName)}
+              >
+                {axis.options.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          );
+        })}
+
+        {showMaterial && (
+          <div>
+            <label htmlFor="material" className={labelClasses}>
+              Material
+            </label>
+            <select
+              id="material"
+              className={inputClasses}
+              {...register("material")}
+            >
+              <option value="">Not sure yet</option>
+              {MATERIAL_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
                   {opt.label}
                 </option>
               ))}
             </select>
           </div>
-        );
-      })}
+        )}
 
-      {showSides && (
-        <div className="mb-2.5">
-          <label htmlFor="sides" className={labelClasses}>
-            Sides
-          </label>
-          <select
-            id="sides"
-            className={inputClasses}
-            aria-invalid={!!errors.sides}
-            aria-describedby={errors.sides ? "sides-error" : undefined}
-            {...register("sides")}
-          >
-            <option value="" disabled>
-              Select…
-            </option>
-            <option value="single">Single sided</option>
-            <option value="double">Double sided</option>
-          </select>
-          {errors.sides && (
-            <p id="sides-error" className={errorClasses}>
-              {errors.sides.message}
-            </p>
-          )}
-        </div>
-      )}
+        {showSides && (
+          <div>
+            <label htmlFor="sides" className={labelClasses}>
+              Sides
+            </label>
+            <select
+              id="sides"
+              className={inputClasses}
+              aria-invalid={!!errors.sides}
+              aria-describedby={errors.sides ? "sides-error" : undefined}
+              {...register("sides")}
+            >
+              <option value="" disabled>
+                Select…
+              </option>
+              <option value="single">Single sided</option>
+              <option value="double">Double sided</option>
+            </select>
+            {errors.sides && (
+              <p id="sides-error" className={errorClasses}>
+                {errors.sides.message}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
 
       <div className="mb-2.5 grid grid-cols-2 gap-2">
         <div>
@@ -718,10 +774,8 @@ export function QuoteForm({
         </div>
       )}
 
-      <div className="mb-2.5 rounded-token border border-line bg-surface-1 p-3">
-        <p className="mb-2 text-xs font-semibold text-ink">Timings</p>
-
-        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+      <div className="mb-2.5">
+        <div className={pairedFields}>
           <div>
             <label htmlFor="neededBy" className={labelClasses}>
               When do you need it?
@@ -761,7 +815,7 @@ export function QuoteForm({
         </div>
 
         {artworkReady === "date" && (
-          <div className="mt-2.5">
+          <div className="mb-2.5">
             <label htmlFor="artworkReadyDate" className={labelClasses}>
               Artwork ready on
             </label>
@@ -784,7 +838,7 @@ export function QuoteForm({
           </div>
         )}
 
-        <p className="mt-2 text-xs text-ink-2">
+        <p className="text-xs text-ink-2">
           Production time runs from the day we receive print-ready artwork, not
           from the day you order.
         </p>
@@ -808,11 +862,11 @@ export function QuoteForm({
       </label>
       <textarea
         id="details"
-        rows={6}
+        rows={3}
         placeholder="Finishing, artwork, delivery — anything else that helps us quote"
         className={clsx(
           inputClasses,
-          "mb-2.5 h-auto resize-none py-2 md:h-auto",
+          "mb-2.5 h-auto resize-y py-2 md:h-auto",
         )}
         {...detailsField}
         onChange={(e) => {
