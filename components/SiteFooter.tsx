@@ -48,14 +48,14 @@ export function SiteFooter() {
 
   return (
     <footer className="c-footer px-4 py-10 sm:px-6 lg:px-10">
-      <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
         <div className="shrink-0">
           <div className="inline-flex rounded-2xl bg-white p-3">
             <Image src="/logo.webp" alt={site.name} width={170} height={48} className="h-10 w-auto" />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-y-8 sm:flex sm:gap-x-10 lg:gap-x-16">
+        <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-x-10 lg:flex lg:gap-x-16">
           {footerColumns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
               <p className="mb-3 text-sm font-bold text-ink">{col.title}</p>

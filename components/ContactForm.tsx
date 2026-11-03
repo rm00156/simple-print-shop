@@ -3,8 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { Send } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useRef, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import clsx from "clsx";
 import { site } from "@/content/site";
 import {
@@ -15,6 +15,7 @@ import {
 } from "@/lib/contact-schema";
 import { TURNSTILE_SITE_KEY } from "@/lib/turnstile";
 import { Button } from "./Button";
+import { QuoteForm } from "./QuoteForm";
 
 type Status = "idle" | "success" | "error" | "rate_limited" | "captcha_failed";
 
@@ -22,6 +23,10 @@ const inputClasses =
   "h-12 w-full rounded-token border border-line bg-surface-2 px-3.5 text-base text-ink transition-colors placeholder:text-ink-3 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25";
 const labelClasses = "mb-1.5 block text-sm font-semibold text-ink";
 const errorClasses = "mt-1 text-xs text-red-600";
+
+// Stable so it runs once on mount rather than on every render, which would pull focus
+// back out of whatever the visitor is typing in.
+const focusOnMount = (el: HTMLElement | null) => el?.focus();
 
 export function ContactForm({
   subject,
@@ -41,11 +46,15 @@ export function ContactForm({
   const [mountedAt] = useState(() => Date.now());
   const [hasTurnstileToken, setHasTurnstileToken] = useState(false);
   const [turnstileKey, setTurnstileKey] = useState(0);
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const returningFromQuoteRef = useRef(false);
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     getValues,
+    setFocus,
     setValue,
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -62,6 +71,15 @@ export function ContactForm({
       turnstileToken: "",
     },
   });
+  const chosenSubject = useWatch({ control, name: "subject" });
+
+  // The link that brought the visitor back has gone, so focus goes to the select they
+  // left from rather than dropping to the page body.
+  useEffect(() => {
+    if (showQuoteForm || !returningFromQuoteRef.current) return;
+    returningFromQuoteRef.current = false;
+    setFocus("subject");
+  }, [showQuoteForm, setFocus]);
 
   function resetTurnstile() {
     setValue("turnstileToken", "", { shouldValidate: false });
@@ -111,6 +129,24 @@ export function ContactForm({
           </a>
           .
         </p>
+      </div>
+    );
+  }
+
+  // A quote asked for here is offered the quote form itself rather than a free-text message,
+  // so it arrives with the same spec, price and deadline flags as one sent from /quote.
+  if (showQuoteForm) {
+    const { name, email, phone, message } = getValues();
+    return (
+      <div ref={focusOnMount} tabIndex={-1} role="group" aria-label="Quote form" className="focus:outline-none">
+        <QuoteForm
+          prefill={{ name, email, phone, message }}
+          onSwitchToMessage={() => {
+            setValue("subject", "" as ContactFormValues["subject"], { shouldValidate: false });
+            returningFromQuoteRef.current = true;
+            setShowQuoteForm(false);
+          }}
+        />
       </div>
     );
   }
@@ -234,6 +270,22 @@ export function ContactForm({
               {errors.subject.message}
             </p>
           )}
+          {/* An offer rather than an automatic swap: arrowing through a closed select
+              fires change on some browsers, so reacting to the value alone would replace
+              the form under a keyboard user passing this option on the way to another. */}
+          <div role="status">
+            {chosenSubject === "Request a quote" && (
+              <div className="mt-2 rounded-2xl bg-surface-1 p-4 text-sm text-ink-2">
+                <p>
+                  Our quote form asks for the size, quantity and deadline we need to price your
+                  job, and brings across what you&apos;ve typed here.
+                </p>
+                <Button type="button" size="sm" className="mt-3" onClick={() => setShowQuoteForm(true)}>
+                  Continue to the quote form
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
       )}
 

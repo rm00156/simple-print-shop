@@ -17,7 +17,12 @@ import {
   toIsoDate,
   workingDaysBetween,
 } from "@/lib/lead-time";
-import { ORDERING_FOR_OPTIONS, quoteSchema } from "@/lib/quote-schema";
+import {
+  MATERIAL_OPTIONS,
+  needsMaterialField,
+  ORDERING_FOR_OPTIONS,
+  quoteSchema,
+} from "@/lib/quote-schema";
 import { verifyTurnstileToken } from "@/lib/verify-turnstile";
 
 const ARTWORK_LABELS: Record<string, string> = {
@@ -98,6 +103,12 @@ export async function handleQuote(request: Request, env?: HandlerEnv): Promise<R
 
   const orderingForLabel = ORDERING_FOR_OPTIONS.find((o) => o.value === values.orderingFor)?.label;
 
+  // Checked against the need as well as read from the values: switching to a service
+  // with no product doesn't clear an answer given before the field was hidden.
+  const materialSummary = needsMaterialField(values.need, values.product)
+    ? MATERIAL_OPTIONS.find((o) => o.value === values.material)?.label
+    : undefined;
+
   const subjectFlag = [
     tier === "emergency" || tier === "express" ? `[${tier.toUpperCase()}] ` : "",
     values.orderingFor === "client" ? "[TRADE] " : "",
@@ -126,6 +137,7 @@ export async function handleQuote(request: Request, env?: HandlerEnv): Promise<R
     productName ? `Product: ${productName}` : null,
     values.stock ? `Stock: ${values.stock}` : null,
     values.pages ? `Pages: ${values.pages}pp` : null,
+    materialSummary ? `Material: ${materialSummary}` : null,
     values.sides ? `Sides: ${values.sides === "double" ? "Double sided" : "Single sided"}` : null,
     `Quantity: ${values.quantity}`,
     `Size: ${values.size}`,
@@ -143,6 +155,7 @@ export async function handleQuote(request: Request, env?: HandlerEnv): Promise<R
     productName ? ["Product", productName] : null,
     values.stock ? ["Stock", values.stock] : null,
     values.pages ? ["Pages", `${values.pages}pp`] : null,
+    materialSummary ? ["Material", materialSummary] : null,
     values.sides ? ["Sides", values.sides === "double" ? "Double sided" : "Single sided"] : null,
     ["Quantity", String(values.quantity)],
     ["Size", values.size],

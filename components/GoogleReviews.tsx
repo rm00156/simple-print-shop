@@ -85,11 +85,12 @@ export function GoogleReviews({ liveData, fallbackRating, fallbackCount, fallbac
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      {/* Flex rather than grid so an incomplete last row sits centred (the width is 3-across minus the two gaps). */}
+      <div className="flex flex-wrap justify-center gap-4">
         {reviews.map((r) => (
           <div
             key={r.id}
-            className="flex flex-col rounded-2xl bg-surface-2 p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
+            className="flex w-full flex-col rounded-2xl bg-surface-2 p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover sm:w-[calc((100%-2rem)/3)]"
           >
             <StarRow rating={r.rating} size={12} />
             <p className="mt-3 mb-4 line-clamp-5 flex-1 text-sm leading-[1.6] text-ink-2 italic">
