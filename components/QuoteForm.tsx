@@ -868,12 +868,19 @@ export function QuoteForm({
           inputClasses,
           "mb-2.5 h-auto resize-y py-2 md:h-auto",
         )}
+        aria-invalid={!!errors.details}
+        aria-describedby={errors.details ? "details-error" : undefined}
         {...detailsField}
         onChange={(e) => {
           detailsEditedRef.current = true;
           detailsField.onChange(e);
         }}
       />
+      {errors.details && (
+        <p id="details-error" className={clsx(errorClasses, "mb-2.5")}>
+          {errors.details.message}
+        </p>
+      )}
 
       <div className="mb-2.5">
         <Turnstile

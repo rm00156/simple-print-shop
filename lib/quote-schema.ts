@@ -121,7 +121,8 @@ export const quoteSchema = z
       .refine((v) => v === "" || isIsoDate(v), "Enter a valid date")
       .optional(),
     orderingFor: z.enum(orderingForValues).optional().or(z.literal("")),
-    details: z.string().trim().max(500).optional().or(z.literal("")),
+    // Same limit as the contact form's message, which can be carried over into this.
+    details: z.string().trim().max(2000, "Keep this under 2000 characters").optional().or(z.literal("")),
     // Honeypot — real users leave this blank. Left as an unconstrained string so bots that
     // fill it in still pass schema validation and reach the route's own fake-success handling.
     company: z.string().optional(),
